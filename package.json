@@ -1,0 +1,19 @@
+{
+  "name": "facturador",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"npm run rserver\" \"npm run rclient\" ",
+    "rserver": "cd server && npm run server",
+    "rclient": "cd client && npm run server",
+    "iserver": "cd server && npm install",
+    "iclient": "cd client && npm install"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^7.1.0"
+  }
+}
