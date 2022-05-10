@@ -1,6 +1,6 @@
 // App
 import { appDataSource } from "./database/appDataSource";
-import { AppServer } from "./appServer";
+import { AppServer } from "./app/appServer";
 
 // Launch DB & Server
 

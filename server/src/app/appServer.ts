@@ -3,12 +3,12 @@ import express, { Application } from "express";
 import morgan from "morgan";
 import cors from "cors";
 // App
-import { routesIndex } from "./routes/routesIndex";
-import { appEnvironment } from "./appEnvironment";
+import { routesIndex } from "../routes/routesIndex";
+import { appEnvironment } from "../environment/appEnvironment";
 // Middlewares
-import { checkToken } from "./middlewares/checkToken";
+import { checkToken } from "../middlewares/checkToken";
 // Models
-import { RouteModel } from "./models/routeModel";
+import { RouteModel } from "../models/routeModel";
 
 export class AppServer {
 

@@ -1,5 +1,5 @@
 // Models
-import { EnvironmentModel } from "./models/environmentModel";
+import { EnvironmentModel } from "../models/environmentModel";
 
 export const appEnvironment: EnvironmentModel = {
     serverPort: 4444,
