@@ -8,7 +8,7 @@ import { appEnvironment } from "../environment/appEnvironment";
 // Middlewares
 import { checkToken } from "../middlewares/checkToken";
 // Models
-import { RouteModel } from "../models/routeModel";
+import { AppRouteModel } from "../models/appModels/appRouteModel";
 
 export class AppServer {
 
@@ -29,7 +29,7 @@ export class AppServer {
     }
 
     public configureRoutes(): void {
-        routesIndex.forEach((route: RouteModel) => {
+        routesIndex.forEach((route: AppRouteModel) => {
             switch (route.middleware) {
                 case "null":
                     (this.server as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {

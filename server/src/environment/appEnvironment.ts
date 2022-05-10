@@ -1,7 +1,8 @@
 // Models
-import { EnvironmentModel } from "../models/environmentModel";
+import { AppEnvironmentModel } from "../models/appModels/appEnvironmentModel";
 
-export const appEnvironment: EnvironmentModel = {
+export const appEnvironment: AppEnvironmentModel = {
     serverPort: 4444,
-    serverIP: "192.168.1.156"
+    serverIP: "192.168.1.156",
+    jwtKey: "1234"
 }
