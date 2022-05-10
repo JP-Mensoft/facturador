@@ -1,6 +1,7 @@
+// App
 import { DataSource } from "typeorm"
 
-export const dbConnection = new DataSource({
+export const appDataSource = new DataSource({
     type: "mysql",
     host: "localhost",
     port: 3306,
