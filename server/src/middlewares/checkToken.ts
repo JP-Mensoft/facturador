@@ -27,5 +27,5 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
         }
         return res.status(401).json(resp);
     }
-};
+}
 

@@ -5,11 +5,11 @@ import { utilsRng } from "../../utils/utils";
 import jwt from "jsonwebtoken";
 import { Environment } from "../../app/environment";
 // Models
-import { UserModel } from "../../models/userModel";
+import { UserIdModel } from "../../models/userDataModel";
 
 @Entity()
 @Unique(["email"])
-export class UsersEntity {
+export class UserEntity {
 
     @Column({ length: 444 })
     public email!: string;
@@ -50,7 +50,7 @@ export class UsersEntity {
     }
 
     public generateSesionToken(): string {
-        const payload: UserModel = {
+        const payload: UserIdModel = {
             userId: this.userId
         }
         return jwt.sign(payload, Environment.jwtKey, { expiresIn: "2h" })
