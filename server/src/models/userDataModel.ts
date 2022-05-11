@@ -4,10 +4,18 @@ export class UserIdModel {
     ) { }
 }
 
-export class SaveUserModel {
+export class AccessUserModel {
     constructor(
         public email: string,
         public password: string
+    ) { }
+}
+
+export class SaveUserModel {
+    constructor(
+        public email: string,
+        public password: string,
+        public verifiedPassword: string
     ) { }
 }
 

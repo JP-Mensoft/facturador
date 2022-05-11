@@ -32,7 +32,7 @@ export class Server {
     public configureRoutes(): void {
         routesIndex.forEach((route: RouteModel) => {
             switch (route.middleware) {
-                case "null":
+                case "undefined":
                     (this.server as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
                         (new (route.controller as any))[route.action](req, res, next);
                     });

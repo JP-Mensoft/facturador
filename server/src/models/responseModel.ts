@@ -1,6 +1,7 @@
 export class ResponseModel {
     constructor(
-        public status: boolean = false,
-        public result: any = undefined
+        public success: boolean = false,
+        public result: any = undefined,
+        public status: number = 100
     ) { }
 }

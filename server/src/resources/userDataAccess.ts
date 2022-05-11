@@ -1,7 +1,7 @@
 // App
 import { DbConnection } from "../database/dbConnection";
-import { UserEntity } from "../database/entities/userEntity";
 // Models
+import { UserEntity } from "../database/entities/userEntity";
 import { ResponseModel } from "../models/responseModel";
 import { SaveUserModel, SetUserModel } from "../models/userDataModel";
 
@@ -11,12 +11,26 @@ export class UserDataAccess {
 
     constructor() { }
 
-    public async getOneUser(userId: number) {
+    public async getOneUserEmail(email: string) {
+        let dataResponse: ResponseModel = new ResponseModel();
+        try {
+            const userFound = await this.userEntity.findOne({ where: { email } });
+            if (userFound != null) {
+                dataResponse.success = true;
+                dataResponse.result = userFound;
+            }
+        } catch (error) {
+            dataResponse.result = error;
+        }
+        return dataResponse;
+    }
+
+    public async getOneUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             const user = await this.userEntity.findOne({ where: { userId } });
             if (user != null) {
-                dataResponse.status = true;
+                dataResponse.success = true;
                 dataResponse.result = user;
             }
         } catch (error) {
@@ -33,7 +47,7 @@ export class UserDataAccess {
         try {
             const saveResult = await this.userEntity.save(newUser);
             if (saveResult != undefined) {
-                dataResponse.status = true;
+                dataResponse.success = true;
                 dataResponse.result = saveResult;
             }
         } catch (error) {
@@ -45,14 +59,14 @@ export class UserDataAccess {
     public async setOneUser(userData: SetUserModel) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const userFound: ResponseModel = await this.getOneUser(userData.userId);
-            if (userFound.status) {
+            const userFound: ResponseModel = await this.getOneUserId(userData.userId);
+            if (userFound.success) {
                 let user: UserEntity = userFound.result;
                 user.email = userData.email;
                 user.saveHashPassword(userData.password);
                 const setResult = await this.userEntity.save(user);
                 if (setResult != undefined) {
-                    dataResponse.status = true;
+                    dataResponse.success = true;
                     dataResponse.result = setResult;
                 }
             }
@@ -67,7 +81,7 @@ export class UserDataAccess {
         try {
             const removeResult = await this.userEntity.delete(userId);
             if (removeResult.affected != 0) {
-                dataResponse.status = true;
+                dataResponse.success = true;
             }
         } catch (error) {
             dataResponse.result = error;
