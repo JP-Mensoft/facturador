@@ -1,18 +1,18 @@
 // App
-import { appDataSource } from "../database/appDataSource";
+import { DbConnection } from "../database/dbConnection";
 import { UsersEntity } from "../database/entities/usersEntity";
-import { AppDbResponseModel } from "../models/appModels/appDbResponseModel";
 // Models
-import { AppUserModel } from "../models/appModels/appUserModel";
+import { ResponseModel } from "../models/responseModel";
+import { UserModel } from "../models/userModel";
 
 export class UsersDataAccess {
 
-    private usersEntity = appDataSource.getRepository(UsersEntity);
+    private usersEntity = DbConnection.getRepository(UsersEntity);
 
     constructor() { }
 
     public async getOneUser(userId: number) {
-        const dbResponse: AppDbResponseModel = {
+        const dbResponse: ResponseModel = {
             status: false,
             result: undefined
         };
@@ -24,11 +24,11 @@ export class UsersDataAccess {
         return dbResponse;
     }
 
-    public async addOneUser(user: AppUserModel) {
+    public async addOneUser(user: UserModel) {
 
     }
 
-    public async setOneUser(user: AppUserModel) {
+    public async setOneUser(user: UserModel) {
 
     }
 

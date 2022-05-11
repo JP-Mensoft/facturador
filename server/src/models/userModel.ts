@@ -1,4 +1,4 @@
-export class AppUserModel {
+export class UserModel {
     constructor(
         public userId?: number,
         public email?: string,

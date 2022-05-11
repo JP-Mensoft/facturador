@@ -1,18 +1,15 @@
 // App
 import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
 import bcrypt from "bcrypt";
-import { utilsRng } from "../../utils/appUtils";
+import { utilsRng } from "../../utils/utils";
 import jwt from "jsonwebtoken";
-import { appEnvironment } from "../../environment/appEnvironment";
+import { Environment } from "../../app/environment";
 // Models
-import { AppUserModel } from "../../models/appModels/appUserModel";
+import { UserModel } from "../../models/userModel";
 
 @Entity()
 @Unique(["email"])
 export class UsersEntity {
-
-    @PrimaryGeneratedColumn()
-    public userId!: number;
 
     @Column({ length: 444 })
     public email!: string;
@@ -22,6 +19,9 @@ export class UsersEntity {
 
     @Column({ length: 10, nullable: true, default: "" })
     public recoveryCode!: string;
+
+    @PrimaryGeneratedColumn()
+    public userId!: number;
 
     // Functions
 
@@ -50,10 +50,10 @@ export class UsersEntity {
     }
 
     public generateSesionToken(): string {
-        const payload: AppUserModel = {
+        const payload: UserModel = {
             userId: this.userId
         }
-        return jwt.sign(payload, appEnvironment.jwtKey, { expiresIn: "2h" })
+        return jwt.sign(payload, Environment.jwtKey, { expiresIn: "2h" })
     }
 
 }

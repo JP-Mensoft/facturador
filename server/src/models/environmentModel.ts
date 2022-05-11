@@ -1,4 +1,4 @@
-export class AppEnvironmentModel {
+export class EnvironmentModel {
     constructor(
         public serverIP: string,
         public serverPort: number,

@@ -1,16 +1,16 @@
 // App
 import { Request, Response, NextFunction } from 'express';
 import jwt from "jsonwebtoken"
-import { appEnvironment } from '../environment/appEnvironment';
+import { Environment } from '../app/environment';
 // Models
-import { GeneralResponseModel } from '../models/responseModels/generalResponseModel';
+import { ResponseModel } from '../models/responseModel';
 
 export const checkToken = (req: Request, res: Response, next: NextFunction) => {
     const token: any = req.headers["token"];
     if (token != undefined) {
-        jwt.verify(token, appEnvironment.jwtKey, (error: any, decoded: any) => {
+        jwt.verify(token, Environment.jwtKey, (error: any, decoded: any) => {
             if (error) {
-                const resp: GeneralResponseModel = {
+                const resp: ResponseModel = {
                     status: false,
                     result: error
                 }
@@ -21,7 +21,7 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
             }
         })
     } else {
-        const resp: GeneralResponseModel = {
+        const resp: ResponseModel = {
             status: false,
             result: "Invalid token."
         }

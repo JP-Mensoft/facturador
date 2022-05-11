@@ -1,11 +1,11 @@
 // App
-import { appDataSource } from "./database/appDataSource";
-import { AppServer } from "./app/appServer";
+import { DbConnection } from "./database/dbConnection";
+import { Server } from "./app/server";
 
 // Launch DB & Server
 
-appDataSource.initialize().then(() => {
-    new AppServer();
+DbConnection.initialize().then(() => {
+    new Server();
 }, () => {
     console.log("Failed connection to database.");
 });

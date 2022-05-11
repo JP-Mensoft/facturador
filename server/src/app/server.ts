@@ -4,13 +4,13 @@ import morgan from "morgan";
 import cors from "cors";
 // App
 import { routesIndex } from "../routes/routesIndex";
-import { appEnvironment } from "../environment/appEnvironment";
+import { Environment } from "./environment";
 // Middlewares
 import { checkToken } from "../middlewares/checkToken";
 // Models
-import { AppRouteModel } from "../models/appModels/appRouteModel";
+import { RouteModel } from "../models/routeModel";
 
-export class AppServer {
+export class Server {
 
     private server: Application;
 
@@ -19,6 +19,7 @@ export class AppServer {
         this.configureServer();
         this.configureRoutes();
         this.configureServerURL();
+        this.bootServer();
     }
 
     public configureServer(): void {
@@ -29,7 +30,7 @@ export class AppServer {
     }
 
     public configureRoutes(): void {
-        routesIndex.forEach((route: AppRouteModel) => {
+        routesIndex.forEach((route: RouteModel) => {
             switch (route.middleware) {
                 case "null":
                     (this.server as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
@@ -48,8 +49,8 @@ export class AppServer {
     }
 
     public configureServerURL(): void {
-        this.server.set("port", appEnvironment.serverPort);
-        this.server.set("ip", appEnvironment.serverIP);
+        this.server.set("port", Environment.serverPort);
+        this.server.set("ip", Environment.serverIP);
     }
 
     public bootServer(): void {

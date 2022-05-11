@@ -1,4 +1,4 @@
-export class AppRouteModel {
+export class RouteModel {
     constructor(
         public method: string,
         public route: string,
