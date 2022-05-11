@@ -65,7 +65,7 @@ export class UserController {
     }
 
     public async saludar(req: Request, res: Response) {
-        return res.status(100).json({ Saludo: "Hola." });
+        return res.status(200).json({ Saludo: "Hola." });
     }
 
 }

@@ -20,6 +20,6 @@ export const userRoutes = [
         route: '/user/register',
         middlewares: 'undefined',
         controller: UserController,
-        action: 'userRegister'
+        action: 'registerUser'
     }
 ]

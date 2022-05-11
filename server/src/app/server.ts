@@ -31,7 +31,7 @@ export class Server {
 
     public configureRoutes(): void {
         routesIndex.forEach((route: RouteModel) => {
-            switch (route.middleware) {
+            switch (route.middlewares) {
                 case "undefined":
                     (this.server as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
                         (new (route.controller as any))[route.action](req, res, next);
@@ -57,7 +57,7 @@ export class Server {
         const port: number = this.server.get("port");
         const ip: string = this.server.get("ip");
         this.server.listen(port, ip, () => {
-            console.log("Server ON - URL: http//" + ip + ":" + port);
+            console.log("Server ON - URL: http://" + ip + ":" + port);
         });
     }
 
