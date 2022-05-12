@@ -7,14 +7,14 @@ import { SaveUserModel, SetUserModel } from "../models/userDataModel";
 
 export class UserDataAccess {
 
-    private userEntity = DbConnection.getRepository(UserEntity);
+    private userRepository = DbConnection.getRepository(UserEntity);
 
     constructor() { }
 
     public async getOneUserEmail(email: string) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const userFound = await this.userEntity.findOne({ where: { email } });
+            const userFound = await this.userRepository.findOne({ where: { email } });
             if (userFound != null) {
                 dataResponse.success = true;
                 dataResponse.result = userFound;
@@ -28,7 +28,7 @@ export class UserDataAccess {
     public async getOneUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const user = await this.userEntity.findOne({ where: { userId } });
+            const user = await this.userRepository.findOne({ where: { userId } });
             if (user != null) {
                 dataResponse.success = true;
                 dataResponse.result = user;
@@ -44,8 +44,10 @@ export class UserDataAccess {
         let newUser: UserEntity = new UserEntity();
         newUser.email = userData.email;
         newUser.saveHashPassword(userData.password);
+        newUser.name = userData.name;
+        newUser.phone = userData.phone;
         try {
-            const saveResult = await this.userEntity.save(newUser);
+            const saveResult = await this.userRepository.save(newUser);
             if (saveResult != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
@@ -64,7 +66,9 @@ export class UserDataAccess {
                 let user: UserEntity = userFound.result;
                 user.email = userData.email;
                 user.saveHashPassword(userData.password);
-                const setResult = await this.userEntity.save(user);
+                user.name = userData.name;
+                user.phone = userData.phone;
+                const setResult = await this.userRepository.save(user);
                 if (setResult != undefined) {
                     dataResponse.success = true;
                     dataResponse.result = setResult;
@@ -79,7 +83,7 @@ export class UserDataAccess {
     public async removeOneUser(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const removeResult = await this.userEntity.delete(userId);
+            const removeResult = await this.userRepository.delete(userId);
             if (removeResult.affected != 0) {
                 dataResponse.success = true;
             }

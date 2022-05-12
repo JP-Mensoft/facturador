@@ -1,5 +1,5 @@
 // App
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import bcrypt from "bcrypt";
 import { utilsRng } from "../../utils/utils";
 import jwt from "jsonwebtoken";
@@ -8,14 +8,19 @@ import { Environment } from "../../app/environment";
 import { UserIdModel } from "../../models/userDataModel";
 
 @Entity()
-@Unique(["email"])
 export class UserEntity {
 
-    @Column({ length: 444 })
+    @Column({ unique: true, length: 444, nullable: false })
     public email!: string;
 
-    @Column({ length: 444 })
+    @Column({ length: 444, nullable: false })
     public password!: string;
+
+    @Column({ length: 444, nullable: true, default: "" })
+    public name!: string;
+
+    @Column({ length: 444, nullable: true, default: "" })
+    public phone!: string;
 
     @Column({ length: 10, nullable: true, default: "" })
     public recoveryCode!: string;
