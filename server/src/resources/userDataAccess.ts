@@ -3,7 +3,7 @@ import { DbConnection } from "../database/dbConnection";
 // Models
 import { UserEntity } from "../database/entities/userEntity";
 import { ResponseModel } from "../models/responseModel";
-import { SaveUserModel, SetUserModel } from "../models/userDataModel";
+import { UserSaveModel, UserSetModel } from "../models/userModel";
 
 export class UserDataAccess {
 
@@ -39,7 +39,7 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async addOneUser(userData: SaveUserModel) {
+    public async addOneUser(userData: UserSaveModel) {
         let dataResponse: ResponseModel = new ResponseModel();
         let newUser: UserEntity = new UserEntity();
         newUser.email = userData.email;
@@ -58,7 +58,7 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async setOneUser(userData: SetUserModel) {
+    public async setOneUser(userData: UserSetModel) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             const userFound: ResponseModel = await this.getOneUserId(userData.userId);

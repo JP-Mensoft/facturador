@@ -56,10 +56,10 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async removeOneCompany(companyId: number) {
+    public async removeOneCompanyUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const removeResult = await this.companyRepository.delete(companyId);
+            const removeResult = await this.companyRepository.delete(userId);
             if (removeResult.affected != 0) {
                 dataResponse.success = true;
             }

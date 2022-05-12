@@ -4,7 +4,7 @@ import { UserDataAccess } from '../resources/userDataAccess';
 // Models
 import { UserEntity } from '../database/entities/userEntity';
 import { ResponseModel } from '../models/responseModel';
-import { AccessUserModel, SaveUserModel } from '../models/userDataModel';
+import { UserAccessModel, UserSaveModel } from '../models/userModel';
 
 export class UserController {
 
@@ -16,7 +16,7 @@ export class UserController {
 
     public async userAccess(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const userRequest: AccessUserModel = req.body;
+        const userRequest: UserAccessModel = req.body;
         try {
             const userFound = await this.userDA.getOneUserEmail(userRequest.email);
             if (userFound.success) {
@@ -43,7 +43,7 @@ export class UserController {
 
     public async registerUser(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const userRequest: SaveUserModel = req.body;
+        const userRequest: UserSaveModel = req.body;
         if (userRequest.password === userRequest.verifiedPassword) {
             try {
                 const saveResult = await this.userDA.addOneUser(userRequest);
@@ -62,10 +62,6 @@ export class UserController {
             serverResponse.status = 400;
         }
         return res.status(serverResponse.status).json(serverResponse);
-    }
-
-    public async saludar(req: Request, res: Response) {
-        return res.status(200).json({ Saludo: "Hola." });
     }
 
 }

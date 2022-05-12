@@ -5,7 +5,7 @@ import { utilsRng } from "../../utils/utils";
 import jwt from "jsonwebtoken";
 import { Environment } from "../../app/environment";
 // Models
-import { UserIdModel } from "../../models/userDataModel";
+import { UserIdModel } from "../../models/userModel";
 
 @Entity()
 export class UserEntity {
