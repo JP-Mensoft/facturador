@@ -4,8 +4,6 @@ import bcrypt from "bcrypt";
 import { utilsRng } from "../../utils/utils";
 import jwt from "jsonwebtoken";
 import { Environment } from "../../app/environment";
-// Models
-import { UserIdModel } from "../../models/userModel";
 
 @Entity()
 export class UserEntity {
@@ -55,7 +53,7 @@ export class UserEntity {
     }
 
     public generateSesionToken(): string {
-        const payload: UserIdModel = {
+        const payload = {
             userId: this.userId
         }
         return jwt.sign(payload, Environment.jwtKey, { expiresIn: "2h" })

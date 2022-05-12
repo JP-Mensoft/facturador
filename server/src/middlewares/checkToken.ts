@@ -2,6 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from "jsonwebtoken"
 import { Environment } from '../app/environment';
+import { DecodedModel } from '../models/decodedModel';
 // Models
 import { ResponseModel } from '../models/responseModel';
 
@@ -15,7 +16,7 @@ export const checkToken = (req: Request, res: Response, next: NextFunction) => {
                 serverResponse.status = 401;
                 return res.status(serverResponse.status).json(serverResponse);
             } else {
-                req.body = decoded;
+                req.body = new DecodedModel(req.body, decoded);
                 next();
             }
         });

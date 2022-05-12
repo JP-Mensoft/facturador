@@ -1,9 +1,3 @@
-export class UserIdModel {
-    constructor(
-        public userId: number,
-    ) { }
-}
-
 export class UserAccessModel {
     constructor(
         public email: string,

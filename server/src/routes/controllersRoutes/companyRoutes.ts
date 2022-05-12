@@ -11,7 +11,7 @@ export const companyRoutes = [
     },
     {
         method: 'post',
-        route: '/company/register',
+        route: '/company/add',
         middlewares: 'checkToken',
         controller: CompanyController,
         action: 'registerUserCompany'

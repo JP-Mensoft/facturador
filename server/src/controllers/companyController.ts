@@ -3,8 +3,8 @@ import { Request, Response } from 'express';
 import { CompanyDataAccess } from '../resources/companyDataAccess';
 // Models
 import { ResponseModel } from '../models/responseModel';
-import { UserIdModel } from '../models/userModel';
 import { CompanyEntity } from '../database/entities/companyEntity';
+import { DecodedModel } from '../models/decodedModel';
 
 export class CompanyController {
 
@@ -16,9 +16,9 @@ export class CompanyController {
 
     public async getUserCompany(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const companyRequest: UserIdModel = req.body;
+        const companyRequest: DecodedModel = req.body;
         try {
-            const companyFound = await this.companyDA.getOneCompanyUserId(companyRequest.userId);
+            const companyFound = await this.companyDA.getOneCompanyUserId(companyRequest.decodedToken.userId);
             if (companyFound.success) {
                 const company: CompanyEntity = companyFound.result;
                 serverResponse.success = true;
@@ -36,9 +36,11 @@ export class CompanyController {
 
     public async registerUserCompany(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const companyRequest: CompanyEntity = req.body;
+        const companyRequest: DecodedModel = req.body;
+        const company: CompanyEntity = companyRequest.data;
+        company.userId = companyRequest.decodedToken.userId;
         try {
-            const saveResult = await this.companyDA.addOneCompany(companyRequest);;
+            const saveResult = await this.companyDA.addOneCompany(company);
             if (saveResult.success) {
                 serverResponse.success = true;
                 serverResponse.result = saveResult.result;
