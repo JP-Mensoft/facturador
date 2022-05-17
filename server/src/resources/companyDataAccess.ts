@@ -1,22 +1,22 @@
 // App
-import { Repository } from "typeorm";
-import { DbConnection } from "../database/dbConnection";
+import { EntityManager } from "typeorm";
+import { dbConnection } from "../database/dbConnection";
 // Models
 import { CompanyEntity } from "../database/entities/companyEntity";
 import { ResponseModel } from "../models/responseModel";
 
 export class CompanyDataAccess {
 
-    private companyRepository: Repository<CompanyEntity>;
+    private entityManager: EntityManager;
 
     constructor() {
-        this.companyRepository = DbConnection.getRepository(CompanyEntity);
+        this.entityManager = dbConnection.manager;
     }
 
     public async getOneCompanyUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const companyFound = await this.companyRepository.findOne({ where: { userId } });
+            const companyFound = await await this.entityManager.findOneBy(CompanyEntity, { userId });
             if (companyFound != null) {
                 dataResponse.success = true;
                 dataResponse.result = companyFound;
@@ -30,7 +30,7 @@ export class CompanyDataAccess {
     public async addOneCompany(newCompany: CompanyEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = await this.companyRepository.save(newCompany);
+            const saveResult = await this.entityManager.save(newCompany);
             if (saveResult != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
@@ -47,7 +47,7 @@ export class CompanyDataAccess {
             const companyFound: ResponseModel = await this.getOneCompanyUserId(newCompany.companyId);
             if (companyFound.success) {
                 let company: CompanyEntity = companyFound.result;
-                const setResult = await this.companyRepository.save(company);
+                const setResult = await this.entityManager.save(company);
                 if (setResult != undefined) {
                     dataResponse.success = true;
                     dataResponse.result = setResult;
@@ -62,7 +62,7 @@ export class CompanyDataAccess {
     public async removeOneCompanyUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const removeResult = await this.companyRepository.delete(userId);
+            const removeResult = await this.entityManager.delete(CompanyEntity, { userId });
             if (removeResult.affected != 0) {
                 dataResponse.success = true;
             }

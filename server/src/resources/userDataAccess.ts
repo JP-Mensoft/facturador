@@ -1,6 +1,6 @@
 // App
-import { DbConnection } from "../database/dbConnection";
-import { Repository } from "typeorm";
+import { dbConnection } from "../database/dbConnection";
+import { EntityManager } from "typeorm";
 // Models
 import { UserEntity } from "../database/entities/userEntity";
 import { CustomerEntity } from "../database/entities/customerEntity";
@@ -9,16 +9,16 @@ import { UserSaveModel, UserSetModel } from "../models/userModel";
 
 export class UserDataAccess {
 
-    private userRepository: Repository<UserEntity>;
+    private entityManager: EntityManager;
 
     constructor() {
-        this.userRepository = DbConnection.getRepository(UserEntity);
+        this.entityManager = dbConnection.manager;
     }
 
     public async getOneUserEmail(email: string) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const userFound = await this.userRepository.findOne({ where: { email } });
+            const userFound = await this.entityManager.findOneBy(UserEntity, { email });
             if (userFound != null) {
                 dataResponse.success = true;
                 dataResponse.result = userFound;
@@ -32,7 +32,7 @@ export class UserDataAccess {
     public async getOneUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const user = await this.userRepository.findOne({ where: { userId } });
+            const user = await this.entityManager.findOneBy(UserEntity, { userId });
             if (user != null) {
                 dataResponse.success = true;
                 dataResponse.result = user;
@@ -51,7 +51,7 @@ export class UserDataAccess {
         newUser.name = userData.name;
         newUser.phone = userData.phone;
         try {
-            const saveResult = await this.userRepository.save(newUser);
+            const saveResult = await this.entityManager.save(newUser);
             if (saveResult != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
@@ -72,7 +72,7 @@ export class UserDataAccess {
                 user.saveHashPassword(userData.password);
                 user.name = userData.name;
                 user.phone = userData.phone;
-                const setResult = await this.userRepository.save(user);
+                const setResult = await this.entityManager.save(user);
                 if (setResult != undefined) {
                     dataResponse.success = true;
                     dataResponse.result = setResult;
@@ -87,7 +87,7 @@ export class UserDataAccess {
     public async removeOneUser(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const removeResult = await this.userRepository.delete(userId);
+            const removeResult = await this.entityManager.delete(UserEntity, { userId });
             if (removeResult.affected != 0) {
                 dataResponse.success = true;
             }
@@ -97,23 +97,22 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    // Repasar
     public async updateUserCustomers(userId: number, customer: CustomerEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             const userFound: ResponseModel = await this.getOneUserId(userId);
             if (userFound.success) {
-                const user: UserEntity = userFound.result;
+                let user: UserEntity = userFound.result;
                 let userCustomers: CustomerEntity[] = [];
                 if (user.customers != undefined) {
                     userCustomers = user.customers;
                 }
                 userCustomers.push(customer);
                 user.customers = userCustomers;
-                const updatedCustomers: ResponseModel = await this.setOneUser(user);
-                if (updatedCustomers.success) {
+                const saveResult = await this.entityManager.save(user);
+                if (saveResult != undefined) {
                     dataResponse.success = true;
-                    dataResponse.result = updatedCustomers.result;
+                    dataResponse.result = saveResult;
                 }
             }
         } catch (error) {

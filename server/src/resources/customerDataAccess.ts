@@ -1,22 +1,22 @@
 // App
-import { DbConnection } from "../database/dbConnection";
-import { Repository } from "typeorm";
+import { dbConnection } from "../database/dbConnection";
+import { EntityManager } from "typeorm";
 // Models
 import { ResponseModel } from "../models/responseModel";
 import { CustomerEntity } from "../database/entities/customerEntity";
 
 export class CustomerDataAccess {
 
-    private customerRepository: Repository<CustomerEntity>;
+    private entityManager: EntityManager;
 
     constructor() {
-        this.customerRepository = DbConnection.getRepository(CustomerEntity);
+        this.entityManager = dbConnection.manager;
     }
 
     public async addOneCustomer(newCustomer: CustomerEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = await this.customerRepository.save(newCustomer);
+            const saveResult = await this.entityManager.save(newCustomer);
             if (saveResult != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
