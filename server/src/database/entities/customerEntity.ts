@@ -1,5 +1,6 @@
 // App
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { InvoiceEntity } from "./invoiceEntity";
 
 @Entity()
 export class CustomerEntity {
@@ -24,6 +25,9 @@ export class CustomerEntity {
 
     @Column({ length: 4444, nullable: true, default: "" })
     public remarks!: string;
+
+    @OneToMany(() => InvoiceEntity, (invoice) => invoice.user)
+    public invoices!: InvoiceEntity[];
 
     @PrimaryGeneratedColumn()
     public customerId!: number;

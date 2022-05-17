@@ -1,12 +1,13 @@
 // App
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, OneToMany } from "typeorm";
 import { utilsRng } from "../../utils/utils";
 import { Environment } from "../../app/environment";
 // Models
 import { DecodedTokenModel } from "../../models/decodedModel";
 import { CustomerEntity } from "./customerEntity";
+import { InvoiceEntity } from "./invoiceEntity";
 
 @Entity()
 export class UserEntity {
@@ -28,7 +29,10 @@ export class UserEntity {
 
     @ManyToMany(() => CustomerEntity, { eager: true })
     @JoinTable()
-    public customers!: CustomerEntity[]
+    public customers!: CustomerEntity[];
+
+    @OneToMany(() => InvoiceEntity, (invoice) => invoice.user, { eager: true })
+    public invoices!: InvoiceEntity[];
 
     @PrimaryGeneratedColumn()
     public userId!: number;
