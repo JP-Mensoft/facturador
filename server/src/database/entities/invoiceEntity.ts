@@ -17,14 +17,20 @@ export class InvoiceEntity {
     @Column({ nullable: true, default: 0 })
     public orderNumber!: number;
 
-    @OneToMany(() => ConceptEntity, (concept) => concept.invoice, { eager: true })
+    @Column({ length: 4444, nullable: true, default: "" })
+    public remarks!: string;
+
+    @Column({ nullable: false, default: false })
+    public charged!: boolean;
+
+    @OneToMany(() => ConceptEntity, (concept) => concept.invoiceId, { eager: true })
     public concepts!: ConceptEntity[];
 
     @ManyToOne(() => CustomerEntity, (customer) => customer.invoices)
-    public customer!: CustomerEntity;
+    public customerId!: number;
 
     @ManyToOne(() => UserEntity, (user) => user.invoices)
-    public user!: UserEntity;
+    public userId!: number;
 
     @PrimaryGeneratedColumn()
     public invoiceId!: number;

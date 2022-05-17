@@ -16,9 +16,9 @@ export class CompanyController {
 
     public async getUserCompany(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const companyRequest: DecodedModel = req.body;
+        const requestDecoded: DecodedModel = req.body;
         try {
-            const companyFound: ResponseModel = await this.companyDA.getOneCompanyUserId(companyRequest.decodedToken.userId);
+            const companyFound: ResponseModel = await this.companyDA.getOneCompanyUserId(requestDecoded.decodedToken.userId);
             if (companyFound.success) {
                 const company: CompanyEntity = companyFound.result;
                 serverResponse.success = true;
@@ -36,9 +36,9 @@ export class CompanyController {
 
     public async registerUserCompany(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const companyRequest: DecodedModel = req.body;
-        const company: CompanyEntity = companyRequest.data;
-        company.userId = companyRequest.decodedToken.userId;
+        const requestDecoded: DecodedModel = req.body;
+        const company: CompanyEntity = requestDecoded.data;
+        company.userId = requestDecoded.decodedToken.userId;
         try {
             const saveResult: ResponseModel = await this.companyDA.addOneCompany(company);
             if (saveResult.success) {

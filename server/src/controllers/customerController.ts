@@ -19,8 +19,8 @@ export class CustomerController {
 
     public async getOneCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const customerRequest: DecodedModel = req.body;
-        const customerId = customerRequest.data.customerId;
+        const requestDecoded: DecodedModel = req.body;
+        const customerId: number = requestDecoded.data.customerId;
         try {
             const getCustomerResult: ResponseModel = await this.customerDA.getOneCustomer(customerId);
             if (getCustomerResult.success) {
@@ -57,9 +57,9 @@ export class CustomerController {
 
     public async registerCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const customerRequest: DecodedModel = req.body;
-        const customer: CustomerEntity = customerRequest.data;
-        const userId: number = customerRequest.decodedToken.userId;
+        const requestDecoded: DecodedModel = req.body;
+        const customer: CustomerEntity = requestDecoded.data;
+        const userId: number = requestDecoded.decodedToken.userId;
         try {
             const saveCustomerResult: ResponseModel = await this.customerDA.addOneCustomer(customer);
             if (saveCustomerResult.success) {
@@ -81,8 +81,8 @@ export class CustomerController {
 
     public async deleteCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const customerRequest: DecodedModel = req.body;
-        const customerId = customerRequest.data.customerId;
+        const requestDecoded: DecodedModel = req.body;
+        const customerId: number = requestDecoded.data.customerId;
         try {
             const deleteCustomerResult: ResponseModel = await this.customerDA.deleteOneCustomer(customerId);
             if (deleteCustomerResult.success) {

@@ -3,6 +3,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { InvoiceEntity } from "./invoiceEntity";
 // Models
 
+
 @Entity()
 export class ConceptEntity {
 
@@ -13,7 +14,7 @@ export class ConceptEntity {
     public amount!: number;
 
     @ManyToOne(() => InvoiceEntity, (invoice) => invoice.concepts)
-    public invoice!: InvoiceEntity;
+    public invoiceId!: number;
 
     @PrimaryGeneratedColumn()
     public conceptId!: number;

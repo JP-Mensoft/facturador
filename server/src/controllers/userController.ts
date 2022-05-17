@@ -16,12 +16,12 @@ export class UserController {
 
     public async userAccess(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const userRequest: UserAccessModel = req.body;
+        const requestDecoded: UserAccessModel = req.body;
         try {
-            const userFound: ResponseModel = await this.userDA.getOneUserEmail(userRequest.email);
+            const userFound: ResponseModel = await this.userDA.getOneUserEmail(requestDecoded.email);
             if (userFound.success) {
                 const user: UserEntity = userFound.result;
-                if (user.checkPassword(userRequest.password)) {
+                if (user.checkPassword(requestDecoded.password)) {
                     serverResponse.success = true;
                     serverResponse.result = {
                         user,
@@ -43,10 +43,10 @@ export class UserController {
 
     public async registerUser(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const userRequest: UserSaveModel = req.body;
-        if (userRequest.password === userRequest.verifiedPassword) {
+        const requestDecoded: UserSaveModel = req.body;
+        if (requestDecoded.password === requestDecoded.verifiedPassword) {
             try {
-                const saveResult: ResponseModel = await this.userDA.addOneUser(userRequest);
+                const saveResult: ResponseModel = await this.userDA.addOneUser(requestDecoded);
                 if (saveResult.success) {
                     serverResponse.success = true;
                     serverResponse.result = saveResult.result;

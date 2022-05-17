@@ -58,9 +58,10 @@ export class CustomerDataAccess {
     public async deleteOneCustomer(customerId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const removeResult = await this.entityManager.delete(CustomerEntity, { customerId });
-            if (removeResult.affected != 0) {
+            const deleteResult = await this.entityManager.delete(CustomerEntity, { customerId });
+            if (deleteResult.affected != 0) {
                 dataResponse.success = true;
+                dataResponse.result = deleteResult;
             }
         } catch (error) {
             dataResponse.result = error;

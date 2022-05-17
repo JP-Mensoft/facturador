@@ -21,7 +21,7 @@ export class CompanyEntity {
     @Column({ length: 44, nullable: true, default: "" })
     public iban!: string;
 
-    @OneToOne(() => UserEntity, { onDelete: "CASCADE" })
+    @OneToOne(() => UserEntity)
     @JoinColumn()
     public userId!: number;
 

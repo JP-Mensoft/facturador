@@ -2,10 +2,10 @@
 import { EntityManager } from "typeorm";
 import { dbConnection } from "../database/dbConnection";
 // Models
-import { CompanyEntity } from "../database/entities/companyEntity";
+import { InvoiceEntity } from "../database/entities/invoiceEntity";
 import { ResponseModel } from "../models/responseModel";
 
-export class CompanyDataAccess {
+export class InvoiceDataAccess {
 
     private entityManager: EntityManager;
 
@@ -13,13 +13,13 @@ export class CompanyDataAccess {
         this.entityManager = dbConnection.manager;
     }
 
-    public async getOneCompanyUserId(userId: number) {
+    public async getOneInvoice(invoiceId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const companyFound = await this.entityManager.findOneBy(CompanyEntity, { userId });
-            if (companyFound != null) {
+            const invoice = await this.entityManager.findBy(InvoiceEntity, { invoiceId });
+            if (invoice != null) {
                 dataResponse.success = true;
-                dataResponse.result = companyFound;
+                dataResponse.result = invoice;
             }
         } catch (error) {
             dataResponse.result = error;
@@ -27,11 +27,11 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async addOneCompany(newCompany: CompanyEntity) {
+    public async addInvoice(invoice: InvoiceEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = await this.entityManager.save(CompanyEntity, newCompany);
-            if (saveResult != undefined) {
+            const saveResult = this.entityManager.save(InvoiceEntity, invoice);
+            if (saveResult != null) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
             }
@@ -41,17 +41,13 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async setOneCompany(newCompany: CompanyEntity) {
+    public async setInvoice(invoice: InvoiceEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const companyFound: ResponseModel = await this.getOneCompanyUserId(newCompany.companyId);
-            if (companyFound.success) {
-                let company: CompanyEntity = companyFound.result;
-                const setResult = await this.entityManager.save(CompanyEntity, company);
-                if (setResult != undefined) {
-                    dataResponse.success = true;
-                    dataResponse.result = setResult;
-                }
+            const saveResult = this.entityManager.save(InvoiceEntity, invoice);
+            if (saveResult != null) {
+                dataResponse.success = true;
+                dataResponse.result = saveResult;
             }
         } catch (error) {
             dataResponse.result = error;
@@ -59,10 +55,10 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async deleteOneCompanyUserId(userId: number) {
+    public async deleteInvoice(invoiceId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const deleteResult = await this.entityManager.delete(CompanyEntity, { userId });
+            const deleteResult = await this.entityManager.delete(InvoiceEntity, invoiceId);
             if (deleteResult.affected != 0) {
                 dataResponse.success = true;
                 dataResponse.result = deleteResult;
