@@ -41,4 +41,23 @@ export class CustomerController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
+    public async deleteCustomer(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        const customerRequest: DecodedModel = req.body;
+        const customerId = customerRequest.data.customerId;
+        try {
+            const deleteCustomerResult: ResponseModel = await this.customerDA.deleteOneCustomer(customerId);
+            if (deleteCustomerResult.success) {
+                serverResponse.success = true;
+                serverResponse.status = 200;
+            } else {
+                serverResponse.status = 400;
+            }
+        } catch (error) {
+            serverResponse.result = error;
+            serverResponse.status = 500;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
+    }
+
 }

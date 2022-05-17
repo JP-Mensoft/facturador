@@ -8,5 +8,12 @@ export const customerRoutes = [
         middlewares: 'checkToken',
         controller: CustomerController,
         action: 'registerCustomer'
+    },
+    {
+        method: 'delete',
+        route: '/customer/delete',
+        middlewares: 'checkToken',
+        controller: CustomerController,
+        action: 'deleteCustomer'
     }
 ]

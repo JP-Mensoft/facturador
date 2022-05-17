@@ -84,7 +84,7 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async removeOneUser(userId: number) {
+    public async deleteOneUser(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             const removeResult = await this.entityManager.delete(UserEntity, { userId });

@@ -59,7 +59,7 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async removeOneCompanyUserId(userId: number) {
+    public async deleteOneCompanyUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             const removeResult = await this.entityManager.delete(CompanyEntity, { userId });
