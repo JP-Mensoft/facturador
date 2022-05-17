@@ -47,7 +47,7 @@ export class CompanyDataAccess {
             const companyFound: ResponseModel = await this.getOneCompanyUserId(newCompany.companyId);
             if (companyFound.success) {
                 let company: CompanyEntity = companyFound.result;
-                const setResult = await this.entityManager.save(company);
+                const setResult = await this.entityManager.save(CompanyEntity, company);
                 if (setResult != undefined) {
                     dataResponse.success = true;
                     dataResponse.result = setResult;

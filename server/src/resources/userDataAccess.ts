@@ -51,7 +51,7 @@ export class UserDataAccess {
         newUser.name = userData.name;
         newUser.phone = userData.phone;
         try {
-            const saveResult = await this.entityManager.save(newUser);
+            const saveResult = await this.entityManager.save(UserEntity, newUser);
             if (saveResult != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
@@ -72,7 +72,7 @@ export class UserDataAccess {
                 user.saveHashPassword(userData.password);
                 user.name = userData.name;
                 user.phone = userData.phone;
-                const setResult = await this.entityManager.save(user);
+                const setResult = await this.entityManager.save(UserEntity, user);
                 if (setResult != undefined) {
                     dataResponse.success = true;
                     dataResponse.result = setResult;
@@ -109,7 +109,7 @@ export class UserDataAccess {
                 }
                 userCustomers.push(customer);
                 user.customers = userCustomers;
-                const saveResult = await this.entityManager.save(user);
+                const saveResult = await this.entityManager.save(UserEntity, user);
                 if (saveResult != undefined) {
                     dataResponse.success = true;
                     dataResponse.result = saveResult;
