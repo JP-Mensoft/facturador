@@ -13,10 +13,10 @@ export class CompanyDataAccess {
         this.entityManager = dbConnection.manager;
     }
 
-    public async getOneCompanyUserId(userId: number) {
+    public async getOneCompanyUserId(user: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const companyFound = await this.entityManager.findOneBy(CompanyEntity, { userId });
+            const companyFound = await this.entityManager.findOneBy(CompanyEntity, { user });
             if (companyFound != null) {
                 dataResponse.success = true;
                 dataResponse.result = companyFound;

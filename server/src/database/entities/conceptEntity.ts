@@ -14,7 +14,7 @@ export class ConceptEntity {
     public amount!: number;
 
     @ManyToOne(() => InvoiceEntity, (invoice) => invoice.concepts)
-    public invoiceId!: number;
+    public invoice!: number;
 
     @PrimaryGeneratedColumn()
     public conceptId!: number;

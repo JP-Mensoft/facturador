@@ -24,18 +24,26 @@ export class InvoiceController {
         const invoiceRequest: InvoiceReqModel = requestDecoded.data;
         const userId: number = requestDecoded.decodedToken.userId;
         let newInvoice: InvoiceEntity = invoiceRequest.invoice;
-        newInvoice.userId = userId;
+        newInvoice.user = userId;
         try {
             const savedResult = await this.invoiceDA.addInvoice(newInvoice);
             if (savedResult.success) {
                 let savedInvoice: InvoiceEntity = savedResult.result;
+                let saveSuccess: boolean = true;
                 for await (const concept of invoiceRequest.concepts) {
-                    concept.invoiceId = savedInvoice.invoiceId;
-                    await this.conceptDA.addConcept(concept);
+                    concept.invoice = savedInvoice.invoiceId;
+                    const saveConceptResult = await this.conceptDA.addConcept(concept);
+                    if (!saveConceptResult.success) {
+                        saveSuccess = false;
+                    }
                 }
-                serverResponse.success = true;
-                serverResponse.result = await this.invoiceDA.getOneInvoice(savedInvoice.invoiceId);
-                serverResponse.status = 200;
+                if (saveSuccess) {
+                    serverResponse.success = true;
+                    serverResponse.result = await this.invoiceDA.getOneInvoice(savedInvoice.invoiceId);
+                    serverResponse.status = 200;
+                } else {
+                    serverResponse.status = 400;
+                }
             }
         } catch (error) {
             serverResponse.status = 500;

@@ -16,7 +16,7 @@ export class InvoiceDataAccess {
     public async getOneInvoice(invoiceId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const invoice = await this.entityManager.findBy(InvoiceEntity, { invoiceId });
+            const invoice = await this.entityManager.findOneBy(InvoiceEntity, { invoiceId });
             if (invoice != null) {
                 dataResponse.success = true;
                 dataResponse.result = invoice;
@@ -30,7 +30,7 @@ export class InvoiceDataAccess {
     public async addInvoice(invoice: InvoiceEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = this.entityManager.save(InvoiceEntity, invoice);
+            const saveResult = await this.entityManager.save(InvoiceEntity, invoice);
             if (saveResult != null) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
@@ -44,7 +44,7 @@ export class InvoiceDataAccess {
     public async setInvoice(invoice: InvoiceEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = this.entityManager.save(InvoiceEntity, invoice);
+            const saveResult = await this.entityManager.save(InvoiceEntity, invoice);
             if (saveResult != null) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;

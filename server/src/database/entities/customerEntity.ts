@@ -26,7 +26,7 @@ export class CustomerEntity {
     @Column({ length: 4444, nullable: true, default: "" })
     public remarks!: string;
 
-    @OneToMany(() => InvoiceEntity, (invoice) => invoice.userId)
+    @OneToMany(() => InvoiceEntity, (invoice) => invoice.user)
     public invoices!: InvoiceEntity[];
 
     @PrimaryGeneratedColumn()

@@ -23,7 +23,7 @@ export class CompanyEntity {
 
     @OneToOne(() => UserEntity)
     @JoinColumn()
-    public userId!: number;
+    public user!: number;
 
     @PrimaryGeneratedColumn()
     public companyId!: number;

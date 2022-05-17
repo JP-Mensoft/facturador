@@ -31,7 +31,7 @@ export class UserEntity {
     @JoinTable()
     public customers!: CustomerEntity[];
 
-    @OneToMany(() => InvoiceEntity, (invoice) => invoice.userId, { eager: true })
+    @OneToMany(() => InvoiceEntity, (invoice) => invoice.user, { eager: true })
     public invoices!: InvoiceEntity[];
 
     @PrimaryGeneratedColumn()

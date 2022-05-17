@@ -9,7 +9,7 @@ import { UserEntity } from "./userEntity";
 export class InvoiceEntity {
 
     @Column({ nullable: false })
-    public date!: Date;
+    public date!: string;
 
     @Column({ nullable: true, default: 0 })
     public invoiceNumber!: number;
@@ -20,17 +20,20 @@ export class InvoiceEntity {
     @Column({ length: 4444, nullable: true, default: "" })
     public remarks!: string;
 
-    @Column({ nullable: false, default: false })
+    @Column({ nullable: true, default: false })
     public charged!: boolean;
 
-    @OneToMany(() => ConceptEntity, (concept) => concept.invoiceId, { eager: true })
+    @Column({ nullable: true, default: "" })
+    public collectionDate!: string;
+
+    @OneToMany(() => ConceptEntity, (concept) => concept.invoice, { eager: true })
     public concepts!: ConceptEntity[];
 
-    @ManyToOne(() => CustomerEntity, (customer) => customer.invoices)
-    public customerId!: number;
+    @ManyToOne(() => CustomerEntity, (customer) => customer.invoices, { eager: true })
+    public customer!: number;
 
-    @ManyToOne(() => UserEntity, (user) => user.invoices)
-    public userId!: number;
+    @ManyToOne(() => UserEntity, (user) => user.invoices, { onDelete: "CASCADE", onUpdate: "CASCADE" })
+    public user!: number;
 
     @PrimaryGeneratedColumn()
     public invoiceId!: number;
