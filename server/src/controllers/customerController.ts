@@ -17,6 +17,44 @@ export class CustomerController {
         this.userDA = new UserDataAccess();
     }
 
+    public async getOneCustomer(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        const customerRequest: DecodedModel = req.body;
+        const customerId = customerRequest.data.customerId;
+        try {
+            const getCustomerResult: ResponseModel = await this.customerDA.getOneCustomer(customerId);
+            if (getCustomerResult.success) {
+                serverResponse.success = true;
+                serverResponse.result = getCustomerResult;
+                serverResponse.status = 200;
+            } else {
+                serverResponse.status = 400;
+            }
+        } catch (error) {
+            serverResponse.result = error;
+            serverResponse.status = 500;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
+    }
+
+    public async getAllCustomers(res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        try {
+            const getCustomersResult: ResponseModel = await this.customerDA.getAllCustomes();
+            if (getCustomersResult.success) {
+                serverResponse.success = true;
+                serverResponse.result = getCustomersResult;
+                serverResponse.status = 200;
+            } else {
+                serverResponse.status = 400;
+            }
+        } catch (error) {
+            serverResponse.result = error;
+            serverResponse.status = 500;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
+    }
+
     public async registerCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const customerRequest: DecodedModel = req.body;

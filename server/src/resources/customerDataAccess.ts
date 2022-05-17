@@ -13,6 +13,34 @@ export class CustomerDataAccess {
         this.entityManager = dbConnection.manager;
     }
 
+    public async getOneCustomer(customerId: number) {
+        let dataResponse: ResponseModel = new ResponseModel();
+        try {
+            const customerFound = await this.entityManager.findOneBy(CustomerEntity, { customerId });
+            if (customerFound != null) {
+                dataResponse.success = true;
+                dataResponse.result = customerFound;
+            }
+        } catch (error) {
+            dataResponse.result = error;
+        }
+        return dataResponse;
+    }
+
+    public async getAllCustomes() {
+        let dataResponse: ResponseModel = new ResponseModel();
+        try {
+            const customersFound = await this.entityManager.find(CustomerEntity);
+            if (customersFound != null) {
+                dataResponse.success = true;
+                dataResponse.result = customersFound;
+            }
+        } catch (error) {
+            dataResponse.result = error;
+        }
+        return dataResponse;
+    }
+
     public async addOneCustomer(newCustomer: CustomerEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
