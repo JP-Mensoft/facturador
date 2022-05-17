@@ -13,7 +13,7 @@ export class ConceptEntity {
     @Column({ nullable: true, default: 0 })
     public amount!: number;
 
-    @ManyToOne(() => InvoiceEntity, (invoice) => invoice.concepts)
+    @ManyToOne(() => InvoiceEntity, (invoice) => invoice.concepts, { onDelete: "CASCADE", onUpdate: "CASCADE" })
     public invoice!: number;
 
     @PrimaryGeneratedColumn()

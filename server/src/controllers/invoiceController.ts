@@ -44,6 +44,8 @@ export class InvoiceController {
                 } else {
                     serverResponse.status = 400;
                 }
+            } else {
+                serverResponse.status = 400;
             }
         } catch (error) {
             serverResponse.status = 500;
