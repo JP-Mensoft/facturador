@@ -37,7 +37,7 @@ export class CustomerController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
-    public async getAllCustomers(res: Response) {
+    public async getAllCustomers(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         try {
             const getCustomersResult: ResponseModel = await this.customerDA.getAllCustomes();
