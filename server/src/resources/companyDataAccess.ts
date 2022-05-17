@@ -16,7 +16,7 @@ export class CompanyDataAccess {
     public async getOneCompanyUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const companyFound = await await this.entityManager.findOneBy(CompanyEntity, { userId });
+            const companyFound = await this.entityManager.findOneBy(CompanyEntity, { userId });
             if (companyFound != null) {
                 dataResponse.success = true;
                 dataResponse.result = companyFound;
@@ -30,7 +30,7 @@ export class CompanyDataAccess {
     public async addOneCompany(newCompany: CompanyEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = await this.entityManager.save(newCompany);
+            const saveResult = await this.entityManager.save(CompanyEntity, newCompany);
             if (saveResult != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;

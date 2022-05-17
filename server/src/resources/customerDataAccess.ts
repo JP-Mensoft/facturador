@@ -16,8 +16,8 @@ export class CustomerDataAccess {
     public async addOneCustomer(newCustomer: CustomerEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = await this.entityManager.save(newCustomer);
-            if (saveResult != undefined) {
+            const saveResult = await this.entityManager.save(CustomerEntity, newCustomer);
+            if (saveResult != null) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
             }
