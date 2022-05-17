@@ -13,7 +13,7 @@ export class CompanyDataAccess {
         this.entityManager = dbConnection.manager;
     }
 
-    public async getOneCompanyUserId(user: number) {
+    public async getOneUserCompany(user: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             const companyFound = await this.entityManager.findOneBy(CompanyEntity, { user });
@@ -44,7 +44,7 @@ export class CompanyDataAccess {
     public async setOneCompany(newCompany: CompanyEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const companyFound: ResponseModel = await this.getOneCompanyUserId(newCompany.companyId);
+            const companyFound: ResponseModel = await this.getOneUserCompany(newCompany.companyId);
             if (companyFound.success) {
                 let company: CompanyEntity = companyFound.result;
                 const setResult = await this.entityManager.save(CompanyEntity, company);
@@ -59,10 +59,10 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async deleteOneCompanyUserId(userId: number) {
+    public async deleteOneUserCompany(user: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const deleteResult = await this.entityManager.delete(CompanyEntity, { userId });
+            const deleteResult = await this.entityManager.delete(CompanyEntity, { user });
             if (deleteResult.affected != 0) {
                 dataResponse.success = true;
                 dataResponse.result = deleteResult;

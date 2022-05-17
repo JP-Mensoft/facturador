@@ -65,7 +65,7 @@ export class UserEntity {
 
     public generateSesionToken(): string {
         const payload: DecodedTokenModel = {
-            userId: this.userId
+            user: this.userId
         }
         return jwt.sign(payload, Environment.jwtKey, { expiresIn: "2h" })
     }

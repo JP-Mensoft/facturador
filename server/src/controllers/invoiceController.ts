@@ -22,9 +22,9 @@ export class InvoiceController {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
         const invoiceRequest: InvoiceReqModel = requestDecoded.data;
-        const userId: number = requestDecoded.decodedToken.userId;
+        const user: number = requestDecoded.decodedToken.user;
         let newInvoice: InvoiceEntity = invoiceRequest.invoice;
-        newInvoice.user = userId;
+        newInvoice.user = user;
         try {
             const savedResult = await this.invoiceDA.addInvoice(newInvoice);
             if (savedResult.success) {
