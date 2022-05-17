@@ -1,11 +1,12 @@
 // App
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany } from "typeorm";
 import bcrypt from "bcrypt";
 import { utilsRng } from "../../utils/utils";
 import jwt from "jsonwebtoken";
 import { Environment } from "../../app/environment";
 // Models
 import { DecodedTokenModel } from "../../models/decodedModel";
+import { CustomerEntity } from "./customerEntity";
 
 @Entity()
 export class UserEntity {
@@ -24,6 +25,10 @@ export class UserEntity {
 
     @Column({ length: 10, nullable: true, default: "" })
     public recoveryCode!: string;
+
+    @ManyToMany(() => CustomerEntity)
+    @JoinTable()
+    public customers!: CustomerEntity[]
 
     @PrimaryGeneratedColumn()
     public userId!: number;

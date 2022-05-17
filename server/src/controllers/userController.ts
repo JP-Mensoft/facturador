@@ -18,7 +18,7 @@ export class UserController {
         let serverResponse: ResponseModel = new ResponseModel();
         const userRequest: UserAccessModel = req.body;
         try {
-            const userFound = await this.userDA.getOneUserEmail(userRequest.email);
+            const userFound: ResponseModel = await this.userDA.getOneUserEmail(userRequest.email);
             if (userFound.success) {
                 const user: UserEntity = userFound.result;
                 if (user.checkPassword(userRequest.password)) {
@@ -46,7 +46,7 @@ export class UserController {
         const userRequest: UserSaveModel = req.body;
         if (userRequest.password === userRequest.verifiedPassword) {
             try {
-                const saveResult = await this.userDA.addOneUser(userRequest);
+                const saveResult: ResponseModel = await this.userDA.addOneUser(userRequest);
                 if (saveResult.success) {
                     serverResponse.success = true;
                     serverResponse.result = saveResult.result;

@@ -1,5 +1,5 @@
+// App
 import { CompanyController } from "../../controllers/companyController";
-
 
 export const companyRoutes = [
     {
@@ -11,7 +11,7 @@ export const companyRoutes = [
     },
     {
         method: 'post',
-        route: '/company/add',
+        route: '/company/register',
         middlewares: 'checkToken',
         controller: CompanyController,
         action: 'registerUserCompany'

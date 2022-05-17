@@ -18,7 +18,7 @@ export class CompanyController {
         let serverResponse: ResponseModel = new ResponseModel();
         const companyRequest: DecodedModel = req.body;
         try {
-            const companyFound = await this.companyDA.getOneCompanyUserId(companyRequest.decodedToken.userId);
+            const companyFound: ResponseModel = await this.companyDA.getOneCompanyUserId(companyRequest.decodedToken.userId);
             if (companyFound.success) {
                 const company: CompanyEntity = companyFound.result;
                 serverResponse.success = true;
@@ -40,7 +40,7 @@ export class CompanyController {
         const company: CompanyEntity = companyRequest.data;
         company.userId = companyRequest.decodedToken.userId;
         try {
-            const saveResult = await this.companyDA.addOneCompany(company);
+            const saveResult: ResponseModel = await this.companyDA.addOneCompany(company);
             if (saveResult.success) {
                 serverResponse.success = true;
                 serverResponse.result = saveResult.result;

@@ -1,14 +1,17 @@
 // App
+import { Repository } from "typeorm";
 import { DbConnection } from "../database/dbConnection";
-import { CompanyEntity } from "../database/entities/companyEntity";
 // Models
+import { CompanyEntity } from "../database/entities/companyEntity";
 import { ResponseModel } from "../models/responseModel";
 
 export class CompanyDataAccess {
 
-    private companyRepository = DbConnection.getRepository(CompanyEntity);
+    private companyRepository: Repository<CompanyEntity>;
 
-    constructor() { }
+    constructor() {
+        this.companyRepository = DbConnection.getRepository(CompanyEntity);
+    }
 
     public async getOneCompanyUserId(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
