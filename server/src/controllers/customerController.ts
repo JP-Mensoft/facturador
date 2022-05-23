@@ -59,11 +59,11 @@ export class CustomerController {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
         const customer: CustomerEntity = requestDecoded.data;
-        const user: number = requestDecoded.decodedToken.user;
+        const userId: number = requestDecoded.decodedToken.userId;
         try {
             const saveCustomerResult: ResponseModel = await this.customerDA.addOneCustomer(customer);
             if (saveCustomerResult.success) {
-                const updateUserCustomersResult: ResponseModel = await this.userDA.updateUserCustomers(user, saveCustomerResult.result);
+                const updateUserCustomersResult: ResponseModel = await this.userDA.updateUserCustomers(userId, saveCustomerResult.result);
                 if (updateUserCustomersResult.success) {
                     serverResponse.success = true;
                     serverResponse.result = updateUserCustomersResult.result;

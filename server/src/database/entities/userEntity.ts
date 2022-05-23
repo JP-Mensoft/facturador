@@ -31,7 +31,7 @@ export class UserEntity {
     @JoinTable()
     public customers!: CustomerEntity[];
 
-    @OneToMany(() => InvoiceEntity, (invoice) => invoice.user, { eager: true })
+    @OneToMany(() => InvoiceEntity, (invoice) => invoice.userId, { eager: true })
     public invoices!: InvoiceEntity[];
 
     @PrimaryGeneratedColumn()
@@ -65,7 +65,8 @@ export class UserEntity {
 
     public generateSesionToken(): string {
         const payload: DecodedTokenModel = {
-            user: this.userId
+            userId: this.userId,
+            email: this.email
         }
         return jwt.sign(payload, Environment.jwtKey, { expiresIn: "2h" })
     }

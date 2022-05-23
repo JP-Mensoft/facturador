@@ -22,16 +22,16 @@ export class InvoiceController {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
         const invoiceRequest: InvoiceReqModel = requestDecoded.data;
-        const user: number = requestDecoded.decodedToken.user;
+        const userId: number = requestDecoded.decodedToken.userId;
         let newInvoice: InvoiceEntity = invoiceRequest.invoice;
-        newInvoice.user = user;
+        newInvoice.userId = userId;
         try {
             const savedResult = await this.invoiceDA.addInvoice(newInvoice);
             if (savedResult.success) {
                 let savedInvoice: InvoiceEntity = savedResult.result;
                 let saveSuccess: boolean = true;
                 for await (const concept of invoiceRequest.concepts) {
-                    concept.invoice = savedInvoice.invoiceId;
+                    concept.invoiceId = savedInvoice.invoiceId;
                     const saveConceptResult = await this.conceptDA.addConcept(concept);
                     if (!saveConceptResult.success) {
                         saveSuccess = false;

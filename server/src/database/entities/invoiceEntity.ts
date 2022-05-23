@@ -26,14 +26,14 @@ export class InvoiceEntity {
     @Column({ nullable: true, default: "" })
     public collectionDate!: string;
 
-    @OneToMany(() => ConceptEntity, (concept) => concept.invoice, { eager: true })
+    @OneToMany(() => ConceptEntity, (concept) => concept.invoiceId, { eager: true })
     public concepts!: ConceptEntity[];
 
     @ManyToOne(() => CustomerEntity, (customer) => customer.invoices, { eager: true })
-    public customer!: number;
+    public customerId!: number;
 
     @ManyToOne(() => UserEntity, (user) => user.invoices, { onDelete: "CASCADE", onUpdate: "CASCADE" })
-    public user!: number;
+    public userId!: number;
 
     @PrimaryGeneratedColumn()
     public invoiceId!: number;

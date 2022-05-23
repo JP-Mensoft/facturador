@@ -14,7 +14,7 @@ export class ConceptEntity {
     public amount!: number;
 
     @ManyToOne(() => InvoiceEntity, (invoice) => invoice.concepts, { onDelete: "CASCADE", onUpdate: "CASCADE" })
-    public invoice!: number;
+    public invoiceId!: number;
 
     @PrimaryGeneratedColumn()
     public conceptId!: number;
