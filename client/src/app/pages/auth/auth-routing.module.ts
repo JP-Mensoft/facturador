@@ -9,13 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    pathMatch: 'full',
     loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
 
   },
   {
     path: 'register',
-    pathMatch: 'full',
     loadChildren: () => import('./register/register.module').then(m => m.RegisterPageModule)
   }
 ];

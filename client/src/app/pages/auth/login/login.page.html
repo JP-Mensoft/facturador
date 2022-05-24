@@ -1,8 +1,55 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
+  <ion-grid>
+
+    <ion-row class='titleRow ion-justify-content-center ion-align-items-center'>
+      <ion-col size='8' sizeMd='6' sizeLg='3' class='titleCol centerCol'>
+        <div class="title">
+          Facturador
+        </div>
+        <div class="hiddenTitle">
+          <span class="hiddenTitleBy">by</span>
+          <span class="hiddenTitleName">JL Pastor</span>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class='contentRow ion-justify-content-center ion-align-items-center'>
+      <ion-col size='8' sizeMd='3'>
+
+        <form [formGroup]='loginForm' (ngSubmit)='attemptAccess();'>
+
+          <ion-row class="formRow">
+            <ion-col class="centerCol" size='12'>
+              <ion-icon class="loginIcon" name="mail-outline"></ion-icon>
+              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}" type="text"
+                placeholder="Email">
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="formRow">
+            <ion-col class="centerCol" size='12'>
+              <ion-icon class="loginIcon" name="lock-closed-outline"></ion-icon>
+              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}" type="text"
+                placeholder="Contraseña">
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="formRow">
+            <ion-col class="btnCol" size='12'>
+              <button class="btnAccess">Acceder</button>
+            </ion-col>
+          </ion-row>
+
+        </form>
+
+        <ion-row class='mottoRow ion-justify-content-center ion-align-items-center'>
+          <p class="motto">Designed and assembled by JL Pastor.</p>
+        </ion-row>
+
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
 </ion-content>

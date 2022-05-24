@@ -1,0 +1,144 @@
+// Variables
+$color_azul: rgb(20, 100, 160);
+$color_gris: rgb(100, 100, 100);
+$color_rojo_error: rgba(190, 65, 65, 0.4);
+//
+
+.centerCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleRow {
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.titleCol {
+    &:hover .title {
+        animation: hideTitle 0.1s 0s 1 normal linear forwards;
+    }
+    &:hover .hiddenTitle {
+        animation: showHiddenTitle 0.1s 0s 1 normal linear forwards;
+    }
+}
+
+.title {
+    font-family: "Roboto Slab", serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: $color_azul;
+}
+
+.hiddenTitle {
+    position: absolute;
+    opacity: 0%;
+    font-family: "Roboto Slab", serif;
+}
+
+.hiddenTitleBy {
+    margin-right: 5px;
+    font-size: 20px;
+    font-weight: 400;
+    color: $color_gris;
+}
+
+.hiddenTitleName {
+    font-size: 25px;
+    font-weight: 800;
+    color: $color_azul;
+}
+
+.formRow {
+    margin-top: 8px;
+}
+
+.loginIcon {
+    margin-right: 10px;
+}
+
+.btnCol {
+    display: flex;
+    justify-content: end;
+}
+
+.loginInput {
+    width: 100%;
+    height: 30px;
+    padding-left: 5px;
+    border: solid black 2px;
+    border-radius: 4px;
+    outline: none;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    &:focus {
+        transition: 0.2s;
+        border: solid $color_azul 2px;
+        box-shadow: -4px 4px 0px;
+        transform: translate(4px, -4px);
+    }
+}
+
+.btnAccess {
+    height: 30px;
+    padding: 5px;
+    border-radius: 4px;
+    border: solid black 2px;
+    background-color: $color_azul;
+    color: white;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    &:hover {
+        transition: 0.1s;
+        box-shadow: 4px 4px 0px black;
+        transform: translate(-4px, -4px);
+    }
+}
+
+.mottoRow {
+    margin-top: 30px;
+}
+
+.motto {
+    font-family: "Roboto Slab", serif;
+    color: $color_gris;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.wrongAccess {
+    animation: wrongAccessColor 0.6s 1;
+}
+
+// Keyframes
+
+@keyframes hideTitle {
+    from {
+    }
+    to {
+        transform: translate(-100px, 0px);
+        opacity: 0%;
+    }
+}
+
+@keyframes showHiddenTitle {
+    from {
+        transform: translate(100px, 0px);
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes wrongAccessColor {
+    0% {
+    }
+    50% {
+        background-color: $color_rojo_error;
+    }
+    100% {
+    }
+}
