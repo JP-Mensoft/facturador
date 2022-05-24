@@ -1,8 +1,8 @@
 <ion-content>
   <ion-grid>
 
-    <ion-row class='titleRow ion-justify-content-center ion-align-items-center'>
-      <ion-col size='8' sizeMd='6' sizeLg='3' class='titleCol centerCol'>
+    <ion-row class='titleRow ion-justify-content-center ion-align-items-center {{loginSuccess ? "correctAccess" : ""}}'>
+      <ion-col size='8' sizeMd='6' sizeLg='3' class='centerCol {{!loginSuccess ? "titleCol" : ""}}'>
         <div class="title">
           Facturador
         </div>
@@ -28,9 +28,10 @@
 
           <ion-row class="formRow">
             <ion-col class="centerCol" size='12'>
-              <ion-icon class="loginIcon" name="lock-closed-outline"></ion-icon>
-              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}" type="text"
-                placeholder="Contraseña">
+              <ion-icon class="loginIcon" name="{{!displayedPassword ? 'lock-closed-outline' : 'lock-open-outline'}}"
+                (click)="showPassword();"></ion-icon>
+              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}"
+                type="{{!displayedPassword ? 'password' : 'text'}}" placeholder="Contraseña">
             </ion-col>
           </ion-row>
 

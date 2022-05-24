@@ -11,7 +11,7 @@ export class LoginPage implements OnInit {
   public loginForm: FormGroup;
   public loginError: boolean;
   public loginSuccess: boolean;
-  public showPassword: boolean;
+  public displayedPassword: boolean;
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
     this.buildForm();
     this.loginError = false;
     this.loginSuccess = false;
-    this.showPassword = false;
+    this.displayedPassword = false;
   }
 
   public buildForm(): void {
@@ -29,8 +29,13 @@ export class LoginPage implements OnInit {
     });
   }
 
+  public showPassword(): void {
+    this.displayedPassword = !this.displayedPassword;
+  }
+
   public attemptAccess(): void {
     this.loginError = !this.loginError;
+    this.loginSuccess = !this.loginSuccess;
   }
 
 }
