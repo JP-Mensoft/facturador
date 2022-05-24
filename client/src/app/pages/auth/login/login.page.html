@@ -21,8 +21,8 @@
           <ion-row class="formRow">
             <ion-col class="centerCol" size='12'>
               <ion-icon class="loginIcon" name="mail-outline"></ion-icon>
-              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}" type="text"
-                placeholder="Email">
+              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}" formControlName="email"
+                type="text" placeholder="Email">
             </ion-col>
           </ion-row>
 
@@ -30,7 +30,7 @@
             <ion-col class="centerCol" size='12'>
               <ion-icon class="loginIcon" name="{{!displayedPassword ? 'lock-closed-outline' : 'lock-open-outline'}}"
                 (click)="showPassword();"></ion-icon>
-              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}"
+              <input class="loginInput form-control {{loginError ? 'wrongAccess' : ''}}" formControlName="password"
                 type="{{!displayedPassword ? 'password' : 'text'}}" placeholder="Contraseña">
             </ion-col>
           </ion-row>
