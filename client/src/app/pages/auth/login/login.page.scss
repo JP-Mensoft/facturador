@@ -1,7 +1,7 @@
 // Variables
 $color_azul: rgb(20, 100, 160);
 $color_gris: rgb(100, 100, 100);
-$color_rojo_error: rgb(190, 30, 30);
+$color_rojo_error: rgb(180, 10, 10);
 //
 
 .centerCol {
@@ -77,11 +77,11 @@ $color_rojo_error: rgb(190, 30, 30);
 }
 
 .wrongAccess {
-    animation: wrongAccess 0.7s 1;
+    animation: wrongAccess 0.5s 1;
 }
 
 .correctAccess {
-    animation: correctAccess 0.6s 0s 1 normal ease-in-out forwards;
+    animation: correctAccess 0.5s 0s 1 normal ease-in-out forwards;
 }
 
 ion-input {
@@ -96,6 +96,14 @@ ion-button {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
+}
+
+.registerLink {
+    cursor: pointer;
+    color: $color_azul;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
 }
 
 // Keyframes
@@ -129,13 +137,9 @@ ion-button {
 }
 
 @keyframes correctAccess {
-    0% {
-        z-index: 100;
+    from {
     }
-    30% {
-        transform: translate(0px, 200px);
-    }
-    100% {
+    to {
         transform: translate(200px, 0px);
         opacity: 0%;
     }

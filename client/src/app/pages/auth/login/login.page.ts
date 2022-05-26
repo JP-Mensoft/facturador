@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResponseModel } from 'src/app/models/responseModel';
 import { UserAccessModel } from 'src/app/models/userModel';
@@ -34,8 +34,8 @@ export class LoginPage implements OnInit {
 
   public buildForm(): void {
     this.loginForm = this.formBuilder.group({
-      email: [''],
-      password: ['']
+      email: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
           await this._storage.set("token", response.result);
           setTimeout(() => {
             this._router.navigate(["/dashboard"]);
-          }, 200);
+          }, 600);
         }
       },
       error: () => {
@@ -62,6 +62,10 @@ export class LoginPage implements OnInit {
       },
       complete: () => { }
     });
+  }
+
+  public goRegister(): void {
+    this._router.navigate(['auth/register']);
   }
 
 }
