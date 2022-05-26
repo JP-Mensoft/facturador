@@ -15,5 +15,12 @@ export const userRoutes = [
         middlewares: 'undefined',
         controller: UserController,
         action: 'registerUser'
+    },
+    {
+        method: 'get',
+        route: '/user/checktoken',
+        middlewares: 'checkToken',
+        controller: UserController,
+        action: 'checkUserToken'
     }
 ]

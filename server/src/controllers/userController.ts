@@ -23,10 +23,7 @@ export class UserController {
                 const user: UserEntity = userFound.result;
                 if (user.checkPassword(requestDecoded.password)) {
                     serverResponse.success = true;
-                    serverResponse.result = {
-                        user,
-                        token: user.generateSesionToken()
-                    };
+                    serverResponse.result = user.generateSesionToken();
                     serverResponse.status = 200;
                 } else {
                     serverResponse.status = 401;
@@ -61,6 +58,13 @@ export class UserController {
         } else {
             serverResponse.status = 400;
         }
+        return res.status(serverResponse.status).json(serverResponse);
+    }
+
+    public async checkUserToken(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        serverResponse.success = true;
+        serverResponse.status = 200;
         return res.status(serverResponse.status).json(serverResponse);
     }
 
