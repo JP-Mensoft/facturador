@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
           await this._storage.set("token", response.result);
           setTimeout(() => {
             this._router.navigate(["/dashboard"]);
-          }, 600);
+          }, 400);
         }
       },
       error: () => {
