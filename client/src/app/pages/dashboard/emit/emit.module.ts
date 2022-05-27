@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { EmitPageRoutingModule } from './emit-routing.module';
 
 import { EmitPage } from './emit.page';
+import { LogoutPageModule } from '../logout/logout.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    EmitPageRoutingModule
+    EmitPageRoutingModule,
+    LogoutPageModule
   ],
   declarations: [EmitPage]
 })
