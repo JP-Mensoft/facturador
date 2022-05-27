@@ -55,6 +55,10 @@ export class LoginPage implements OnInit {
           setTimeout(() => {
             this._router.navigate(["/dashboard"]);
           }, 400);
+          setTimeout(() => {
+            this.loginError = false;
+            this.loginSuccess = false;
+          }, 500);
         }
       },
       error: () => {
