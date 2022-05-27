@@ -17,4 +17,4 @@ import { InvoicesPage } from './invoices.page';
   ],
   declarations: [InvoicesPage]
 })
-export class InvoicesPageModule {}
+export class InvoicesPageModule { }

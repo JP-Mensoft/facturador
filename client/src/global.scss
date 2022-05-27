@@ -27,4 +27,24 @@
 
 /* Fonts */
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700;800;900&display=swap");
+
+/* General Rules */
+
+.startCol {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.centerCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.endCol {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}

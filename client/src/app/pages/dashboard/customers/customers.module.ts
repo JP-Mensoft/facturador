@@ -17,4 +17,4 @@ import { CustomersPage } from './customers.page';
   ],
   declarations: [CustomersPage]
 })
-export class CustomersPageModule {}
+export class CustomersPageModule { }

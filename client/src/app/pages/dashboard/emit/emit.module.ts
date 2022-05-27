@@ -17,4 +17,4 @@ import { EmitPage } from './emit.page';
   ],
   declarations: [EmitPage]
 })
-export class EmitPageModule {}
+export class EmitPageModule { }
