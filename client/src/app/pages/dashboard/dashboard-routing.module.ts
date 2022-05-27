@@ -21,12 +21,16 @@ const routes: Routes = [
         loadChildren: () => import('./invoices/invoices.module').then(m => m.InvoicesPageModule)
       },
       {
+        path: 'user',
+        loadChildren: () => import('./user/user.module').then(m => m.UserPageModule)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: 'emit'
       }
     ]
-  },
+  }
 ];
 
 @NgModule({
