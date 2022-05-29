@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,11 +11,17 @@ export class NavPage implements OnInit {
 
   @Input() sectionName: string;
 
-  constructor() {
+  constructor(private _storage: StorageService, private _router: Router) {
     this.sectionName = "";
   }
 
   ngOnInit() {
+  }
+
+  public logout(): void {
+    this._storage.remove("token").then(() => {
+      this._router.navigate(["auth/login"]);
+    });
   }
 
 }

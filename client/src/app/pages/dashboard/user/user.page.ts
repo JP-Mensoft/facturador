@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SectionService } from 'src/app/services/section.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserPage implements OnInit {
 
-  constructor() { }
+  constructor(private _section: SectionService) { }
 
   ngOnInit() {
+    this._section.setSectionName("Usuario");
   }
 
 }

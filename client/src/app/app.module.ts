@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 // Services
 import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
+import { SectionService } from './services/section.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,8 @@ import { StorageService } from './services/storage.service';
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     AuthService,
-    StorageService
+    StorageService,
+    SectionService
   ],
   bootstrap: [AppComponent],
 })
