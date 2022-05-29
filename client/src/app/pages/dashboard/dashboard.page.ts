@@ -7,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardPage implements OnInit {
 
-  constructor() { }
+  public sectionName: string;
+
+  constructor() {
+    this.sectionName = "";
+  }
 
   ngOnInit() {
+  }
+
+  public setSectionName(sectionName: string): void {
+    this.sectionName = sectionName;
   }
 
 }

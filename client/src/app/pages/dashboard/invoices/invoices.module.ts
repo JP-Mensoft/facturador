@@ -7,15 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { InvoicesPageRoutingModule } from './invoices-routing.module';
 
 import { InvoicesPage } from './invoices.page';
-import { LogoutPageModule } from '../logout/logout.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InvoicesPageRoutingModule,
-    LogoutPageModule
+    InvoicesPageRoutingModule
   ],
   declarations: [InvoicesPage]
 })

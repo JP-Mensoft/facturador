@@ -7,15 +7,13 @@ import { IonicModule } from '@ionic/angular';
 import { UserPageRoutingModule } from './user-routing.module';
 
 import { UserPage } from './user.page';
-import { LogoutPageModule } from '../logout/logout.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    UserPageRoutingModule,
-    LogoutPageModule
+    UserPageRoutingModule
   ],
   declarations: [UserPage]
 })
