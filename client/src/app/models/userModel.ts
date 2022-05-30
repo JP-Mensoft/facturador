@@ -17,12 +17,11 @@ export class UserSaveModel {
 
 export class UserSetModel {
     constructor(
-        public userId: number,
         public email: string,
-        public password: string,
         public name: string,
         public phone: string,
-        public recoveryCode: string
+        public newPassword: string,
+        public reNewPassword: string
     ) { }
 }
 

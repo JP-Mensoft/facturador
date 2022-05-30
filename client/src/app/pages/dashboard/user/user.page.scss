@@ -1,0 +1,61 @@
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+$color_green_success: rgb(10, 100, 10);
+
+ion-button {
+    --color: rgb(20, 100, 160);
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dividerLabel {
+    margin-left: 10px;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.inputLabel {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.inputText {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.successSet {
+    animation: successSet 0.7s;
+}
+
+.errorSet {
+    animation: successSet 0.7s;
+}
+
+// Keyframes
+
+@keyframes successSet {
+    0% {
+    }
+    50% {
+        color: $color_green_success;
+    }
+    100% {
+    }
+}
+
+@keyframes errorSet {
+    0% {
+    }
+    50% {
+        color: $color_red_error;
+    }
+    100% {
+    }
+}

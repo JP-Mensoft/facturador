@@ -1,3 +1,81 @@
 <ion-content>
-  Usuario
+
+  <form [formGroup]='companyForm'>
+    <ion-item-group>
+
+      <ion-item-divider>
+        <ion-icon name="briefcase-outline"></ion-icon>
+        <ion-label class="dividerLabel {{successSetCompany ? 'successSet' : ''}} {{errorSetCompany ? 'errorSet' : ''}}">
+          Datos Empresa
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="saveCompany();" [disabled]="!userForm.valid">Guardar</ion-button>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Nombre</ion-label>
+        <ion-input class="inputText" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Logo</ion-label>
+        <ion-input class="inputText" formControlName="logoURL"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Dirección</ion-label>
+        <ion-input class="inputText" formControlName="address"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">CIF</ion-label>
+        <ion-input class="inputText" formControlName="cif"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">IBAN</ion-label>
+        <ion-input class="inputText" formControlName="iban"></ion-input>
+      </ion-item>
+
+    </ion-item-group>
+  </form>
+
+  <form [formGroup]='userForm'>
+    <ion-item-group>
+
+      <ion-item-divider>
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <ion-label class="dividerLabel {{successSetUser ? 'successSet' : ''}} {{errorSetUser ? 'errorSet' : ''}}">
+          Datos Usuario
+        </ion-label>
+        <ion-button slot="end" fill="clear" (click)="saveUser();" [disabled]="!userForm.valid">Guardar</ion-button>
+      </ion-item-divider>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Correo</ion-label>
+        <ion-input class="inputText" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Nombre</ion-label>
+        <ion-input class="inputText" formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Teléfono</ion-label>
+        <ion-input class="inputText" formControlName="phone"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Nueva Contraseña</ion-label>
+        <ion-input class="inputText" formControlName="newPassword"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="inputLabel">Repetir Nueva Contraseña</ion-label>
+        <ion-input class="inputText" formControlName="reNewPassword"></ion-input>
+      </ion-item>
+
+    </ion-item-group>
+  </form>
+
 </ion-content>

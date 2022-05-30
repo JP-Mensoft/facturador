@@ -1,21 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { SectionService } from 'src/app/services/section.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-export class DashboardPage implements OnInit {
+export class DashboardPage implements OnInit, OnDestroy {
 
   public sectionName: string;
+  private sectionNameSubscription: Subscription;
 
-  constructor(private _section: SectionService) {
+  constructor(private _section: DashboardService) {
     this.sectionName = "";
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.monitoringSectionName();
+  }
+
+  ngOnDestroy(): void {
+    this.sectionNameSubscription.unsubscribe();
   }
 
   public setSectionName(sectionName: string): void {
@@ -23,7 +29,7 @@ export class DashboardPage implements OnInit {
   }
 
   public monitoringSectionName(): void {
-    this._section.sectionName.subscribe({
+    this.sectionNameSubscription = this._section.sectionName.subscribe({
       next: (name) => {
         this.sectionName = name;
       },

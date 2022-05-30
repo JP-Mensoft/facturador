@@ -22,5 +22,19 @@ export const userRoutes = [
         middlewares: 'checkToken',
         controller: UserController,
         action: 'checkUserToken'
+    },
+    {
+        method: 'get',
+        route: '/user/getone',
+        middlewares: 'checkToken',
+        controller: UserController,
+        action: 'getOneUser'
+    },
+    {
+        method: 'put',
+        route: '/user/set',
+        middlewares: 'checkToken',
+        controller: UserController,
+        action: 'setUser'
     }
 ]

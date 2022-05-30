@@ -18,11 +18,11 @@ export class StorageService {
   }
 
   public async set(key: string, value: any) {
-    await this._storage?.set(key, value);
+    await this._storage.set(key, value);
   }
 
   public async get(key: string) {
-    const value = await this._storage?.get(key);
+    const value = await this._storage.get(key);
     return value;
   }
 

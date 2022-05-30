@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SectionService } from 'src/app/services/section.service';
+import { DashboardService } from 'src/app/services/dashboard.service';
 
 @Component({
   selector: 'app-invoices',
@@ -8,7 +8,7 @@ import { SectionService } from 'src/app/services/section.service';
 })
 export class InvoicesPage implements OnInit {
 
-  constructor(private _section: SectionService) { }
+  constructor(private _section: DashboardService) { }
 
   ngOnInit() {
     this._section.setSectionName("Facturas");

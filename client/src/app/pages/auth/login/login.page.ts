@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResponseModel } from 'src/app/models/responseModel';
@@ -19,21 +19,21 @@ export class LoginPage implements OnInit {
   public displayedPassword: boolean;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private _formBuilder: FormBuilder,
     private _auth: AuthService,
     private _storage: StorageService,
     private _router: Router
   ) { }
 
-  ngOnInit() {
-    this.buildForm();
+  ngOnInit(): void {
+    this.buildForms();
     this.loginError = false;
     this.loginSuccess = false;
     this.displayedPassword = false;
   }
 
-  public buildForm(): void {
-    this.loginForm = this.formBuilder.group({
+  public buildForms(): void {
+    this.loginForm = this._formBuilder.group({
       email: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
@@ -54,11 +54,11 @@ export class LoginPage implements OnInit {
           await this._storage.set("token", response.result);
           setTimeout(() => {
             this._router.navigate(["/dashboard"]);
-          }, 400);
+          }, 200);
           setTimeout(() => {
             this.loginError = false;
             this.loginSuccess = false;
-          }, 500);
+          }, 300);
         }
       },
       error: () => {

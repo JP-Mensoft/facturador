@@ -27,10 +27,11 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async addOneCompany(newCompany: CompanyEntity) {
+    public async addOneCompany(userId: number, companyData: CompanyEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = await this.entityManager.save(CompanyEntity, newCompany);
+            companyData.userId = userId;
+            const saveResult = await this.entityManager.save(CompanyEntity, companyData);
             if (saveResult != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = saveResult;
@@ -41,18 +42,20 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async setOneCompany(newCompany: CompanyEntity) {
+    public async setOneCompany(companyData: CompanyEntity, companyFound: CompanyEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const companyFound: ResponseModel = await this.getOneUserCompany(newCompany.companyId);
-            if (companyFound.success) {
-                let company: CompanyEntity = companyFound.result;
-                const setResult = await this.entityManager.save(CompanyEntity, company);
-                if (setResult != undefined) {
-                    dataResponse.success = true;
-                    dataResponse.result = setResult;
-                }
+            companyFound.name = companyData.name;
+            companyFound.logoURL = companyData.logoURL;
+            companyFound.iban = companyData.iban;
+            companyFound.cif = companyData.cif;
+            companyFound.address = companyData.address;
+            const setResult = await this.entityManager.save(CompanyEntity, companyFound);
+            if (setResult != undefined) {
+                dataResponse.success = true;
+                dataResponse.result = setResult;
             }
+
         } catch (error) {
             dataResponse.result = error;
         }

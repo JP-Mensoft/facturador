@@ -34,16 +34,22 @@ export class CompanyController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
-    public async registerUserCompany(req: Request, res: Response) {
+    public async setUserCompany(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
-        const company: CompanyEntity = requestDecoded.data;
-        company.userId = requestDecoded.decodedToken.userId;
+        const companyData: CompanyEntity = requestDecoded.data;
+        const userId: number = requestDecoded.decodedToken.userId;
         try {
-            const saveResult: ResponseModel = await this.companyDA.addOneCompany(company);
-            if (saveResult.success) {
+            let setResult: ResponseModel;
+            const companyFound: ResponseModel = await this.companyDA.getOneUserCompany(userId);
+            if (companyFound.success) {
+                setResult = await this.companyDA.setOneCompany(companyData, companyFound.result);
+            } else {
+                setResult = await this.companyDA.addOneCompany(userId, companyData);
+            }
+            if (setResult.success) {
                 serverResponse.success = true;
-                serverResponse.result = saveResult.result;
+                serverResponse.result = setResult.result;
                 serverResponse.status = 200;
             } else {
                 serverResponse.status = 400;

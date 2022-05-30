@@ -1,11 +1,23 @@
-// Variables
-$color_azul: rgb(20, 100, 160);
-$color_gris: rgb(100, 100, 100);
-$color_rojo_error: rgb(180, 10, 10);
-//
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+
+ion-input {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+ion-button {
+    --color: rgb(20, 100, 160);
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
 
 .titleRow {
-    margin-top: 30px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -22,7 +34,7 @@ $color_rojo_error: rgb(180, 10, 10);
     font-family: "Roboto Slab", serif;
     font-size: 30px;
     font-weight: 800;
-    color: $color_azul;
+    color: $color_blue;
 }
 
 .hiddenTitle {
@@ -35,27 +47,17 @@ $color_rojo_error: rgb(180, 10, 10);
     margin-right: 10px;
     font-size: 20px;
     font-weight: 400;
-    color: $color_gris;
+    color: $color_grey;
 }
 
 .hiddenTitleName {
     font-size: 25px;
     font-weight: 800;
-    color: $color_azul;
+    color: $color_blue;
 }
 
 .formRow {
-    margin-top: 9px;
-}
-
-.loginIcon {
-    margin-right: 5px;
-}
-
-.btnCol {
-    margin-top: 9px;
-    display: flex;
-    justify-content: end;
+    margin-bottom: 20px;
 }
 
 .mottoRow {
@@ -64,40 +66,18 @@ $color_rojo_error: rgb(180, 10, 10);
 
 .motto {
     font-family: "Roboto Slab", serif;
-    color: $color_gris;
+    color: $color_grey;
     text-align: center;
     font-size: 13px;
     font-weight: 600;
 }
 
 .wrongAccess {
-    animation: wrongAccess 0.5s 1;
+    animation: wrongAccess 0.7s;
 }
 
 .correctAccess {
-    animation: correctAccess 0.4s 0s 1 normal ease-in-out forwards;
-}
-
-ion-input {
-    font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-ion-button {
-    --background: transparent;
-    --color: rgb(20, 100, 160);
-    font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-.registerLink {
-    cursor: pointer;
-    color: $color_azul;
-    font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 400;
+    animation: correctAccess 0.2s 0s 1 normal ease-in-out forwards;
 }
 
 // Keyframes
@@ -124,7 +104,7 @@ ion-button {
     0% {
     }
     50% {
-        color: $color_rojo_error;
+        color: $color_red_error;
     }
     100% {
     }

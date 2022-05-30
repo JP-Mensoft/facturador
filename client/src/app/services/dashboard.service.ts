@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SectionService {
+export class DashboardService {
 
   public sectionName: Subject<string>;
 

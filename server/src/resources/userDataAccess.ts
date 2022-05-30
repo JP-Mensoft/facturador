@@ -43,7 +43,7 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async addOneUser(userData: UserSaveModel) {
+    public async addUser(userData: UserSaveModel) {
         let dataResponse: ResponseModel = new ResponseModel();
         let newUser: UserEntity = new UserEntity();
         newUser.email = userData.email;
@@ -62,18 +62,25 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async setOneUser(userData: UserSetModel) {
+    public async setUser(userId: number, userData: UserSetModel) {
         let dataResponse: ResponseModel = new ResponseModel();
+        let setPassword: boolean = true;
         try {
-            const userFound: ResponseModel = await this.getOneUserId(userData.userId);
+            const userFound: ResponseModel = await this.getOneUserId(userId);
             if (userFound.success) {
                 let user: UserEntity = userFound.result;
                 user.email = userData.email;
-                user.saveHashPassword(userData.password);
+                if (userData.newPassword != "") {
+                    if (userData.newPassword === userData.reNewPassword) {
+                        user.saveHashPassword(userData.newPassword);
+                    } else {
+                        setPassword = false;
+                    }
+                }
                 user.name = userData.name;
                 user.phone = userData.phone;
                 const setResult = await this.entityManager.save(UserEntity, user);
-                if (setResult != undefined) {
+                if (setResult != undefined && setPassword) {
                     dataResponse.success = true;
                     dataResponse.result = setResult;
                 }
