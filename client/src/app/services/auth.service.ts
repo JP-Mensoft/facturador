@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { UserAccessModel } from '../models/userModel';
+import { UserAccessModel, UserSetModel } from '../models/userModel';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -23,6 +23,10 @@ export class AuthService {
 
   public checkToken(token: string): Observable<any> {
     return this._http.get(this.apiPath + "user/checktoken", { 'headers': { token } });
+  }
+
+  public registerUser(userData: UserSetModel): Observable<any> {
+    return this._http.post(this.apiPath + "user/register", userData);
   }
 
 }

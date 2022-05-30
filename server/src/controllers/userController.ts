@@ -5,7 +5,7 @@ import { UserDataAccess } from '../resources/userDataAccess';
 import { UserEntity } from '../database/entities/userEntity';
 import { ResponseModel } from '../models/responseModel';
 import { DecodedModel } from '../models/decodedModel';
-import { UserAccessModel, UserSaveModel, UserSetModel } from '../models/userModel';
+import { UserAccessModel, UserSetModel } from '../models/userModel';
 
 export class UserController {
 
@@ -80,13 +80,14 @@ export class UserController {
 
     public async registerUser(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const requestDecoded: UserSaveModel = req.body;
-        if (requestDecoded.password === requestDecoded.verifiedPassword) {
+        const requestDecoded: UserSetModel = req.body;
+        if (requestDecoded.newPassword === requestDecoded.reNewPassword) {
             try {
                 const saveResult: ResponseModel = await this.userDA.addUser(requestDecoded);
+                const userSave: UserEntity = saveResult.result;
                 if (saveResult.success) {
                     serverResponse.success = true;
-                    serverResponse.result = saveResult.result;
+                    serverResponse.result = userSave.generateSesionToken();
                     serverResponse.status = 200;
                 } else {
                     serverResponse.status = 400;

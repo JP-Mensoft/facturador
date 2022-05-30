@@ -5,7 +5,7 @@ import { EntityManager } from "typeorm";
 import { UserEntity } from "../database/entities/userEntity";
 import { CustomerEntity } from "../database/entities/customerEntity";
 import { ResponseModel } from "../models/responseModel";
-import { UserSaveModel, UserSetModel } from "../models/userModel";
+import { UserSetModel } from "../models/userModel";
 
 export class UserDataAccess {
 
@@ -43,11 +43,11 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async addUser(userData: UserSaveModel) {
+    public async addUser(userData: UserSetModel) {
         let dataResponse: ResponseModel = new ResponseModel();
         let newUser: UserEntity = new UserEntity();
         newUser.email = userData.email;
-        newUser.saveHashPassword(userData.password);
+        newUser.saveHashPassword(userData.newPassword);
         newUser.name = userData.name;
         newUser.phone = userData.phone;
         try {

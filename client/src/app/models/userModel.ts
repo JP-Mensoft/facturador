@@ -5,16 +5,6 @@ export class UserAccessModel {
     ) { }
 }
 
-export class UserSaveModel {
-    constructor(
-        public email: string,
-        public password: string,
-        public verifiedPassword: string,
-        public name: string,
-        public phone: string
-    ) { }
-}
-
 export class UserSetModel {
     constructor(
         public email: string,

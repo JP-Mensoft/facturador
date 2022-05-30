@@ -109,7 +109,6 @@ export class UserPage implements OnInit {
       },
       complete: () => { }
     });
-
   }
 
   public async saveUser() {
@@ -120,6 +119,20 @@ export class UserPage implements OnInit {
     this.userData.phone = this.userForm.get("phone").value;
     this.userData.newPassword = this.userForm.get("newPassword").value;
     this.userData.reNewPassword = this.userForm.get("reNewPassword").value;
+    if (this.userData.newPassword === "") {
+      this.saveUserSub();
+    } else {
+      if (this.userData.newPassword === this.userData.reNewPassword) {
+        this.saveUserSub();
+      } else {
+        setTimeout(() => {
+          this.errorSetUser = true;
+        }, 10);
+      }
+    }
+  }
+
+  public async saveUserSub() {
     this._user.setUserData(await this._storage.get("token"), this.userData).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
@@ -138,6 +151,8 @@ export class UserPage implements OnInit {
     this.userForm.get("email").setValue(this.userData.email);
     this.userForm.get("name").setValue(this.userData.name);
     this.userForm.get("phone").setValue(this.userData.phone);
+    this.userForm.get("newPassword").setValue("");
+    this.userForm.get("reNewPassword").setValue("");
   }
 
   public loadCompanyData(): void {
