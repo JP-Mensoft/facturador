@@ -57,6 +57,7 @@ export class LoginPage implements OnInit {
           this._storage.set("token", response.result).then(() => {
             this._router.navigate(["/dashboard"]);
             this.clearForm();
+            this.showSpinnerLogin = false;
           });
         }
       },
