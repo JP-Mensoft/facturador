@@ -21,7 +21,7 @@ export class InvoiceEntity {
     public remarks!: string;
 
     @Column({ nullable: true, default: false })
-    public charged!: boolean;
+    public collected!: boolean;
 
     @Column({ nullable: true, default: "" })
     public collectionDate!: string;

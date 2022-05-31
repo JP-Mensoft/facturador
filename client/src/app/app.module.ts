@@ -11,9 +11,12 @@ import { AuthService } from './services/auth.service';
 import { StorageService } from './services/storage.service';
 import { DashboardService } from './services/dashboard.service';
 import { UserService } from './services/user.service';
+import { CustomersService } from './services/customers.service';
+import { CustomerFilterPipe } from './pipes/customer-filter.pipe';
+import { InvoiceFilterPipe } from './pipes/invoice-filter.pipe';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CustomerFilterPipe, InvoiceFilterPipe],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { UserService } from './services/user.service';
     AuthService,
     StorageService,
     DashboardService,
-    UserService
+    UserService,
+    CustomersService
   ],
   bootstrap: [AppComponent],
 })
