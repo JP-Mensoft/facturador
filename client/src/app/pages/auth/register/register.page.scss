@@ -72,14 +72,6 @@ ion-button {
     font-weight: 600;
 }
 
-.wrongRegister {
-    animation: wrongRegister 0.7s;
-}
-
-.correctRegister {
-    animation: correctRegister 0.2s 0s 1 normal ease-in-out forwards;
-}
-
 // Keyframes
 
 @keyframes hideTitle {
@@ -97,24 +89,5 @@ ion-button {
     }
     to {
         opacity: 100%;
-    }
-}
-
-@keyframes wrongRegister {
-    0% {
-    }
-    50% {
-        color: $color_red_error;
-    }
-    100% {
-    }
-}
-
-@keyframes correctRegister {
-    from {
-    }
-    to {
-        transform: translate(200px, 0px);
-        opacity: 0%;
     }
 }

@@ -2,9 +2,8 @@
 
   <ion-grid>
 
-    <ion-row
-      class='titleRow ion-justify-content-center ion-align-items-center {{registerSuccess ? "correctRegister" : ""}}'>
-      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol {{!registerSuccess ? "titleCol" : ""}}'>
+    <ion-row class='titleRow ion-justify-content-center ion-align-items-center'>
+      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol'>
         <div class="title">
           Facturador
         </div>
@@ -67,9 +66,8 @@
           </ion-row>
 
           <ion-row class="ion-justify-content-between ion-align-items-center">
-            <ion-button class="btnCancel" fill="clear" (click)="goLogin();">Cancelar</ion-button>
-            <ion-button class="btnSave {{registerError ? 'wrongRegister' : ''}}" fill="clear" (click)="registerUser();"
-              [disabled]="!registerForm.valid">Guardar</ion-button>
+            <ion-button fill="clear" (click)="goLogin();">Cancelar</ion-button>
+            <ion-button fill="clear" (click)="registerUser();" [disabled]="!registerForm.valid">Guardar</ion-button>
           </ion-row>
 
         </form>

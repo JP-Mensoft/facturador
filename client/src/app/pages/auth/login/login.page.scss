@@ -72,14 +72,6 @@ ion-button {
     font-weight: 600;
 }
 
-.wrongAccess {
-    animation: wrongAccess 0.7s;
-}
-
-.correctAccess {
-    animation: correctAccess 0.2s 0s 1 normal ease-in-out forwards;
-}
-
 // Keyframes
 
 @keyframes hideTitle {
@@ -97,24 +89,5 @@ ion-button {
     }
     to {
         opacity: 100%;
-    }
-}
-
-@keyframes wrongAccess {
-    0% {
-    }
-    50% {
-        color: $color_red_error;
-    }
-    100% {
-    }
-}
-
-@keyframes correctAccess {
-    from {
-    }
-    to {
-        transform: translate(200px, 0px);
-        opacity: 0%;
     }
 }

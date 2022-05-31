@@ -14,8 +14,6 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RegisterPage implements OnInit {
 
   public registerForm: FormGroup;
-  public registerSuccess: boolean;
-  public registerError: boolean;
   public displayedPassword: boolean;
 
   constructor(
@@ -24,8 +22,7 @@ export class RegisterPage implements OnInit {
     private _storage: StorageService,
     private _router: Router
   ) {
-    this.registerSuccess = false;
-    this.registerError = false;
+    this.displayedPassword = false;
   }
 
   ngOnInit() {
@@ -47,8 +44,6 @@ export class RegisterPage implements OnInit {
   }
 
   public async registerUser() {
-    this.registerSuccess = false;
-    this.registerError = false;
     const user = new UserSetModel(
       this.registerForm.get("email").value,
       this.registerForm.get("name").value,
@@ -56,11 +51,7 @@ export class RegisterPage implements OnInit {
       this.registerForm.get("newPassword").value,
       this.registerForm.get("reNewPassword").value
     );
-    if (user.newPassword === "" || user.newPassword != user.reNewPassword) {
-      setTimeout(() => {
-        this.registerError = true;
-      }, 10);
-    } else {
+    if (user.newPassword != "" && user.newPassword === user.reNewPassword) {
       this.registerUserSub(user);
     }
   }
@@ -69,22 +60,13 @@ export class RegisterPage implements OnInit {
     this._auth.registerUser(user).subscribe({
       next: async (result: ResponseModel) => {
         if (result.success) {
-          this.registerSuccess = true;
-          setTimeout(() => {
-            this._storage.set("token", result.result).then(() => {
-              this._router.navigate(["dashboard/user"]);
-            });
-          }, 200);
-          setTimeout(() => {
+          this._storage.set("token", result.result).then(() => {
+            this._router.navigate(["dashboard/user"]);
             this.clearForm();
-            this.registerSuccess = false;
-            this.registerError = false;
-          }, 500);
+          });
         }
       },
-      error: () => {
-        this.registerError = true;
-      },
+      error: () => { },
       complete: () => { }
     });
   }
@@ -98,8 +80,8 @@ export class RegisterPage implements OnInit {
   }
 
   public goLogin(): void {
-    this.clearForm();
     this._router.navigate(['auth/login']);
+    this.clearForm();
   }
 
 }

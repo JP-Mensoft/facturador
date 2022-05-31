@@ -29,33 +29,3 @@ ion-button {
     font-size: 15px;
     font-weight: 400;
 }
-
-.successSet {
-    animation: successSet 0.7s;
-}
-
-.errorSet {
-    animation: errorSet 0.7s;
-}
-
-// Keyframes
-
-@keyframes successSet {
-    0% {
-    }
-    50% {
-        color: $color_green_success;
-    }
-    100% {
-    }
-}
-
-@keyframes errorSet {
-    0% {
-    }
-    50% {
-        color: $color_red_error;
-    }
-    100% {
-    }
-}

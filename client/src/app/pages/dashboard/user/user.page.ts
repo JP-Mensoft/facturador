@@ -19,11 +19,6 @@ export class UserPage implements OnInit {
   public userData: UserSetModel;
   public userCompany: CompanyModel;
 
-  public successSetUser: boolean;
-  public successSetCompany: boolean;
-  public errorSetUser: boolean;
-  public errorSetCompany: boolean;
-
   constructor(
     private _section: DashboardService,
     private _formBuilder: FormBuilder,
@@ -35,10 +30,6 @@ export class UserPage implements OnInit {
     this._section.setSectionName("Usuario");
     this.userData = new UserSetModel("", "", "", "", "");
     this.userCompany = new CompanyModel("", "", "", "", "");
-    this.successSetUser = false;
-    this.successSetCompany = false;
-    this.errorSetUser = false;
-    this.errorSetCompany = false;
     this.buildForms();
     this.getUserData();
     this.getUserCompany();
@@ -90,8 +81,6 @@ export class UserPage implements OnInit {
   }
 
   public async saveCompany() {
-    this.successSetCompany = false;
-    this.errorSetCompany = false;
     this.userCompany.name = this.companyForm.get("name").value;
     this.userCompany.logoURL = this.companyForm.get("logoURL").value;
     this.userCompany.address = this.companyForm.get("address").value;
@@ -100,20 +89,15 @@ export class UserPage implements OnInit {
     this._user.setUserCompany(await this._storage.get("token"), this.userCompany).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
-          this.successSetCompany = true;
           this.loadCompanyData();
         }
       },
-      error: () => {
-        this.errorSetCompany = true;
-      },
+      error: () => { },
       complete: () => { }
     });
   }
 
   public async saveUser() {
-    this.successSetUser = false;
-    this.errorSetUser = false;
     this.userData.email = this.userForm.get("email").value;
     this.userData.name = this.userForm.get("name").value;
     this.userData.phone = this.userForm.get("phone").value;
@@ -124,10 +108,6 @@ export class UserPage implements OnInit {
     } else {
       if (this.userData.newPassword === this.userData.reNewPassword) {
         this.saveUserSub();
-      } else {
-        setTimeout(() => {
-          this.errorSetUser = true;
-        }, 10);
       }
     }
   }
@@ -136,13 +116,10 @@ export class UserPage implements OnInit {
     this._user.setUserData(await this._storage.get("token"), this.userData).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
-          this.successSetUser = true;
           this.loadUserData();
         }
       },
-      error: () => {
-        this.errorSetUser = true;
-      },
+      error: () => { },
       complete: () => { }
     });
   }

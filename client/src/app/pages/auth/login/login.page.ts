@@ -14,8 +14,6 @@ import { StorageService } from 'src/app/services/storage.service';
 export class LoginPage implements OnInit {
 
   public loginForm: FormGroup;
-  public loginError: boolean;
-  public loginSuccess: boolean;
   public displayedPassword: boolean;
 
   constructor(
@@ -23,13 +21,12 @@ export class LoginPage implements OnInit {
     private _auth: AuthService,
     private _storage: StorageService,
     private _router: Router
-  ) { }
+  ) {
+    this.displayedPassword = false;
+  }
 
   ngOnInit(): void {
     this.buildForms();
-    this.loginError = false;
-    this.loginSuccess = false;
-    this.displayedPassword = false;
   }
 
   public buildForms(): void {
@@ -44,32 +41,32 @@ export class LoginPage implements OnInit {
   }
 
   public attemptAccess() {
-    this.loginError = false;
-    this.loginSuccess = false;
-    const loginData: UserAccessModel = new UserAccessModel(this.loginForm.get('email').value, this.loginForm.get('password').value);
+    const loginData: UserAccessModel = new UserAccessModel(
+      this.loginForm.get('email').value,
+      this.loginForm.get('password').value
+    );
     this._auth.attempAccess(loginData).subscribe({
-      next: async (response: ResponseModel) => {
+      next: (response: ResponseModel) => {
         if (response.success) {
-          this.loginSuccess = true;
-          await this._storage.set("token", response.result);
-          setTimeout(() => {
+          this._storage.set("token", response.result).then(() => {
             this._router.navigate(["/dashboard"]);
-          }, 200);
-          setTimeout(() => {
-            this.loginError = false;
-            this.loginSuccess = false;
-          }, 500);
+            this.clearForm();
+          });
         }
       },
-      error: () => {
-        this.loginError = true;
-      },
+      error: () => { },
       complete: () => { }
     });
   }
 
+  public clearForm(): void {
+    this.loginForm.get('email').setValue("");
+    this.loginForm.get('password').setValue("");
+  }
+
   public goRegister(): void {
     this._router.navigate(['auth/register']);
+    this.clearForm();
   }
 
 }

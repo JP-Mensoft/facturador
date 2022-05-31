@@ -2,8 +2,8 @@
 
   <ion-grid>
 
-    <ion-row class='titleRow ion-justify-content-center ion-align-items-center {{loginSuccess ? "correctAccess" : ""}}'>
-      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol {{!loginSuccess ? "titleCol" : ""}}'>
+    <ion-row class='titleRow ion-justify-content-center ion-align-items-center'>
+      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol'>
         <div class="title">
           Facturador
         </div>
@@ -40,8 +40,7 @@
 
           <ion-row class="ion-justify-content-between ion-align-items-center">
             <ion-button fill="clear" (click)="goRegister();">Registro</ion-button>
-            <ion-button class="{{loginError ? 'wrongAccess' : ''}}" fill="clear" (click)="attemptAccess();"
-              [disabled]="!loginForm.valid">Acceder</ion-button>
+            <ion-button fill="clear" (click)="attemptAccess();" [disabled]="!loginForm.valid">Acceder</ion-button>
           </ion-row>
 
         </form>

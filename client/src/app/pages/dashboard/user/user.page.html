@@ -5,7 +5,7 @@
 
       <ion-item-divider>
         <ion-icon name="briefcase-outline"></ion-icon>
-        <ion-label class="dividerLabel {{successSetCompany ? 'successSet' : ''}} {{errorSetCompany ? 'errorSet' : ''}}">
+        <ion-label class="dividerLabel">
           Datos Empresa
         </ion-label>
         <ion-button slot="end" fill="clear" (click)="saveCompany();" [disabled]="!userForm.valid">Guardar</ion-button>
@@ -44,7 +44,7 @@
 
       <ion-item-divider>
         <ion-icon name="person-circle-outline"></ion-icon>
-        <ion-label class="dividerLabel {{successSetUser ? 'successSet' : ''}} {{errorSetUser ? 'errorSet' : ''}}">
+        <ion-label class="dividerLabel">
           Datos Usuario
         </ion-label>
         <ion-button slot="end" fill="clear" (click)="saveUser();" [disabled]="!userForm.valid">Guardar</ion-button>
