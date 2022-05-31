@@ -33,6 +33,31 @@ export class UserController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
+    public async registerUser(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        const requestDecoded: UserSetModel = req.body;
+        if (requestDecoded.newPassword === requestDecoded.reNewPassword) {
+            try {
+                const saveResult: ResponseModel = await this.userDA.registerUser(requestDecoded);
+                const userSave: UserEntity = saveResult.result;
+                if (saveResult.success) {
+                    serverResponse.success = true;
+                    serverResponse.result = userSave.generateSesionToken();
+                    serverResponse.status = 200;
+                } else {
+                    serverResponse.result = saveResult.result;
+                    serverResponse.status = 400;
+                }
+            } catch (error) {
+                serverResponse.result = error;
+                serverResponse.status = 500;
+            }
+        } else {
+            serverResponse.status = 400;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
+    }
+
     public async setUser(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
@@ -40,11 +65,14 @@ export class UserController {
         const userId: number = requestDecoded.decodedToken.userId;
         if (userData.newPassword === userData.reNewPassword) {
             try {
-                const changedUser: ResponseModel = await this.userDA.setUser(userId, userData);
-                if (changedUser.success) {
+                const setResult: ResponseModel = await this.userDA.setUser(userId, userData);
+                if (setResult.success) {
                     serverResponse.success = true;
-                    serverResponse.result = changedUser.result;
+                    serverResponse.result = setResult.result;
                     serverResponse.status = 200;
+                } else {
+                    serverResponse.result = setResult.result;
+                    serverResponse.status = 400;
                 }
             } catch (error) {
                 serverResponse.result = error;
@@ -74,30 +102,6 @@ export class UserController {
         } catch (error) {
             serverResponse.result = error;
             serverResponse.status = 500;
-        }
-        return res.status(serverResponse.status).json(serverResponse);
-    }
-
-    public async registerUser(req: Request, res: Response) {
-        let serverResponse: ResponseModel = new ResponseModel();
-        const requestDecoded: UserSetModel = req.body;
-        if (requestDecoded.newPassword === requestDecoded.reNewPassword) {
-            try {
-                const saveResult: ResponseModel = await this.userDA.addUser(requestDecoded);
-                const userSave: UserEntity = saveResult.result;
-                if (saveResult.success) {
-                    serverResponse.success = true;
-                    serverResponse.result = userSave.generateSesionToken();
-                    serverResponse.status = 200;
-                } else {
-                    serverResponse.status = 400;
-                }
-            } catch (error) {
-                serverResponse.result = error;
-                serverResponse.status = 500;
-            }
-        } else {
-            serverResponse.status = 400;
         }
         return res.status(serverResponse.status).json(serverResponse);
     }

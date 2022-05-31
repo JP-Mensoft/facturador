@@ -17,11 +17,11 @@ export const userRoutes = [
         action: 'registerUser'
     },
     {
-        method: 'get',
-        route: '/user/checktoken',
+        method: 'put',
+        route: '/user/set',
         middlewares: 'checkToken',
         controller: UserController,
-        action: 'checkUserToken'
+        action: 'setUser'
     },
     {
         method: 'get',
@@ -31,10 +31,10 @@ export const userRoutes = [
         action: 'getOneUser'
     },
     {
-        method: 'put',
-        route: '/user/set',
+        method: 'get',
+        route: '/user/checktoken',
         middlewares: 'checkToken',
         controller: UserController,
-        action: 'setUser'
+        action: 'checkUserToken'
     }
 ]
