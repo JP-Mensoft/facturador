@@ -47,6 +47,7 @@ export class LoginPage implements OnInit {
 
   public attemptAccess() {
     this.showSpinnerLogin = true;
+    this.showErrorLogin = false;
     const loginData: UserAccessModel = new UserAccessModel(
       this.loginForm.get('email').value,
       this.loginForm.get('password').value

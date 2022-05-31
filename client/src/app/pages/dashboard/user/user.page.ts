@@ -96,6 +96,8 @@ export class UserPage implements OnInit {
 
   public async saveCompany() {
     this.showSpinnerCompany = true;
+    this.showCorrectCompany = false;
+    this.showErrorCompany = false;
     this.userCompany.name = this.companyForm.get("name").value;
     this.userCompany.logoURL = this.companyForm.get("logoURL").value;
     this.userCompany.address = this.companyForm.get("address").value;
@@ -129,6 +131,8 @@ export class UserPage implements OnInit {
 
   public async saveUser() {
     this.showSpinnerUser = true;
+    this.showCorrectUser = false;
+    this.showErrorUser = false;
     this.userData.email = this.userForm.get("email").value;
     this.userData.name = this.userForm.get("name").value;
     this.userData.phone = this.userForm.get("phone").value;

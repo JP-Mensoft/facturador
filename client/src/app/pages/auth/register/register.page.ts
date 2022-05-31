@@ -52,6 +52,8 @@ export class RegisterPage implements OnInit {
 
   public async registerUser() {
     this.showSpinnerRegister = true;
+    this.showCorrectRegister = false;
+    this.showErrorRegister = false;
     const user = new UserSetModel(
       this.registerForm.get("email").value,
       this.registerForm.get("name").value,
