@@ -33,12 +33,12 @@ export class UserController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
-    public async registerUser(req: Request, res: Response) {
+    public async addUser(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: UserSetModel = req.body;
         if (requestDecoded.newPassword === requestDecoded.reNewPassword) {
             try {
-                const saveResult: ResponseModel = await this.userDA.registerUser(requestDecoded);
+                const saveResult: ResponseModel = await this.userDA.addUser(requestDecoded);
                 const userSave: UserEntity = saveResult.result;
                 if (saveResult.success) {
                     serverResponse.success = true;

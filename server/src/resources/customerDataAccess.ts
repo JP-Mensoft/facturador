@@ -27,11 +27,11 @@ export class CustomerDataAccess {
         return dataResponse;
     }
 
-    public async getAllCustomes() {
+    public async getAllCustomers(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const customersFound = await this.entityManager.find(CustomerEntity);
-            if (customersFound != null) {
+            const customersFound = await this.entityManager.find(CustomerEntity, { where: { userId } });
+            if (customersFound != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = customersFound;
             }

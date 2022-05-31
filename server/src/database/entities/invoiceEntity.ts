@@ -9,7 +9,7 @@ import { UserEntity } from "./userEntity";
 export class InvoiceEntity {
 
     @Column({ nullable: false })
-    public date!: string;
+    public date!: Date;
 
     @Column({ nullable: true, default: 0 })
     public invoiceNumber!: number;
@@ -25,6 +25,12 @@ export class InvoiceEntity {
 
     @Column({ nullable: true, default: "" })
     public collectionDate!: string;
+
+    @Column({ nullable: true, default: 0 })
+    public taxableIncome!: number;
+
+    @Column({ nullable: true, default: 0 })
+    public totalAmount!: number;
 
     @OneToMany(() => ConceptEntity, (concept) => concept.invoiceId, { eager: true })
     public concepts!: ConceptEntity[];

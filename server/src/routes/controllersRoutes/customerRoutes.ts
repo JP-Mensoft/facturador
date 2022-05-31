@@ -18,10 +18,10 @@ export const customerRoutes = [
     },
     {
         method: 'post',
-        route: '/customer/register',
+        route: '/customer/add',
         middlewares: 'checkToken',
         controller: CustomerController,
-        action: 'registerCustomer'
+        action: 'addCustomer'
     },
     {
         method: 'delete',

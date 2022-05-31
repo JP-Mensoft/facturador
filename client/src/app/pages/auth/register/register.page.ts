@@ -50,7 +50,7 @@ export class RegisterPage implements OnInit {
     this.displayedPassword = !this.displayedPassword;
   }
 
-  public async registerUser() {
+  public async addUser() {
     this.showSpinnerRegister = true;
     this.showCorrectRegister = false;
     this.showErrorRegister = false;
@@ -62,7 +62,7 @@ export class RegisterPage implements OnInit {
       this.registerForm.get("reNewPassword").value
     );
     if (user.newPassword != "" && user.newPassword === user.reNewPassword) {
-      this.registerUserSub(user);
+      this.addUserSub(user);
     } else {
       setTimeout(() => {
         this.showSpinnerRegister = false;
@@ -74,8 +74,8 @@ export class RegisterPage implements OnInit {
     }
   }
 
-  public async registerUserSub(user: UserSetModel) {
-    this._auth.registerUser(user).subscribe({
+  public async addUserSub(user: UserSetModel) {
+    this._auth.addUser(user).subscribe({
       next: async (result: ResponseModel) => {
         if (result.success) {
           setTimeout(() => {
@@ -109,8 +109,8 @@ export class RegisterPage implements OnInit {
   }
 
   public goLogin(): void {
-    this.clearForm();
     this._router.navigate(['auth/login']);
+    this.clearForm();
   }
 
 }

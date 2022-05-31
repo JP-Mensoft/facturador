@@ -69,7 +69,7 @@
             <ion-spinner color="primary" *ngIf="showSpinnerRegister"></ion-spinner>
             <ion-icon name="checkmark-outline" *ngIf="showCorrectRegister"></ion-icon>
             <ion-icon name="close-outline" *ngIf="showErrorRegister"></ion-icon>
-            <ion-button fill="clear" (click)="registerUser();" [disabled]="!registerForm.valid">Guardar</ion-button>
+            <ion-button fill="clear" (click)="addUser();" [disabled]="!registerForm.valid">Guardar</ion-button>
           </ion-row>
 
         </form>

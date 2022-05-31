@@ -62,18 +62,4 @@ export class CompanyDataAccess {
         return dataResponse;
     }
 
-    public async deleteOneUserCompany(userId: number) {
-        let dataResponse: ResponseModel = new ResponseModel();
-        try {
-            const deleteResult = await this.entityManager.delete(CompanyEntity, { userId });
-            if (deleteResult.affected != 0) {
-                dataResponse.success = true;
-                dataResponse.result = deleteResult;
-            }
-        } catch (error) {
-            dataResponse.result = error;
-        }
-        return dataResponse;
-    }
-
 }

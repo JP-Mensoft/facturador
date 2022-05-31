@@ -11,10 +11,10 @@ export const userRoutes = [
     },
     {
         method: 'post',
-        route: '/user/register',
+        route: '/user/add',
         middlewares: 'undefined',
         controller: UserController,
-        action: 'registerUser'
+        action: 'addUser'
     },
     {
         method: 'put',

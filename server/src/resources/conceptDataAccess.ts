@@ -27,18 +27,4 @@ export class ConceptDataAccess {
         return dataResponse;
     }
 
-    public async deleteConcept(conceptId: number) {
-        let dataResponse: ResponseModel = new ResponseModel();
-        try {
-            const deleteResult = await this.entityManager.delete(ConceptEntity, conceptId);
-            if (deleteResult.affected != 0) {
-                dataResponse.success = true;
-                dataResponse.result = deleteResult;
-            }
-        } catch (error) {
-            dataResponse.result = error;
-        }
-        return dataResponse;
-    }
-
 }

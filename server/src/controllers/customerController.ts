@@ -1,7 +1,6 @@
 // App
 import { Request, Response } from 'express';
 import { CustomerDataAccess } from '../resources/customerDataAccess';
-import { UserDataAccess } from '../resources/userDataAccess';
 // Models
 import { ResponseModel } from '../models/responseModel';
 import { DecodedModel } from '../models/decodedModel';
@@ -10,11 +9,9 @@ import { CustomerEntity } from '../database/entities/customerEntity';
 export class CustomerController {
 
     private customerDA: CustomerDataAccess;
-    private userDA: UserDataAccess;
 
     constructor() {
         this.customerDA = new CustomerDataAccess();
-        this.userDA = new UserDataAccess();
     }
 
     public async getOneCustomer(req: Request, res: Response) {
@@ -39,8 +36,10 @@ export class CustomerController {
 
     public async getAllCustomers(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
+        const requestDecoded: DecodedModel = req.body;
+        const userId: number = requestDecoded.decodedToken.userId;
         try {
-            const getCustomersResult: ResponseModel = await this.customerDA.getAllCustomes();
+            const getCustomersResult: ResponseModel = await this.customerDA.getAllCustomers(userId);
             if (getCustomersResult.success) {
                 serverResponse.success = true;
                 serverResponse.result = getCustomersResult;
@@ -55,7 +54,7 @@ export class CustomerController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
-    public async registerCustomer(req: Request, res: Response) {
+    public async addCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
         let customer: CustomerEntity = requestDecoded.data;

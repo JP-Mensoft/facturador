@@ -3,7 +3,7 @@ import { InvoiceController } from "../../controllers/invoiceController";
 export const invoiceRoutes = [
     {
         method: 'post',
-        route: '/invoice/register',
+        route: '/invoice/add',
         middlewares: 'checkToken',
         controller: InvoiceController,
         action: 'addInvoice'
@@ -14,5 +14,5 @@ export const invoiceRoutes = [
         middlewares: 'checkToken',
         controller: InvoiceController,
         action: 'deleteInvoice'
-    },
+    }
 ]

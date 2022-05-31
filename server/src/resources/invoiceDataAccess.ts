@@ -27,13 +27,13 @@ export class InvoiceDataAccess {
         return dataResponse;
     }
 
-    public async addInvoice(invoice: InvoiceEntity) {
+    public async getAllInvoices(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const saveResult = await this.entityManager.save(InvoiceEntity, invoice);
-            if (saveResult != null) {
+            const invoices = await this.entityManager.find(InvoiceEntity, { where: { userId } });
+            if (invoices != undefined) {
                 dataResponse.success = true;
-                dataResponse.result = saveResult;
+                dataResponse.result = invoices;
             }
         } catch (error) {
             dataResponse.result = error;
@@ -41,7 +41,7 @@ export class InvoiceDataAccess {
         return dataResponse;
     }
 
-    public async setInvoice(invoice: InvoiceEntity) {
+    public async addInvoice(invoice: InvoiceEntity) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             const saveResult = await this.entityManager.save(InvoiceEntity, invoice);

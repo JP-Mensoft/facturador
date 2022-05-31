@@ -25,8 +25,8 @@ export class AuthService {
     return this._http.get(this.apiPath + "user/checktoken", { 'headers': { token } });
   }
 
-  public registerUser(userData: UserSetModel): Observable<any> {
-    return this._http.post(this.apiPath + "user/register", userData);
+  public addUser(userData: UserSetModel): Observable<any> {
+    return this._http.post(this.apiPath + "user/add", userData);
   }
 
 }

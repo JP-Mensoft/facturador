@@ -80,8 +80,8 @@ export class LoginPage implements OnInit {
   }
 
   public goRegister(): void {
-    this.clearForm();
     this._router.navigate(['auth/register']);
+    this.clearForm();
   }
 
 }

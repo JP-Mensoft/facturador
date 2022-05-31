@@ -22,16 +22,16 @@ export class UserService {
     return this._http.get(this.apiPath + "company/usercompany", { 'headers': { token } });
   }
 
+  public setUserCompany(token: string, companyData: CompanyModel): Observable<any> {
+    return this._http.post(this.apiPath + "company/set", companyData, { 'headers': { token } });
+  }
+
   public getUser(token: string): Observable<any> {
     return this._http.get(this.apiPath + "user/getone", { 'headers': { token } });
   }
 
   public setUserData(token: string, userData: UserSetModel): Observable<any> {
     return this._http.put(this.apiPath + "user/set", userData, { 'headers': { token } });
-  }
-
-  public setUserCompany(token: string, companyData: CompanyModel): Observable<any> {
-    return this._http.post(this.apiPath + "company/set", companyData, { 'headers': { token } });
   }
 
 }

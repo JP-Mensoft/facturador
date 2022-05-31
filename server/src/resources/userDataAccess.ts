@@ -43,7 +43,7 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async registerUser(userData: UserSetModel) {
+    public async addUser(userData: UserSetModel) {
         let dataResponse: ResponseModel = new ResponseModel();
         let newUser: UserEntity = new UserEntity();
         newUser.email = userData.email;

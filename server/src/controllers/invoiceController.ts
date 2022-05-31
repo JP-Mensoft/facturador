@@ -18,6 +18,14 @@ export class InvoiceController {
         this.invoiceDA = new InvoiceDataAccess();
     }
 
+    public getOneInvoice(req: Request, res: Response) {
+
+    }
+
+    public getAllInvoices(req: Request, res: Response) {
+
+    }
+
     public async addInvoice(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
