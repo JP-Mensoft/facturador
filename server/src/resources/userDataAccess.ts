@@ -100,28 +100,4 @@ export class UserDataAccess {
         return dataResponse;
     }
 
-    public async updateUserCustomers(userId: number, customer: CustomerEntity) {
-        let dataResponse: ResponseModel = new ResponseModel();
-        try {
-            const userFound: ResponseModel = await this.getOneUserId(userId);
-            if (userFound.success) {
-                let user: UserEntity = userFound.result;
-                let userCustomers: CustomerEntity[] = [];
-                if (user.customers != undefined) {
-                    userCustomers = user.customers;
-                }
-                userCustomers.push(customer);
-                user.customers = userCustomers;
-                const saveResult = await this.entityManager.save(UserEntity, user);
-                if (saveResult != undefined) {
-                    dataResponse.success = true;
-                    dataResponse.result = saveResult;
-                }
-            }
-        } catch (error) {
-            dataResponse.result = error;
-        }
-        return dataResponse;
-    }
-
 }

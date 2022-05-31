@@ -1,6 +1,7 @@
 // App
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { InvoiceEntity } from "./invoiceEntity";
+import { UserEntity } from "./userEntity";
 
 @Entity()
 export class CustomerEntity {
@@ -25,6 +26,9 @@ export class CustomerEntity {
 
     @Column({ length: 4444, nullable: true, default: "" })
     public remarks!: string;
+
+    @ManyToOne(() => UserEntity, (user) => user.customers, { onDelete: "CASCADE", onUpdate: "CASCADE" })
+    public userId!: number;
 
     @OneToMany(() => InvoiceEntity, (invoice) => invoice.userId)
     public invoices!: InvoiceEntity[];

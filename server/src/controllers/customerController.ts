@@ -58,17 +58,15 @@ export class CustomerController {
     public async registerCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
-        const customer: CustomerEntity = requestDecoded.data;
+        let customer: CustomerEntity = requestDecoded.data;
         const userId: number = requestDecoded.decodedToken.userId;
+        customer.userId = userId;
         try {
             const saveCustomerResult: ResponseModel = await this.customerDA.addOneCustomer(customer);
             if (saveCustomerResult.success) {
-                const updateUserCustomersResult: ResponseModel = await this.userDA.updateUserCustomers(userId, saveCustomerResult.result);
-                if (updateUserCustomersResult.success) {
-                    serverResponse.success = true;
-                    serverResponse.result = updateUserCustomersResult.result;
-                    serverResponse.status = 200;
-                }
+                serverResponse.success = true;
+                serverResponse.result = saveCustomerResult.result;
+                serverResponse.status = 200;
             } else {
                 serverResponse.status = 400;
             }

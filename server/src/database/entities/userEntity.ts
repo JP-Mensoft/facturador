@@ -1,7 +1,7 @@
 // App
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { Entity, PrimaryGeneratedColumn, Column, JoinTable, ManyToMany, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { utilsRng } from "../../utils/utils";
 import { Environment } from "../../app/environment";
 // Models
@@ -27,8 +27,7 @@ export class UserEntity {
     @Column({ length: 10, nullable: true, default: "" })
     public recoveryCode!: string;
 
-    @ManyToMany(() => CustomerEntity, { eager: true })
-    @JoinTable()
+    @OneToMany(() => CustomerEntity, (customer) => customer.userId, { eager: true })
     public customers!: CustomerEntity[];
 
     @OneToMany(() => InvoiceEntity, (invoice) => invoice.userId, { eager: true })
