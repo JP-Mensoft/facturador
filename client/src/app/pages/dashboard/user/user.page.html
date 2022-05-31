@@ -8,6 +8,9 @@
         <ion-label class="dividerLabel">
           Datos Empresa
         </ion-label>
+        <ion-spinner color="primary" *ngIf="showSpinnerCompany"></ion-spinner>
+        <ion-icon class="verifyIcon" name="checkmark-outline" *ngIf="showCorrectCompany"></ion-icon>
+        <ion-icon class="verifyIcon" name="close-outline" *ngIf="showErrorCompany"></ion-icon>
         <ion-button slot="end" fill="clear" (click)="saveCompany();" [disabled]="!userForm.valid">Guardar</ion-button>
       </ion-item-divider>
 
@@ -47,6 +50,9 @@
         <ion-label class="dividerLabel">
           Datos Usuario
         </ion-label>
+        <ion-spinner color="primary" *ngIf="showSpinnerUser"></ion-spinner>
+        <ion-icon class="verifyIcon" name="checkmark-outline" *ngIf="showCorrectUser"></ion-icon>
+        <ion-icon class="verifyIcon" name="close-outline" *ngIf="showErrorUser"></ion-icon>
         <ion-button slot="end" fill="clear" (click)="saveUser();" [disabled]="!userForm.valid">Guardar</ion-button>
       </ion-item-divider>
 

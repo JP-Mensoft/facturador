@@ -19,12 +19,26 @@ export class UserPage implements OnInit {
   public userData: UserSetModel;
   public userCompany: CompanyModel;
 
+  public showSpinnerCompany: boolean;
+  public showSpinnerUser: boolean;
+  public showCorrectCompany: boolean;
+  public showCorrectUser: boolean;
+  public showErrorCompany: boolean;
+  public showErrorUser: boolean;
+
   constructor(
     private _section: DashboardService,
     private _formBuilder: FormBuilder,
     private _user: UserService,
     private _storage: StorageService
-  ) { }
+  ) {
+    this.showSpinnerCompany = false;
+    this.showSpinnerUser = false;
+    this.showCorrectCompany = false;
+    this.showCorrectUser = false;
+    this.showErrorCompany = false;
+    this.showErrorUser = false;
+  }
 
   ngOnInit() {
     this._section.setSectionName("Usuario");
@@ -81,6 +95,7 @@ export class UserPage implements OnInit {
   }
 
   public async saveCompany() {
+    this.showSpinnerCompany = true;
     this.userCompany.name = this.companyForm.get("name").value;
     this.userCompany.logoURL = this.companyForm.get("logoURL").value;
     this.userCompany.address = this.companyForm.get("address").value;
@@ -89,15 +104,31 @@ export class UserPage implements OnInit {
     this._user.setUserCompany(await this._storage.get("token"), this.userCompany).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
-          this.loadCompanyData();
+          setTimeout(() => {
+            this.loadCompanyData();
+            this.showSpinnerCompany = false;
+            this.showCorrectCompany = true;
+          }, 1000);
+          setTimeout(() => {
+            this.showCorrectCompany = false;
+          }, 2000);
         }
       },
-      error: () => { },
+      error: () => {
+        setTimeout(() => {
+          this.showSpinnerCompany = false;
+          this.showErrorCompany = true;
+        }, 1000);
+        setTimeout(() => {
+          this.showErrorCompany = false;
+        }, 2000);
+      },
       complete: () => { }
     });
   }
 
   public async saveUser() {
+    this.showSpinnerUser = true;
     this.userData.email = this.userForm.get("email").value;
     this.userData.name = this.userForm.get("name").value;
     this.userData.phone = this.userForm.get("phone").value;
@@ -108,6 +139,14 @@ export class UserPage implements OnInit {
     } else {
       if (this.userData.newPassword === this.userData.reNewPassword) {
         this.saveUserSub();
+      } else {
+        setTimeout(() => {
+          this.showSpinnerUser = false;
+          this.showErrorUser = true;
+        }, 1000);
+        setTimeout(() => {
+          this.showErrorUser = false;
+        }, 2000);
       }
     }
   }
@@ -116,10 +155,25 @@ export class UserPage implements OnInit {
     this._user.setUserData(await this._storage.get("token"), this.userData).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
-          this.loadUserData();
+          setTimeout(() => {
+            this.loadUserData();
+            this.showSpinnerUser = false;
+            this.showCorrectUser = true;
+          }, 1000);
+          setTimeout(() => {
+            this.showCorrectUser = false;
+          }, 2000);
         }
       },
-      error: () => { },
+      error: () => {
+        setTimeout(() => {
+          this.showSpinnerUser = false;
+          this.showErrorUser = true;
+        }, 1000);
+        setTimeout(() => {
+          this.showErrorUser = false;
+        }, 2000);
+      },
       complete: () => { }
     });
   }
