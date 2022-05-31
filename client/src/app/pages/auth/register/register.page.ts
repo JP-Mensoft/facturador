@@ -14,9 +14,9 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RegisterPage implements OnInit {
 
   public registerForm: FormGroup;
-
-  public successRegister: boolean;
-  public errorRegister: boolean;
+  public registerSuccess: boolean;
+  public registerError: boolean;
+  public displayedPassword: boolean;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -24,8 +24,8 @@ export class RegisterPage implements OnInit {
     private _storage: StorageService,
     private _router: Router
   ) {
-    this.successRegister = false;
-    this.errorRegister = false;
+    this.registerSuccess = false;
+    this.registerError = false;
   }
 
   ngOnInit() {
@@ -35,16 +35,20 @@ export class RegisterPage implements OnInit {
   public buildForms(): void {
     this.registerForm = this._formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      name: ['', []],
-      phone: ['', []],
-      newPassword: ['', [Validators.required]],
-      reNewPassword: ['', [Validators.required]]
+      name: ['', [Validators.required,]],
+      phone: ['', [Validators.required,]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      reNewPassword: ['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
+  public showPassword(): void {
+    this.displayedPassword = !this.displayedPassword;
+  }
+
   public async registerUser() {
-    this.successRegister = false;
-    this.errorRegister = false;
+    this.registerSuccess = false;
+    this.registerError = false;
     const user = new UserSetModel(
       this.registerForm.get("email").value,
       this.registerForm.get("name").value,
@@ -52,16 +56,12 @@ export class RegisterPage implements OnInit {
       this.registerForm.get("newPassword").value,
       this.registerForm.get("reNewPassword").value
     );
-    if (user.newPassword != "") {
-      this.registerUserSub(user);
+    if (user.newPassword === "" || user.newPassword != user.reNewPassword) {
+      setTimeout(() => {
+        this.registerError = true;
+      }, 10);
     } else {
-      if (user.newPassword === user.reNewPassword) {
-        this.registerUserSub(user);
-      } else {
-        setTimeout(() => {
-          this.errorRegister = true;
-        }, 10);
-      }
+      this.registerUserSub(user);
     }
   }
 
@@ -69,19 +69,37 @@ export class RegisterPage implements OnInit {
     this._auth.registerUser(user).subscribe({
       next: async (result: ResponseModel) => {
         if (result.success) {
-          this.successRegister = true;
+          this.registerSuccess = true;
           setTimeout(() => {
             this._storage.set("token", result.result).then(() => {
               this._router.navigate(["dashboard/user"]);
             });
-          }, 700);
+          }, 200);
+          setTimeout(() => {
+            this.clearForm();
+            this.registerSuccess = false;
+            this.registerError = false;
+          }, 500);
         }
       },
       error: () => {
-        this.errorRegister = true;
+        this.registerError = true;
       },
       complete: () => { }
     });
+  }
+
+  public clearForm(): void {
+    this.registerForm.get("email").setValue("");
+    this.registerForm.get("name").setValue("");
+    this.registerForm.get("phone").setValue("");
+    this.registerForm.get("newPassword").setValue("");
+    this.registerForm.get("reNewPassword").setValue("");
+  }
+
+  public goLogin(): void {
+    this.clearForm();
+    this._router.navigate(['auth/login']);
   }
 
 }

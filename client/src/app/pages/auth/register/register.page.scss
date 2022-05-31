@@ -1,0 +1,120 @@
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+
+ion-input {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+ion-button {
+    --color: rgb(20, 100, 160);
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.titleRow {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titleCol {
+    &:hover .title {
+        animation: hideTitle 0.1s 0s 1 normal linear forwards;
+    }
+    &:hover .hiddenTitle {
+        animation: showHiddenTitle 0.1s 0s 1 normal linear forwards;
+    }
+}
+
+.title {
+    font-family: "Roboto Slab", serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: $color_blue;
+}
+
+.hiddenTitle {
+    position: absolute;
+    opacity: 0%;
+    font-family: "Roboto Slab", serif;
+}
+
+.hiddenTitleBy {
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    color: $color_grey;
+}
+
+.hiddenTitleName {
+    font-size: 25px;
+    font-weight: 800;
+    color: $color_blue;
+}
+
+.formRow {
+    margin-bottom: 20px;
+}
+
+.mottoRow {
+    margin-top: 30px;
+}
+
+.motto {
+    font-family: "Roboto Slab", serif;
+    color: $color_grey;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.wrongRegister {
+    animation: wrongRegister 0.7s;
+}
+
+.correctRegister {
+    animation: correctRegister 0.2s 0s 1 normal ease-in-out forwards;
+}
+
+// Keyframes
+
+@keyframes hideTitle {
+    from {
+    }
+    to {
+        transform: translate(-100px, 0px);
+        opacity: 0%;
+    }
+}
+
+@keyframes showHiddenTitle {
+    from {
+        transform: translate(100px, 0px);
+    }
+    to {
+        opacity: 100%;
+    }
+}
+
+@keyframes wrongRegister {
+    0% {
+    }
+    50% {
+        color: $color_red_error;
+    }
+    100% {
+    }
+}
+
+@keyframes correctRegister {
+    from {
+    }
+    to {
+        transform: translate(200px, 0px);
+        opacity: 0%;
+    }
+}
