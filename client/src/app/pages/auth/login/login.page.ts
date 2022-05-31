@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ResponseModel } from 'src/app/models/responseModel';
@@ -14,7 +14,10 @@ import { StorageService } from 'src/app/services/storage.service';
 export class LoginPage implements OnInit {
 
   public loginForm: FormGroup;
+
   public displayedPassword: boolean;
+  public showSpinnerLogin: boolean;
+  public showErrorLogin: boolean;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -23,6 +26,8 @@ export class LoginPage implements OnInit {
     private _router: Router
   ) {
     this.displayedPassword = false;
+    this.showSpinnerLogin = false;
+    this.showErrorLogin = false;
   }
 
   ngOnInit(): void {
@@ -41,6 +46,7 @@ export class LoginPage implements OnInit {
   }
 
   public attemptAccess() {
+    this.showSpinnerLogin = true;
     const loginData: UserAccessModel = new UserAccessModel(
       this.loginForm.get('email').value,
       this.loginForm.get('password').value
@@ -54,19 +60,26 @@ export class LoginPage implements OnInit {
           });
         }
       },
-      error: () => { },
+      error: () => {
+        setTimeout(() => {
+          this.showSpinnerLogin = false;
+          this.showErrorLogin = true;
+        }, 1000);
+        setTimeout(() => {
+          this.showErrorLogin = false;
+        }, 2000);
+      },
       complete: () => { }
     });
   }
 
   public clearForm(): void {
-    this.loginForm.get('email').setValue("");
-    this.loginForm.get('password').setValue("");
+    this.loginForm.reset();
   }
 
   public goRegister(): void {
-    this._router.navigate(['auth/register']);
     this.clearForm();
+    this._router.navigate(['auth/register']);
   }
 
 }

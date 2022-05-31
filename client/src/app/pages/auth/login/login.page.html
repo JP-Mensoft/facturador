@@ -3,7 +3,7 @@
   <ion-grid>
 
     <ion-row class='titleRow ion-justify-content-center ion-align-items-center'>
-      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol'>
+      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol titleCol'>
         <div class="title">
           Facturador
         </div>
@@ -14,7 +14,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class='contentRow ion-justify-content-center ion-align-items-center'>
+    <ion-row class='ion-justify-content-center ion-align-items-center'>
       <ion-col size="9" sizeSm="7" sizeMd='5' sizeLg="3">
 
         <form [formGroup]='loginForm'>
@@ -40,6 +40,8 @@
 
           <ion-row class="ion-justify-content-between ion-align-items-center">
             <ion-button fill="clear" (click)="goRegister();">Registro</ion-button>
+            <ion-spinner color="primary" *ngIf="showSpinnerLogin"></ion-spinner>
+            <ion-icon name="close-outline" *ngIf="showErrorLogin"></ion-icon>
             <ion-button fill="clear" (click)="attemptAccess();" [disabled]="!loginForm.valid">Acceder</ion-button>
           </ion-row>
 

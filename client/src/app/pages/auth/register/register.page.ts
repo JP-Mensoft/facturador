@@ -14,7 +14,11 @@ import { StorageService } from 'src/app/services/storage.service';
 export class RegisterPage implements OnInit {
 
   public registerForm: FormGroup;
+
   public displayedPassword: boolean;
+  public showSpinnerRegister: boolean;
+  public showCorrectRegister: boolean;
+  public showErrorRegister: boolean;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -23,6 +27,9 @@ export class RegisterPage implements OnInit {
     private _router: Router
   ) {
     this.displayedPassword = false;
+    this.showSpinnerRegister = false;
+    this.showCorrectRegister = false;
+    this.showErrorRegister = false;
   }
 
   ngOnInit() {
@@ -44,6 +51,7 @@ export class RegisterPage implements OnInit {
   }
 
   public async registerUser() {
+    this.showSpinnerRegister = true;
     const user = new UserSetModel(
       this.registerForm.get("email").value,
       this.registerForm.get("name").value,
@@ -53,6 +61,14 @@ export class RegisterPage implements OnInit {
     );
     if (user.newPassword != "" && user.newPassword === user.reNewPassword) {
       this.registerUserSub(user);
+    } else {
+      setTimeout(() => {
+        this.showSpinnerRegister = false;
+        this.showErrorRegister = true;
+      }, 1000);
+      setTimeout(() => {
+        this.showErrorRegister = false;
+      }, 2000);
     }
   }
 
@@ -60,28 +76,39 @@ export class RegisterPage implements OnInit {
     this._auth.registerUser(user).subscribe({
       next: async (result: ResponseModel) => {
         if (result.success) {
-          this._storage.set("token", result.result).then(() => {
-            this._router.navigate(["dashboard/user"]);
-            this.clearForm();
-          });
+          setTimeout(() => {
+            this.showSpinnerRegister = false;
+            this.showCorrectRegister = true;
+          }, 1000);
+          setTimeout(() => {
+            this.showCorrectRegister = false;
+            this._storage.set("token", result.result).then(() => {
+              this._router.navigate(["dashboard/user"]);
+              this.clearForm();
+            });
+          }, 2000);
         }
       },
-      error: () => { },
+      error: () => {
+        setTimeout(() => {
+          this.showSpinnerRegister = false;
+          this.showErrorRegister = true;
+        }, 1000);
+        setTimeout(() => {
+          this.showErrorRegister = false;
+        }, 2000);
+      },
       complete: () => { }
     });
   }
 
   public clearForm(): void {
-    this.registerForm.get("email").setValue("");
-    this.registerForm.get("name").setValue("");
-    this.registerForm.get("phone").setValue("");
-    this.registerForm.get("newPassword").setValue("");
-    this.registerForm.get("reNewPassword").setValue("");
+    this.registerForm.reset();
   }
 
   public goLogin(): void {
-    this._router.navigate(['auth/login']);
     this.clearForm();
+    this._router.navigate(['auth/login']);
   }
 
 }

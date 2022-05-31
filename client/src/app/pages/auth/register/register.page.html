@@ -3,7 +3,7 @@
   <ion-grid>
 
     <ion-row class='titleRow ion-justify-content-center ion-align-items-center'>
-      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol'>
+      <ion-col size='8' sizeMd='6' sizeLg='4' class='centerCol titleCol'>
         <div class="title">
           Facturador
         </div>
@@ -14,7 +14,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row class='contentRow ion-justify-content-center ion-align-items-center'>
+    <ion-row class='ion-justify-content-center ion-align-items-center'>
       <ion-col size="9" sizeSm="7" sizeMd='5' sizeLg="3">
 
         <form [formGroup]='registerForm'>
@@ -55,8 +55,7 @@
           </ion-row>
 
           <ion-row class='formRow ion-justify-content-center ion-align-items-center'>
-            <ion-icon name="{{!displayedPassword ? 'lock-closed-outline' : 'lock-open-outline'}}"
-              (click)="showPassword();">
+            <ion-icon name="{{!displayedPassword ? 'lock-closed' : 'lock-open'}}" (click)="showPassword();">
             </ion-icon>
             <ion-item>
               <ion-input formControlName="reNewPassword" type="{{!displayedPassword ? 'password' : 'text'}}"
@@ -67,6 +66,9 @@
 
           <ion-row class="ion-justify-content-between ion-align-items-center">
             <ion-button fill="clear" (click)="goLogin();">Cancelar</ion-button>
+            <ion-spinner color="primary" *ngIf="showSpinnerRegister"></ion-spinner>
+            <ion-icon name="checkmark-outline" *ngIf="showCorrectRegister"></ion-icon>
+            <ion-icon name="close-outline" *ngIf="showErrorRegister"></ion-icon>
             <ion-button fill="clear" (click)="registerUser();" [disabled]="!registerForm.valid">Guardar</ion-button>
           </ion-row>
 
