@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomersService {
+export class InvoicesService {
 
   private apiPath: string;
 

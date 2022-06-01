@@ -14,6 +14,7 @@ import { UserService } from './services/user.service';
 import { CustomersService } from './services/customers.service';
 import { CustomerFilterPipe } from './pipes/customer-filter.pipe';
 import { InvoiceFilterPipe } from './pipes/invoice-filter.pipe';
+import { InvoicesService } from './services/invoices.service';
 
 @NgModule({
   declarations: [AppComponent, CustomerFilterPipe, InvoiceFilterPipe],
@@ -30,7 +31,8 @@ import { InvoiceFilterPipe } from './pipes/invoice-filter.pipe';
     StorageService,
     DashboardService,
     UserService,
-    CustomersService
+    CustomersService,
+    InvoicesService
   ],
   bootstrap: [AppComponent],
 })
