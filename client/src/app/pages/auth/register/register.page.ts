@@ -67,10 +67,10 @@ export class RegisterPage implements OnInit {
       setTimeout(() => {
         this.showSpinnerRegister = false;
         this.showErrorRegister = true;
-      }, 1000);
+      }, 500);
       setTimeout(() => {
         this.showErrorRegister = false;
-      }, 2000);
+      }, 1000);
     }
   }
 
@@ -81,24 +81,24 @@ export class RegisterPage implements OnInit {
           setTimeout(() => {
             this.showSpinnerRegister = false;
             this.showCorrectRegister = true;
-          }, 1000);
+          }, 500);
           setTimeout(() => {
             this.showCorrectRegister = false;
             this._storage.set("token", result.result).then(() => {
               this._router.navigate(["dashboard/user"]);
               this.clearForm();
             });
-          }, 2000);
+          }, 1000);
         }
       },
       error: () => {
         setTimeout(() => {
           this.showSpinnerRegister = false;
           this.showErrorRegister = true;
-        }, 1000);
+        }, 500);
         setTimeout(() => {
           this.showErrorRegister = false;
-        }, 2000);
+        }, 1000);
       },
       complete: () => { }
     });

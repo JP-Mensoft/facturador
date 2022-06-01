@@ -110,20 +110,20 @@ export class UserPage implements OnInit {
             this.loadCompanyData();
             this.showSpinnerCompany = false;
             this.showCorrectCompany = true;
-          }, 1000);
+          }, 500);
           setTimeout(() => {
             this.showCorrectCompany = false;
-          }, 2000);
+          }, 1000);
         }
       },
       error: () => {
         setTimeout(() => {
           this.showSpinnerCompany = false;
           this.showErrorCompany = true;
-        }, 1000);
+        }, 500);
         setTimeout(() => {
           this.showErrorCompany = false;
-        }, 2000);
+        }, 1000);
       },
       complete: () => { }
     });
@@ -147,10 +147,10 @@ export class UserPage implements OnInit {
         setTimeout(() => {
           this.showSpinnerUser = false;
           this.showErrorUser = true;
-        }, 1000);
+        }, 500);
         setTimeout(() => {
           this.showErrorUser = false;
-        }, 2000);
+        }, 1000);
       }
     }
   }
@@ -163,20 +163,20 @@ export class UserPage implements OnInit {
             this.loadUserData();
             this.showSpinnerUser = false;
             this.showCorrectUser = true;
-          }, 1000);
+          }, 500);
           setTimeout(() => {
             this.showCorrectUser = false;
-          }, 2000);
+          }, 1000);
         }
       },
       error: () => {
         setTimeout(() => {
           this.showSpinnerUser = false;
           this.showErrorUser = true;
-        }, 1000);
+        }, 500);
         setTimeout(() => {
           this.showErrorUser = false;
-        }, 2000);
+        }, 1000);
       },
       complete: () => { }
     });

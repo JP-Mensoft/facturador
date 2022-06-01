@@ -18,7 +18,6 @@ const routes: Routes = [
     canActivate: [DashboardGuard],
     canActivateChild: [DashboardGuard]
   }
-
 ];
 
 @NgModule({

@@ -1,3 +1,48 @@
 <ion-content>
-  Facturas
+
+  <ion-grid>
+    <ion-row class='ion-justify-content-between ion-align-items-center'>
+      <ion-col size='12'>
+        <ion-searchbar animated showCancelButton="focus" placeholder="Buscar" [(ngModel)]="invoicesFilter">
+        </ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid>
+    <ion-row class='ion-justify-content-center ion-align-items-center'>
+
+      <ion-card (click)="goDetail();">
+        <ion-card-header>
+          <ion-card-title>Factura</ion-card-title>
+          <ion-card-subtitle>Subtitulo Factura</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          Contenido Factura
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card (click)="goDetail();">
+        <ion-card-header>
+          <ion-card-title>Factura</ion-card-title>
+          <ion-card-subtitle>Subtitulo Factura</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          Contenido Factura
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card (click)="goDetail();">
+        <ion-card-header>
+          <ion-card-title>Factura</ion-card-title>
+          <ion-card-subtitle>Subtitulo Factura</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          Contenido Factura
+        </ion-card-content>
+      </ion-card>
+
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

@@ -66,10 +66,10 @@ export class LoginPage implements OnInit {
         setTimeout(() => {
           this.showSpinnerLogin = false;
           this.showErrorLogin = true;
-        }, 1000);
+        }, 500);
         setTimeout(() => {
           this.showErrorLogin = false;
-        }, 2000);
+        }, 1000);
       },
       complete: () => { }
     });

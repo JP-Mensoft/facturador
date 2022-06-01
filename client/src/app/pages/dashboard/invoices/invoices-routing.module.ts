@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: InvoicesPage
+  },
+  {
+    path: 'invoice-detail',
+    loadChildren: () => import('./invoice-detail/invoice-detail.module').then( m => m.InvoiceDetailPageModule)
   }
 ];
 

@@ -6,18 +6,18 @@ import { InvoiceModel } from '../models/invoiceModel';
 })
 export class InvoiceFilterPipe implements PipeTransform {
 
-  transform(value: any[], arg: string): any[] {
+  transform(value: InvoiceModel[], arg: string): any[] {
     const filteredInvoices: InvoiceModel[] = [];
     if (arg === "") {
       return value;
     }
-    value.forEach((producto: any) => {
-      const fechaProducto: string = new Date(producto.fecha).toLocaleDateString();
-      const especieProducto: string = producto.especie;
-      if (fechaProducto.includes(arg) || especieProducto.toLowerCase().includes(arg.toLowerCase())) {
-        filteredInvoices.push(producto);
+    value.forEach((invoice: InvoiceModel) => {
+      const invoiceDate: string = invoice.date.toString();
+      if (invoiceDate.includes(arg)) {
+        filteredInvoices.push(invoice);
       }
     });
     return filteredInvoices;
   }
+
 }

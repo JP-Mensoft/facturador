@@ -7,6 +7,14 @@ const routes: Routes = [
   {
     path: '',
     component: CustomersPage
+  },
+  {
+    path: 'customer-detail',
+    loadChildren: () => import('./customer-detail/customer-detail.module').then(m => m.CustomerDetailPageModule)
+  },
+  {
+    path: 'customer-add',
+    loadChildren: () => import('./customer-add/customer-add.module').then( m => m.CustomerAddPageModule)
   }
 ];
 
@@ -14,4 +22,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CustomersPageRoutingModule {}
+export class CustomersPageRoutingModule { }

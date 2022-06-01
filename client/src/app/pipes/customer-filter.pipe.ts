@@ -6,16 +6,15 @@ import { CustomerModel } from '../models/customerModel';
 })
 export class CustomerFilterPipe implements PipeTransform {
 
-  transform(value: any[], arg: string): any[] {
+  transform(value: CustomerModel[], arg: string): any[] {
     const filteredCustomers: CustomerModel[] = [];
     if (arg === "") {
       return value;
     }
-    value.forEach((producto: any) => {
-      const fechaProducto: string = new Date(producto.fecha).toLocaleDateString();
-      const especieProducto: string = producto.especie;
-      if (fechaProducto.includes(arg) || especieProducto.toLowerCase().includes(arg.toLowerCase())) {
-        filteredCustomers.push(producto);
+    value.forEach((customer: CustomerModel) => {
+      const customerName: string = customer.name;
+      if (customerName.includes(arg.toLocaleLowerCase())) {
+        filteredCustomers.push(customer);
       }
     });
     return filteredCustomers;
