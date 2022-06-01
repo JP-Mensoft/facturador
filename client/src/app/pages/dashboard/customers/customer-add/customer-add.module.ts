@@ -1,11 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-
+import { FormBuilder, FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
 import { CustomerAddPageRoutingModule } from './customer-add-routing.module';
-
 import { CustomerAddPage } from './customer-add.page';
 
 @NgModule({
@@ -13,8 +10,9 @@ import { CustomerAddPage } from './customer-add.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    CustomerAddPageRoutingModule
+    CustomerAddPageRoutingModule,
+    FormBuilder
   ],
   declarations: [CustomerAddPage]
 })
-export class CustomerAddPageModule {}
+export class CustomerAddPageModule { }

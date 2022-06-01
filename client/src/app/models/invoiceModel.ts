@@ -2,6 +2,7 @@ import { ConceptModel } from "./conceptModel";
 
 export class InvoiceModel {
     constructor(
+        public invoiceId: number,
         public date: string,
         public invoiceNumber: number,
         public orderNumber: number,
