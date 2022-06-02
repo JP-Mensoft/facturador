@@ -75,6 +75,26 @@ export class CustomerController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
+    public async setCustomer(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        const requestDecoded: DecodedModel = req.body;
+        let customer: CustomerEntity = requestDecoded.data;
+        try {
+            const setCustomerResult: ResponseModel = await this.customerDA.setOneCustomer(customer);
+            if (setCustomerResult.success) {
+                serverResponse.success = true;
+                serverResponse.result = setCustomerResult.result;
+                serverResponse.status = 200;
+            } else {
+                serverResponse.status = 400;
+            }
+        } catch (error) {
+            serverResponse.result = error;
+            serverResponse.status = 500;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
+    }
+
     public async deleteCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const customerId: number = Number(req.params.customerId);

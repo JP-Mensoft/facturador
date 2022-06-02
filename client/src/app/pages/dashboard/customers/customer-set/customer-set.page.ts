@@ -58,7 +58,6 @@ export class CustomerSetPage implements OnInit {
       next: (result: ResponseModel) => {
         if (result.success) {
           this.customer = result.result;
-          console.log(this.customer);
           this.setForm();
         }
       },
@@ -68,7 +67,40 @@ export class CustomerSetPage implements OnInit {
   }
 
   public async setCustomer() {
-
+    this.showSpinnerCustomer = true;
+    this.showErrorCustomer = false;
+    this.showCorrectCustomer = false;
+    this.customer.name = this.customerForm.get("name").value;
+    this.customer.email = this.customerForm.get("email").value;
+    this.customer.contact = this.customerForm.get("contact").value;
+    this.customer.phone = this.customerForm.get("phone").value;
+    this.customer.address = this.customerForm.get("address").value;
+    this.customer.cif = this.customerForm.get("cif").value;
+    this.customer.remarks = this.customerForm.get("remarks").value;
+    this._customers.setCustomer(await this._storage.get("token"), this.customer).subscribe({
+      next: (result: ResponseModel) => {
+        if (result.success) {
+          setTimeout(() => {
+            this.showSpinnerCustomer = false;
+            this.showCorrectCustomer = true;
+          }, 500);
+          setTimeout(() => {
+            this.showCorrectCustomer = false;
+            this.goCustomers();
+          }, 1000);
+        }
+      },
+      error: () => {
+        setTimeout(() => {
+          this.showSpinnerCustomer = false;
+          this.showErrorCustomer = true;
+        }, 500);
+        setTimeout(() => {
+          this.showErrorCustomer = false;
+        }, 1000);
+      },
+      complete: () => { }
+    });
   }
 
   public setForm(): void {

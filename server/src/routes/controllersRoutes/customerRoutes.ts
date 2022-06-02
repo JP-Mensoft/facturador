@@ -24,6 +24,13 @@ export const customerRoutes = [
         action: 'addCustomer'
     },
     {
+        method: 'put',
+        route: '/customer/set',
+        middlewares: 'checkToken',
+        controller: CustomerController,
+        action: 'setCustomer'
+    },
+    {
         method: 'delete',
         route: '/customer/delete/:customerId',
         middlewares: 'checkToken',

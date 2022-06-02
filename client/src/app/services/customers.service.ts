@@ -29,6 +29,10 @@ export class CustomersService {
     return this._http.post(this.apiPath + "customer/add", customer, { 'headers': { token } });
   }
 
+  public setCustomer(token: string, customer: CustomerModel): Observable<any> {
+    return this._http.put(this.apiPath + "customer/set", customer, { 'headers': { token } });
+  }
+
   public deleteCustomer(token: string, customerId: number): Observable<any> {
     return this._http.delete(this.apiPath + "customer/delete/" + customerId, { 'headers': { token } });
   }

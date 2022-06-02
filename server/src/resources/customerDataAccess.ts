@@ -55,6 +55,20 @@ export class CustomerDataAccess {
         return dataResponse;
     }
 
+    public async setOneCustomer(customer: CustomerEntity) {
+        let dataResponse: ResponseModel = new ResponseModel();
+        try {
+            const saveResult = await this.entityManager.save(CustomerEntity, customer);
+            if (saveResult != null) {
+                dataResponse.success = true;
+                dataResponse.result = saveResult;
+            }
+        } catch (error) {
+            dataResponse.result = error;
+        }
+        return dataResponse;
+    }
+
     public async deleteOneCustomer(customerId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
