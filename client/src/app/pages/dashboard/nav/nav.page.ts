@@ -10,11 +10,9 @@ import { StorageService } from 'src/app/services/storage.service';
 export class NavPage implements OnInit {
 
   @Input() sectionName: string;
-  @Input() loggedUser: string;
 
   constructor(private _storage: StorageService, private _router: Router) {
     this.sectionName = "";
-    this.loggedUser = "";
   }
 
   ngOnInit() { }

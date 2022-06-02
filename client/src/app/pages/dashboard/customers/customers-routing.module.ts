@@ -9,12 +9,12 @@ const routes: Routes = [
     component: CustomersPage
   },
   {
-    path: 'customer-detail',
+    path: 'customer-detail/:customerId',
     loadChildren: () => import('./customer-detail/customer-detail.module').then(m => m.CustomerDetailPageModule)
   },
   {
     path: 'customer-add',
-    loadChildren: () => import('./customer-add/customer-add.module').then( m => m.CustomerAddPageModule)
+    loadChildren: () => import('./customer-add/customer-add.module').then(m => m.CustomerAddPageModule)
   }
 ];
 

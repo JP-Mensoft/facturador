@@ -12,8 +12,8 @@ export class CustomerFilterPipe implements PipeTransform {
       return value;
     }
     value.forEach((customer: CustomerModel) => {
-      const customerName: string = customer.name;
-      if (customerName.includes(arg.toLocaleLowerCase())) {
+      const customerName: string = customer.name.toLowerCase();
+      if (customerName.includes(arg.toLowerCase())) {
         filteredCustomers.push(customer);
       }
     });

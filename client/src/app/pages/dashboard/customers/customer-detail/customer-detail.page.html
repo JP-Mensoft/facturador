@@ -4,14 +4,17 @@
 
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Nombre Cliente</ion-card-title>
-          <ion-card-subtitle>Email Cliente</ion-card-subtitle>
-          <ion-card-subtitle>Teléfono Cliente / Contacto Cliente</ion-card-subtitle>
-          <ion-card-subtitle>CIF Cliente</ion-card-subtitle>
-          <ion-card-subtitle>Dirección Cliente</ion-card-subtitle>
+          <ion-card-title class="customerName">{{customer.name}}</ion-card-title>
+          <ion-card-subtitle class="customerInfo">{{customer.email}}</ion-card-subtitle>
+          <ion-card-subtitle class="customerInfo">
+            {{customer.phone}} <span class="dividerBar">/</span> {{customer.contact}}
+          </ion-card-subtitle>
+          <ion-card-subtitle class="customerInfo">{{customer.address}}</ion-card-subtitle>
+          <ion-card-subtitle class="customerInfoExtra">CIF: <span class="cieText">{{customer.cif}}</span>
+          </ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content>
-          Comentarios Cliente
+        <ion-card-content class="customerRemarks">
+          {{customer.remarks}}
         </ion-card-content>
       </ion-card>
 

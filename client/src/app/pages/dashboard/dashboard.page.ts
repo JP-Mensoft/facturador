@@ -11,7 +11,6 @@ import { StorageService } from 'src/app/services/storage.service';
 export class DashboardPage implements OnInit, OnDestroy {
 
   public sectionName: string;
-  public loggedUser: string;
   private sectionNameSub: Subscription;
 
   constructor(
@@ -19,20 +18,14 @@ export class DashboardPage implements OnInit, OnDestroy {
     private _storage: StorageService
   ) {
     this.sectionName = "";
-    this.loggedUser = "";
   }
 
   ngOnInit(): void {
-    this.setLoggedUser();
     this.monitoringSectionName();
   }
 
   ngOnDestroy(): void {
     this.sectionNameSub.unsubscribe();
-  }
-
-  public async setLoggedUser() {
-    this.loggedUser = await this._storage.get("email");
   }
 
   public monitoringSectionName(): void {

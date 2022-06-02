@@ -1,0 +1,46 @@
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+$color_green_success: rgb(10, 100, 10);
+
+.customerName {
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.customerInfo {
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.customerInfoExtra {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.cieText {
+    color: $color_blue;
+}
+
+.customerRemarks {
+    text-align: center;
+    color: black;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.dividerBar {
+    color: $color_blue;
+    font-weight: 600;
+}

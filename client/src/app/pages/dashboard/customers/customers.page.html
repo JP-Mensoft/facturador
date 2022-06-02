@@ -18,9 +18,16 @@
 
     <ion-item-sliding *ngFor="let customer of customers | customerFilter: customersFilter; index as i;">
 
-      <ion-item (click)="goDetail();">
+      <ion-item (click)="goDetail(customer.customerId);">
         <ion-icon class="customerIcon" name="person"></ion-icon>
-        <ion-label>{{customer.name}}</ion-label>
+        <ion-label>
+          <h1 class="customerName">
+            {{customer.name}}
+          </h1>
+          <p class="customerInfo">
+            {{customer.email}} <span class="dividerBar">/</span> {{customer.phone}}
+          </p>
+        </ion-label>
       </ion-item>
 
       <ion-item-options side="end">

@@ -47,7 +47,7 @@
       <ion-textarea class="inputText" formControlName="remarks"></ion-textarea>
     </ion-item>
 
-    <ion-item lines="none">
+    <ion-item class="btnItem" lines="none">
       <ion-button slot="start" fill="clear" (click)="goCustomers();">Cancelar</ion-button>
       <ion-button slot="end" fill="clear" (click)="saveCustomer();" [disabled]="!customerForm.valid">
         Guardar

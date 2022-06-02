@@ -54,7 +54,7 @@ export class CustomerAddPage implements OnInit {
     this.showCorrectCustomer = false;
     const name = this.customerForm.get("name").value;
     const email = this.customerForm.get("email").value;
-    const contact = this.customerForm.get("email").value;
+    const contact = this.customerForm.get("contact").value;
     const phone = this.customerForm.get("phone").value;
     const address = this.customerForm.get("address").value;
     const cif = this.customerForm.get("cif").value;
