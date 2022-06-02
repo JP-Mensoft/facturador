@@ -11,12 +11,12 @@ export class InvoicesPage implements OnInit {
 
   public invoicesFilter: string;
 
-  constructor(private _section: DashboardService, private _router: Router) {
+  constructor(private _dashboard: DashboardService, private _router: Router) {
     this.invoicesFilter = "";
   }
 
   ngOnInit() {
-    this._section.setSectionName("Facturas");
+    this._dashboard.setSectionName("Facturas");
   }
 
   public goDetail(): void {

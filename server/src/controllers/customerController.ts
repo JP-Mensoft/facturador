@@ -16,13 +16,12 @@ export class CustomerController {
 
     public async getOneCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const requestDecoded: DecodedModel = req.body;
-        const customerId: number = requestDecoded.data.customerId;
+        const customerId: number = Number(req.params.customerId);
         try {
             const getCustomerResult: ResponseModel = await this.customerDA.getOneCustomer(customerId);
             if (getCustomerResult.success) {
                 serverResponse.success = true;
-                serverResponse.result = getCustomerResult;
+                serverResponse.result = getCustomerResult.result;
                 serverResponse.status = 200;
             } else {
                 serverResponse.status = 400;
@@ -42,7 +41,7 @@ export class CustomerController {
             const getCustomersResult: ResponseModel = await this.customerDA.getAllCustomers(userId);
             if (getCustomersResult.success) {
                 serverResponse.success = true;
-                serverResponse.result = getCustomersResult;
+                serverResponse.result = getCustomersResult.result;
                 serverResponse.status = 200;
             } else {
                 serverResponse.status = 400;
@@ -78,8 +77,7 @@ export class CustomerController {
 
     public async deleteCustomer(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const requestDecoded: DecodedModel = req.body;
-        const customerId: number = requestDecoded.data.customerId;
+        const customerId: number = Number(req.params.customerId);
         try {
             const deleteCustomerResult: ResponseModel = await this.customerDA.deleteOneCustomer(customerId);
             if (deleteCustomerResult.success) {

@@ -10,17 +10,20 @@ import { StorageService } from 'src/app/services/storage.service';
 export class NavPage implements OnInit {
 
   @Input() sectionName: string;
+  @Input() loggedUser: string;
 
   constructor(private _storage: StorageService, private _router: Router) {
     this.sectionName = "";
+    this.loggedUser = "";
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   public logout(): void {
     this._storage.remove("token").then(() => {
-      this._router.navigate(["auth/login"]);
+      this._storage.remove("email").then(() => {
+        this._router.navigate(["auth/login"]);
+      });
     });
   }
 

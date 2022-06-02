@@ -14,40 +14,26 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid>
-    <ion-row class='ion-justify-content-center ion-align-items-center'>
+  <ion-list>
 
-      <ion-card (click)="goDetail();">
-        <ion-card-header>
-          <ion-card-title>Nombre Cliente</ion-card-title>
-          <ion-card-subtitle>Email Cliente / Teléfono Cliente</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          Comentarios Cliente
-        </ion-card-content>
-      </ion-card>
+    <ion-item-sliding *ngFor="let customer of customers | customerFilter: customersFilter; index as i;">
 
-      <ion-card (click)="goDetail();">
-        <ion-card-header>
-          <ion-card-title>Nombre Cliente</ion-card-title>
-          <ion-card-subtitle>Email Cliente / Teléfono Cliente</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          Comentarios Cliente
-        </ion-card-content>
-      </ion-card>
+      <ion-item (click)="goDetail();">
+        <ion-icon class="customerIcon" name="person"></ion-icon>
+        <ion-label>{{customer.name}}</ion-label>
+      </ion-item>
 
-      <ion-card (click)="goDetail();">
-        <ion-card-header>
-          <ion-card-title>Nombre Cliente</ion-card-title>
-          <ion-card-subtitle>Email Cliente / Teléfono Cliente</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          Comentarios Cliente
-        </ion-card-content>
-      </ion-card>
+      <ion-item-options side="end">
+        <ion-item-option color="primary">
+          <ion-icon slot="icon-only" name="hammer"></ion-icon>
+        </ion-item-option>
+        <ion-item-option color="danger" (click)="deleteCustomer(customer.customerId);">
+          <ion-icon slot="icon-only" name="trash-bin"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
 
-    </ion-row>
-  </ion-grid>
+    </ion-item-sliding>
+
+  </ion-list>
 
 </ion-content>

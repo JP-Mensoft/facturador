@@ -27,7 +27,7 @@ export class UserPage implements OnInit {
   public showErrorUser: boolean;
 
   constructor(
-    private _section: DashboardService,
+    private _dashboard: DashboardService,
     private _formBuilder: FormBuilder,
     private _user: UserService,
     private _storage: StorageService
@@ -41,7 +41,7 @@ export class UserPage implements OnInit {
   }
 
   ngOnInit() {
-    this._section.setSectionName("Usuario");
+    this._dashboard.setSectionName("Usuario");
     this.userData = new UserSetModel("", "", "", "", "");
     this.userCompany = new CompanyModel("", "", "", "", "");
     this.buildForms();

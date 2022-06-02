@@ -1,27 +1,27 @@
 <ion-header>
-  <app-nav [sectionName]="sectionName"></app-nav>
+  <app-nav [sectionName]="sectionName" [loggedUser]="loggedUser"></app-nav>
 </ion-header>
 
 <ion-content>
   <ion-tabs>
     <ion-tab-bar slot="bottom">
 
-      <ion-tab-button tab="emit" (click)="setSectionName('Emitir');">
+      <ion-tab-button tab="emit" (click)="goEmit();">
         <ion-icon name="document-text-outline"></ion-icon>
         <ion-label class="lblTab">Emitir</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="invoices" (click)="setSectionName('Facturas');">
+      <ion-tab-button tab="invoices" (click)="goInvoices();">
         <ion-icon name="file-tray-full-outline"></ion-icon>
         <ion-label class="lblTab">Facturas</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="customers" (click)="setSectionName('Clientes');">
+      <ion-tab-button tab="customers" (click)="goCustomers();">
         <ion-icon name="people-outline"></ion-icon>
         <ion-label class="lblTab">Clientes</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button tab="user" (click)="setSectionName('Usuario');">
+      <ion-tab-button tab="user" (click)="goUser();">
         <ion-icon name="person-outline"></ion-icon>
         <ion-label class="lblTab">Usuario</ion-label>
       </ion-tab-button>

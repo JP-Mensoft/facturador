@@ -1,6 +1,8 @@
 <ion-toolbar>
 
-  <ion-title class="sectionTitle">{{sectionName}}</ion-title>
+  <ion-text slot="start" class="sectionTitle">{{sectionName}}</ion-text>
+
+  <ion-text slot="primary" class="loggedUser">{{loggedUser}}</ion-text>
 
   <ion-button slot="end" fill="clear" (click)="logout();">Salir</ion-button>
 

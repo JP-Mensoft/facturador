@@ -55,7 +55,8 @@ export class LoginPage implements OnInit {
     this._auth.attempAccess(loginData).subscribe({
       next: (response: ResponseModel) => {
         if (response.success) {
-          this._storage.set("token", response.result).then(() => {
+          this._storage.set("token", response.result.token).then(() => {
+            this._storage.set("email", response.result.email);
             this._router.navigate(["/dashboard"]);
             this.clearForm();
             this.showSpinnerLogin = false;

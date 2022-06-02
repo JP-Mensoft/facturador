@@ -20,9 +20,8 @@ export class CompanyController {
         try {
             const companyFound: ResponseModel = await this.companyDA.getOneUserCompany(requestDecoded.decodedToken.userId);
             if (companyFound.success) {
-                const company: CompanyEntity = companyFound.result;
                 serverResponse.success = true;
-                serverResponse.result = company;
+                serverResponse.result = companyFound.result;
                 serverResponse.status = 200;
             } else {
                 serverResponse.status = 400;

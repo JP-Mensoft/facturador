@@ -3,8 +3,8 @@ import { CustomerController } from "../../controllers/customerController";
 
 export const customerRoutes = [
     {
-        method: 'post',
-        route: '/customer/getone',
+        method: 'get',
+        route: '/customer/getone/:customerId',
         middlewares: 'checkToken',
         controller: CustomerController,
         action: 'getOneCustomer'
@@ -25,7 +25,7 @@ export const customerRoutes = [
     },
     {
         method: 'delete',
-        route: '/customer/delete',
+        route: '/customer/delete/:customerId',
         middlewares: 'checkToken',
         controller: CustomerController,
         action: 'deleteCustomer'

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CustomerAddPageRoutingModule } from './customer-add-routing.module';
 import { CustomerAddPage } from './customer-add.page';
@@ -11,7 +11,7 @@ import { CustomerAddPage } from './customer-add.page';
     FormsModule,
     IonicModule,
     CustomerAddPageRoutingModule,
-    FormBuilder
+    ReactiveFormsModule
   ],
   declarations: [CustomerAddPage]
 })

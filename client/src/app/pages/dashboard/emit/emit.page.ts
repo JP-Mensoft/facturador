@@ -8,10 +8,10 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class EmitPage implements OnInit {
 
-  constructor(private _section: DashboardService) { }
+  constructor(private _dashboard: DashboardService) { }
 
   ngOnInit() {
-    this._section.setSectionName("Emitir");
+    this._dashboard.setSectionName("Emitir");
   }
 
 }

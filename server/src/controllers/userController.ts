@@ -91,7 +91,7 @@ export class UserController {
                 const user: UserEntity = userFound.result;
                 if (user.checkPassword(requestDecoded.password)) {
                     serverResponse.success = true;
-                    serverResponse.result = user.generateSesionToken();
+                    serverResponse.result = { token: user.generateSesionToken(), email: user.email };
                     serverResponse.status = 200;
                 } else {
                     serverResponse.status = 401;

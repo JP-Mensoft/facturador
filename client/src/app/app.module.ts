@@ -12,12 +12,10 @@ import { StorageService } from './services/storage.service';
 import { DashboardService } from './services/dashboard.service';
 import { UserService } from './services/user.service';
 import { CustomersService } from './services/customers.service';
-import { CustomerFilterPipe } from './pipes/customer-filter.pipe';
-import { InvoiceFilterPipe } from './pipes/invoice-filter.pipe';
 import { InvoicesService } from './services/invoices.service';
 
 @NgModule({
-  declarations: [AppComponent, CustomerFilterPipe, InvoiceFilterPipe],
+  declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,

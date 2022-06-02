@@ -2,7 +2,6 @@ import { ConceptModel } from "./conceptModel";
 
 export class InvoiceModel {
     constructor(
-        public invoiceId: number,
         public date: string,
         public invoiceNumber: number,
         public orderNumber: number,
@@ -12,7 +11,8 @@ export class InvoiceModel {
         public taxableIncome: number,
         public totalAmount: number,
         public concepts: ConceptModel[],
-        public customerId: number
+        public customerId: number,
+        public invoiceId?: number
     ) { }
 }
 

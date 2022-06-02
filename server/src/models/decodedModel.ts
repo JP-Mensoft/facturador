@@ -7,7 +7,6 @@ export class DecodedModel {
 
 export class DecodedTokenModel {
     constructor(
-        public userId: number,
-        public email: string
+        public userId: number
     ) { }
 }

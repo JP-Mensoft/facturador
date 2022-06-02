@@ -6,14 +6,31 @@ import { Subject } from 'rxjs';
 })
 export class DashboardService {
 
-  public sectionName: Subject<string>;
+  public subSectionName: Subject<string>;
+  public subCustomers: Subject<boolean>;
+  public subInvoices: Subject<boolean>;
+
+  public customersStatus: boolean;
+  public invoicesStatus: boolean;
 
   constructor() {
-    this.sectionName = new Subject<string>();
+    this.subSectionName = new Subject<string>();
+    this.subCustomers = new Subject<boolean>();
+    this.subInvoices = new Subject<boolean>();
   }
 
   public setSectionName(sectionName: string): void {
-    this.sectionName.next(sectionName);
+    this.subSectionName.next(sectionName);
+  }
+
+  public switchCustomers(): void {
+    this.customersStatus = !this.customersStatus;
+    this.subCustomers.next(this.customersStatus);
+  }
+
+  public switchInvoices(): void {
+    this.invoicesStatus = !this.invoicesStatus;
+    this.subInvoices.next(this.invoicesStatus);
   }
 
 }

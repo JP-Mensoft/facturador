@@ -1,0 +1,37 @@
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+$color_green_success: rgb(10, 100, 10);
+
+ion-button {
+    --color: rgb(20, 100, 160);
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+ion-spinner,
+.verifyIcon {
+    margin-left: 10px;
+}
+
+.dividerLabel {
+    margin-left: 10px;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.inputLabel {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.inputText {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+}

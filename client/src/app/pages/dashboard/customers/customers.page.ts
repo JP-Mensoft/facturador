@@ -1,22 +1,77 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { CustomerModel } from 'src/app/models/customerModel';
+import { ResponseModel } from 'src/app/models/responseModel';
+import { CustomersService } from 'src/app/services/customers.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.page.html',
   styleUrls: ['./customers.page.scss'],
 })
-export class CustomersPage implements OnInit {
+export class CustomersPage implements OnInit, OnDestroy {
 
+  public switchCustomersSub: Subscription;
   public customersFilter: string;
+  public customers: CustomerModel[];
 
-  constructor(private _section: DashboardService, private _router: Router) {
+  constructor(
+    private _dashboard: DashboardService,
+    private _router: Router,
+    private _customers: CustomersService,
+    private _storage: StorageService
+  ) {
     this.customersFilter = "";
+    this.customers = [];
   }
 
   ngOnInit() {
-    this._section.setSectionName("Clientes");
+    this._dashboard.setSectionName("Clientes");
+    this.getUserCustomers();
+    this.monitoringSwitchCustomers();
+  }
+
+  ngOnDestroy() {
+    this.switchCustomersSub.unsubscribe();
+  }
+
+  public monitoringSwitchCustomers(): void {
+    this.switchCustomersSub = this._dashboard.subCustomers.subscribe({
+      next: async () => {
+        await this.getUserCustomers();
+      },
+      error: () => { },
+      complete: () => { }
+    });
+  }
+
+  public async getUserCustomers() {
+    this._customers.getAllCustomers(await this._storage.get("token")).subscribe({
+      next: (result: ResponseModel) => {
+        if (result.success) {
+          this.customers = result.result;
+        }
+      },
+      error: () => { },
+      complete: () => { }
+    });
+  }
+
+  public async deleteCustomer(customerId: number) {
+    this._customers.deleteCustomer(await this._storage.get("token"), customerId).subscribe({
+      next: (result: ResponseModel) => {
+        if (result.success) {
+          this.getUserCustomers();
+        }
+      },
+      error: () => {
+
+      },
+      complete: () => { }
+    });
   }
 
   public goDetail(): void {

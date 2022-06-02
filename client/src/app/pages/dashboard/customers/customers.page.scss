@@ -1,3 +1,14 @@
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+$color_green_success: rgb(10, 100, 10);
+
 ion-card {
     cursor: pointer;
+}
+
+.customerIcon {
+    color: $color_blue;
+    margin-right: 10px;
 }

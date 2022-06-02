@@ -8,10 +8,10 @@ import { DashboardService } from 'src/app/services/dashboard.service';
 })
 export class CustomerDetailPage implements OnInit {
 
-  constructor(private _section: DashboardService) { }
+  constructor(private _dashboard: DashboardService) { }
 
   ngOnInit() {
-    this._section.setSectionName("Clientes");
+    this._dashboard.setSectionName("Clientes");
   }
 
 }
