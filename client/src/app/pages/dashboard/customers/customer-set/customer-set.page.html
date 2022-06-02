@@ -1,0 +1,59 @@
+<ion-content>
+
+  <ion-item-divider>
+    <ion-icon name="person-add-outline"></ion-icon>
+    <ion-label class="dividerLabel">
+      Editar Cliente
+    </ion-label>
+    <ion-spinner color="primary" *ngIf="showSpinnerCustomer"></ion-spinner>
+    <ion-icon class="verifyIcon" name="checkmark-outline" *ngIf="showCorrectCustomer"></ion-icon>
+    <ion-icon class="verifyIcon" name="close-outline" *ngIf="showErrorCustomer"></ion-icon>
+  </ion-item-divider>
+
+  <form [formGroup]='customerForm'>
+
+    <ion-item>
+      <ion-label class="inputLabel" position="floating">Nombre</ion-label>
+      <ion-input class="inputText" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="inputLabel" position="floating">Email</ion-label>
+      <ion-input class="inputText" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="inputLabel" position="floating">Nombre Contacto</ion-label>
+      <ion-input class="inputText" formControlName="contact"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="inputLabel" position="floating">Teléfono</ion-label>
+      <ion-input class="inputText" formControlName="phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="inputLabel" position="floating">Dirección</ion-label>
+      <ion-input class="inputText" formControlName="address"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="inputLabel" position="floating">CIF</ion-label>
+      <ion-input class="inputText" formControlName="cif"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="inputLabel" position="floating">Comentarios</ion-label>
+      <ion-textarea class="inputText" formControlName="remarks"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="btnItem" lines="none">
+      <ion-button slot="start" fill="clear" (click)="goCustomers();">Cancelar</ion-button>
+      <ion-button slot="end" fill="clear" (click)="setCustomer();" [disabled]="!customerForm.valid">
+        Guardar
+      </ion-button>
+    </ion-item>
+
+  </form>
+
+</ion-content>

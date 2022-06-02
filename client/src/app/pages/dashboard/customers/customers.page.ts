@@ -74,6 +74,10 @@ export class CustomersPage implements OnInit, OnDestroy {
     });
   }
 
+  public goSetCustomer(customerId: number): void {
+    this._router.navigate(['dashboard/customers/customer-set', customerId]);
+  }
+
   public goDetail(customerId: number): void {
     this._router.navigate(['dashboard/customers/customer-detail', customerId]);
   }
