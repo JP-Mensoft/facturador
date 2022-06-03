@@ -37,7 +37,7 @@ export class DashboardPage implements OnInit, OnDestroy {
   }
 
   public goEmit(): void {
-    this.sectionName = "Emitir";
+    this.sectionName = "Emitir Factura";
     this._dashboard.switchEmit();
   }
 

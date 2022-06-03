@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompanyModel } from 'src/app/models/companyModel';
 import { ConceptModel } from 'src/app/models/conceptModel';
@@ -35,7 +36,8 @@ export class EmitPage implements OnInit, OnDestroy {
     private _invoice: InvoicesService,
     private _customers: CustomersService,
     private _user: UserService,
-    private _formBuilder: FormBuilder
+    private _formBuilder: FormBuilder,
+    private _router: Router
   ) {
     this.company = new CompanyModel("", "", "", "");
     this.user = new UserSetModel("", "", "", "", "");
@@ -46,7 +48,7 @@ export class EmitPage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this._dashboard.setSectionName("Emitir");
+    this._dashboard.setSectionName("Emitir Factura");
     this.getUserData();
     this.getUserCompany();
     this.getUserCustomers();
@@ -96,6 +98,10 @@ export class EmitPage implements OnInit, OnDestroy {
     });
   }
 
+  public goUser(): void {
+    this._router.navigate(['dashboard/user']);
+  }
+
   // Customers
 
   public async getUserCustomers() {
@@ -108,6 +114,12 @@ export class EmitPage implements OnInit, OnDestroy {
       error: () => { },
       complete: () => { }
     });
+  }
+
+  public goCustomerDetail(): void {
+    if (this.customer.customerId != 0) {
+      this._router.navigate(['dashboard/customers/customer-detail', this.customer.customerId]);
+    }
   }
 
   // Utils
