@@ -1,0 +1,28 @@
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+$color_green_success: rgb(10, 100, 10);
+
+.sectionTitle {
+    font-family: "Oswald", sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.dataName {
+    font-family: "Oswald", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.dividerBar {
+    color: $color_blue;
+    font-weight: 600;
+}
+
+.dataInfo {
+    font-family: "Oswald", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}

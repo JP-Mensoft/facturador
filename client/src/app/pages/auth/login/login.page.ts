@@ -9,7 +9,7 @@ import { StorageService } from 'src/app/services/storage.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['./login.page.scss', '../auth.page.scss'],
 })
 export class LoginPage implements OnInit {
 

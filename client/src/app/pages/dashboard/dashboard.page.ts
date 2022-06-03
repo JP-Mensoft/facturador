@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DashboardService } from 'src/app/services/dashboard.service';
-import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,12 +9,11 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class DashboardPage implements OnInit, OnDestroy {
 
-  public sectionName: string;
   private sectionNameSub: Subscription;
+  public sectionName: string;
 
   constructor(
-    private _dashboard: DashboardService,
-    private _storage: StorageService
+    private _dashboard: DashboardService
   ) {
     this.sectionName = "";
   }
@@ -40,6 +38,7 @@ export class DashboardPage implements OnInit, OnDestroy {
 
   public goEmit(): void {
     this.sectionName = "Emitir";
+    this._dashboard.switchEmit();
   }
 
   public goInvoices(): void {

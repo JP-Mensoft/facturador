@@ -23,8 +23,8 @@ export class InvoiceEntity {
     @Column({ nullable: true, default: false })
     public collected!: boolean;
 
-    @Column({ nullable: true, default: "" })
-    public collectionDate!: string;
+    @Column({ nullable: true, default: null })
+    public collectionDate!: Date;
 
     @Column({ nullable: true, default: 0 })
     public taxableIncome!: number;

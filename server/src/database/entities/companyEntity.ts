@@ -10,9 +10,6 @@ export class CompanyEntity {
     public name!: string;
 
     @Column({ length: 4444, nullable: true, default: "" })
-    public logoURL!: string;
-
-    @Column({ length: 4444, nullable: true, default: "" })
     public address!: string;
 
     @Column({ length: 9, nullable: true, default: "" })

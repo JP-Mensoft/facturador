@@ -9,7 +9,7 @@ import { StorageService } from 'src/app/services/storage.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
-  styleUrls: ['./register.page.scss'],
+  styleUrls: ['./register.page.scss', '../auth.page.scss'],
 })
 export class RegisterPage implements OnInit {
 

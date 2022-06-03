@@ -1,0 +1,117 @@
+/* Colors */
+$color_blue: rgb(20, 100, 160);
+$color_grey: rgb(100, 100, 100);
+$color_red_error: rgb(100, 10, 10);
+
+.startCol {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.centerCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.endCol {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.betweenCol {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+ion-input {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+ion-button {
+    --color: rgb(20, 100, 160);
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.titleRow {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.titleCol {
+    &:hover .title {
+        animation: hideTitle 0.1s 0s 1 normal linear forwards;
+    }
+    &:hover .hiddenTitle {
+        animation: showHiddenTitle 0.1s 0s 1 normal linear forwards;
+    }
+}
+
+.title {
+    font-family: "Roboto Slab", serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: $color_blue;
+}
+
+.hiddenTitle {
+    position: absolute;
+    opacity: 0%;
+    font-family: "Roboto Slab", serif;
+}
+
+.hiddenTitleBy {
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: 400;
+    color: $color_grey;
+}
+
+.hiddenTitleName {
+    font-size: 25px;
+    font-weight: 800;
+    color: $color_blue;
+}
+
+.formRow {
+    margin-bottom: 20px;
+}
+
+.mottoRow {
+    margin-top: 30px;
+}
+
+.motto {
+    font-family: "Roboto Slab", serif;
+    color: $color_grey;
+    text-align: center;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+// Keyframes
+
+@keyframes hideTitle {
+    from {
+    }
+    to {
+        transform: translate(-100px, 0px);
+        opacity: 0%;
+    }
+}
+
+@keyframes showHiddenTitle {
+    from {
+        transform: translate(100px, 0px);
+    }
+    to {
+        opacity: 100%;
+    }
+}

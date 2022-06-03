@@ -24,7 +24,10 @@ import { InvoicesService } from './services/invoices.service';
     HttpClientModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: RouteReuseStrategy,
+      useClass: IonicRouteStrategy
+    },
     AuthService,
     StorageService,
     DashboardService,

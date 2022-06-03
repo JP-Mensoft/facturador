@@ -46,7 +46,6 @@ export class CompanyDataAccess {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
             companyFound.name = companyData.name;
-            companyFound.logoURL = companyData.logoURL;
             companyFound.iban = companyData.iban;
             companyFound.cif = companyData.cif;
             companyFound.address = companyData.address;

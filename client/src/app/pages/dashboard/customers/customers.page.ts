@@ -14,7 +14,8 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class CustomersPage implements OnInit, OnDestroy {
 
-  public switchCustomersSub: Subscription;
+  private switchCustomersSub: Subscription;
+
   public customersFilter: string;
   public customers: CustomerModel[];
 

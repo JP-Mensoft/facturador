@@ -1,3 +1,38 @@
 <ion-content>
-  Emitir
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle class="sectionTitle">Mis Datos</ion-card-subtitle>
+      <ion-card-title class="dataName">
+        {{company.name}} <span class="dividerBar">/</span> {{company.cif}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="dataInfo">
+      <p>{{user.email}} <span class="dividerBar">/</span> {{user.phone}}</p>
+      <p>{{company.address}}</p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-item>
+    <ion-label>Cliente</ion-label>
+    <ion-select [(ngModel)]="customer" okText="Seleccionar" cancelText="Cancelar">
+      <ion-select-option *ngFor="let customer of customers; index as i;" [value]="customer">
+        {{customer.name}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle class="sectionTitle">Datos Cliente</ion-card-subtitle>
+      <ion-card-title class="dataName">
+        {{customer.cif}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content class="dataInfo">
+      <p>{{customer.email}} <span class="dividerBar">/</span> {{customer.phone}}</p>
+      <p>{{customer.address}}</p>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>

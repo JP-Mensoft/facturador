@@ -43,7 +43,7 @@ export class UserPage implements OnInit {
   ngOnInit() {
     this._dashboard.setSectionName("Usuario");
     this.userData = new UserSetModel("", "", "", "", "");
-    this.userCompany = new CompanyModel("", "", "", "", "");
+    this.userCompany = new CompanyModel("", "", "", "");
     this.buildForms();
     this.getUserData();
     this.getUserCompany();
@@ -99,7 +99,6 @@ export class UserPage implements OnInit {
     this.showCorrectCompany = false;
     this.showErrorCompany = false;
     this.userCompany.name = this.companyForm.get("name").value;
-    this.userCompany.logoURL = this.companyForm.get("logoURL").value;
     this.userCompany.address = this.companyForm.get("address").value;
     this.userCompany.cif = this.companyForm.get("cif").value;
     this.userCompany.iban = this.companyForm.get("iban").value;
@@ -192,7 +191,6 @@ export class UserPage implements OnInit {
 
   public loadCompanyData(): void {
     this.companyForm.get("name").setValue(this.userCompany.name);
-    this.companyForm.get("logoURL").setValue(this.userCompany.logoURL);
     this.companyForm.get("address").setValue(this.userCompany.address);
     this.companyForm.get("cif").setValue(this.userCompany.cif);
     this.companyForm.get("iban").setValue(this.userCompany.iban);
