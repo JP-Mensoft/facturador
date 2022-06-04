@@ -8,11 +8,11 @@
     </ion-row>
     <ion-row class='ion-justify-content-center ion-align-items-center'>
       <ion-segment [(ngModel)]="collectedFilter">
-        <ion-segment-button value="all">
-          <ion-label class="lblSegment">Todas</ion-label>
-        </ion-segment-button>
         <ion-segment-button value="collected">
           <ion-label class="lblSegment">Cobradas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="all">
+          <ion-label class="lblSegment">Todas</ion-label>
         </ion-segment-button>
         <ion-segment-button value="uncollected">
           <ion-label class="lblSegment">Pendientes</ion-label>
