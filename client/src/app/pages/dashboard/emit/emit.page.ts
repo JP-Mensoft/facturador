@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CompanyModel } from 'src/app/models/companyModel';
@@ -28,12 +27,19 @@ export class EmitPage implements OnInit, OnDestroy {
   public invoice: InvoiceModel;
   public concept: ConceptModel;
   public concepts: ConceptModel[];
+  public remarks: string;
+  public taxableIncome: number;
+  public totalAmount: number;
   // User & Company
   public user: UserSetModel;
   public company: CompanyModel;
   // Customers
   public customer: CustomerModel;
   public customers: CustomerModel[];
+  // Spinner
+  public showSpinnerInvoice: boolean;
+  public showCorrectInvoice: boolean;
+  public showErrorInvoice: boolean;
 
   constructor(
     private _dashboard: DashboardService,
@@ -41,17 +47,22 @@ export class EmitPage implements OnInit, OnDestroy {
     private _invoice: InvoicesService,
     private _customers: CustomersService,
     private _user: UserService,
-    private _formBuilder: FormBuilder,
     private _router: Router
   ) {
     this.company = new CompanyModel("", "", "", "");
     this.user = new UserSetModel("", "", "", "", "");
     this.customer = new CustomerModel("", "", "", "", "", "", "", 0);
     this.concept = new ConceptModel("", 0, 0);
-    this.invoice = new InvoiceModel(new Date(), 0, 0, "", false, new Date(), 0, 0, [], 0);
+    this.invoice = new InvoiceModel(new Date(), "", false, 0, 0, [], 0);
     this.today = new Date().toDateString();
     this.customers = [];
     this.concepts = [];
+    this.remarks = "";
+    this.totalAmount = 0;
+    this.taxableIncome = 0;
+    this.showSpinnerInvoice = false;
+    this.showCorrectInvoice = false;
+    this.showErrorInvoice = false;
   }
 
   ngOnInit() {
@@ -87,12 +98,28 @@ export class EmitPage implements OnInit, OnDestroy {
   }
 
   public addInvoice(): void {
-    console.log(this.concepts);
+    this.showSpinnerInvoice = true;
+    this.showCorrectInvoice = false;
+    this.showErrorInvoice = false;
+    if (this.checkInvoice()) {
+      console.log(this.invoice);
+    } else {
+      setTimeout(() => {
+        this.showSpinnerInvoice = false;
+        this.showErrorInvoice = true;
+      }, 500);
+      setTimeout(() => {
+        this.showErrorInvoice = false;
+      }, 1000);
+    }
   }
 
   public resetInvoice(): void {
     this.customer = new CustomerModel("", "", "", "", "", "", "", 0);
     this.concepts = [];
+    this.remarks = "";
+    this.totalAmount = 0;
+    this.taxableIncome = 0;
   }
 
   public addConcept(): void {
@@ -102,7 +129,24 @@ export class EmitPage implements OnInit, OnDestroy {
   public deleteConcept(index: number): void {
     if (this.concepts.length != 0) {
       this.concepts.splice(index, 1);
+      this.updateTotalAmount();
     }
+  }
+
+  public checkInvoice(): boolean {
+    return this.customer.customerId != 0
+      && this.concepts.length != 0
+      && this.company.name != ""
+      && this.totalAmount != 0
+  }
+
+  public updateTotalAmount(): void {
+    let temporaryTotal: number = 0;
+    this.concepts.forEach(concept => {
+      temporaryTotal += concept.amount;
+    });
+    let taxableAmounts: number = (this.taxableIncome / 100) * temporaryTotal;
+    this.totalAmount = temporaryTotal + taxableAmounts;
   }
 
   // User & Company

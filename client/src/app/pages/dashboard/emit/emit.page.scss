@@ -54,6 +54,17 @@ ion-button {
     font-weight: 600;
 }
 
+.taxRow {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.lblTotal {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
 .btnCol {
     display: flex;
     align-items: flex-end;

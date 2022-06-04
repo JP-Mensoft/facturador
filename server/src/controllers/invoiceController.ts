@@ -5,7 +5,6 @@ import { InvoiceDataAccess } from "../resources/invoiceDataAccess";
 // Models
 import { ResponseModel } from '../models/responseModel';
 import { DecodedModel } from '../models/decodedModel';
-import { InvoiceReqModel } from '../models/invoiceReqModel';
 import { InvoiceEntity } from '../database/entities/invoiceEntity';
 
 export class InvoiceController {
@@ -29,16 +28,23 @@ export class InvoiceController {
     public async addInvoice(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
         const requestDecoded: DecodedModel = req.body;
-        const invoiceRequest: InvoiceReqModel = requestDecoded.data;
+        const invoiceData: InvoiceEntity = requestDecoded.data;
         const userId: number = requestDecoded.decodedToken.userId;
-        let newInvoice: InvoiceEntity = invoiceRequest.invoice;
+        let newInvoice: InvoiceEntity = new InvoiceEntity();
+        newInvoice.userId = userId;
+        newInvoice.collected = invoiceData.collected;
+        newInvoice.customerId = invoiceData.customerId;
+        newInvoice.date = invoiceData.date;
+        newInvoice.remarks = invoiceData.remarks;
+        newInvoice.taxableIncome = invoiceData.taxableIncome;
+        newInvoice.totalAmount = invoiceData.totalAmount;
         newInvoice.userId = userId;
         try {
             const savedResult = await this.invoiceDA.addInvoice(newInvoice);
             if (savedResult.success) {
                 let savedInvoice: InvoiceEntity = savedResult.result;
                 let saveSuccess: boolean = true;
-                for await (const concept of invoiceRequest.concepts) {
+                for await (const concept of invoiceData.concepts) {
                     concept.invoiceId = savedInvoice.invoiceId;
                     const saveConceptResult = await this.conceptDA.addConcept(concept);
                     if (!saveConceptResult.success) {
@@ -63,8 +69,7 @@ export class InvoiceController {
 
     public async deleteInvoice(req: Request, res: Response) {
         let serverResponse: ResponseModel = new ResponseModel();
-        const requestDecoded: DecodedModel = req.body;
-        const invoiceId: number = requestDecoded.data.invoiceId;
+        const invoiceId: number = Number(req.params.invoiceId);
         try {
             const deleteInvoiceResult: ResponseModel = await this.invoiceDA.deleteInvoice(invoiceId);
             if (deleteInvoiceResult.success) {

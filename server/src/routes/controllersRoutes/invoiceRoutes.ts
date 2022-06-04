@@ -24,7 +24,7 @@ export const invoiceRoutes = [
     },
     {
         method: 'delete',
-        route: '/invoice/delete',
+        route: '/invoice/delete/:invoiceId',
         middlewares: 'checkToken',
         controller: InvoiceController,
         action: 'deleteInvoice'

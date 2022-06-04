@@ -5,9 +5,6 @@
     <ion-label class="dividerLabel">
       Editar Cliente
     </ion-label>
-    <ion-spinner color="primary" *ngIf="showSpinnerCustomer"></ion-spinner>
-    <ion-icon class="verifyIcon" name="checkmark-outline" *ngIf="showCorrectCustomer"></ion-icon>
-    <ion-icon class="verifyIcon" name="close-outline" *ngIf="showErrorCustomer"></ion-icon>
   </ion-item-divider>
 
   <form [formGroup]='customerForm'>
@@ -48,7 +45,10 @@
     </ion-item>
 
     <ion-item class="btnItem" lines="none">
-      <ion-button slot="start" fill="clear" (click)="goCustomers();">Cancelar</ion-button>
+      <ion-button slot="start" fill="clear" (click)="goCustomers();" class="btnCancel">Cancelar</ion-button>
+      <ion-spinner slot="end" color="primary" *ngIf="showSpinnerCustomer"></ion-spinner>
+      <ion-icon slot="end" class="verifyIcon" name="checkmark-outline" *ngIf="showCorrectCustomer"></ion-icon>
+      <ion-icon slot="end" class="verifyIcon" name="close-outline" *ngIf="showErrorCustomer"></ion-icon>
       <ion-button slot="end" fill="clear" (click)="setCustomer();" [disabled]="!customerForm.valid">
         Guardar
       </ion-button>

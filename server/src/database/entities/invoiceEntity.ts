@@ -11,12 +11,6 @@ export class InvoiceEntity {
     @Column({ nullable: false })
     public date!: Date;
 
-    @Column({ nullable: true, default: 0 })
-    public invoiceNumber!: number;
-
-    @Column({ nullable: true, default: 0 })
-    public orderNumber!: number;
-
     @Column({ length: 4444, nullable: true, default: "" })
     public remarks!: string;
 
