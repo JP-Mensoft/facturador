@@ -13,6 +13,7 @@ import { DashboardService } from './services/dashboard.service';
 import { UserService } from './services/user.service';
 import { CustomersService } from './services/customers.service';
 import { InvoicesService } from './services/invoices.service';
+import { CollectedFilterPipe } from './pipes/collected-filter.pipe';
 
 @NgModule({
   declarations: [AppComponent],

@@ -9,8 +9,8 @@ const routes: Routes = [
     component: InvoicesPage
   },
   {
-    path: 'invoice-detail',
-    loadChildren: () => import('./invoice-detail/invoice-detail.module').then( m => m.InvoiceDetailPageModule)
+    path: 'invoice-detail/:invoiceId',
+    loadChildren: () => import('./invoice-detail/invoice-detail.module').then(m => m.InvoiceDetailPageModule)
   }
 ];
 
@@ -18,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InvoicesPageRoutingModule {}
+export class InvoicesPageRoutingModule { }

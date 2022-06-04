@@ -17,12 +17,41 @@ export class InvoiceController {
         this.invoiceDA = new InvoiceDataAccess();
     }
 
-    public getOneInvoice(req: Request, res: Response) {
-
+    public async getOneInvoice(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        const invoiceId: number = Number(req.params.invoiceId);
+        try {
+            const getInvoiceResult = await this.invoiceDA.getOneInvoice(invoiceId);
+            if (getInvoiceResult.success) {
+                serverResponse.success = true;
+                serverResponse.result = getInvoiceResult.result;
+                serverResponse.status = 200;
+            } else {
+                serverResponse.status = 400;
+            }
+        } catch (error) {
+            serverResponse.status = 500;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
     }
 
-    public getAllInvoices(req: Request, res: Response) {
-
+    public async getAllInvoices(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        const requestDecoded: DecodedModel = req.body;
+        const userId: number = requestDecoded.decodedToken.userId;
+        try {
+            const getInvoicesResult = await this.invoiceDA.getAllInvoices(userId);
+            if (getInvoicesResult.success) {
+                serverResponse.success = true;
+                serverResponse.result = getInvoicesResult.result;
+                serverResponse.status = 200;
+            } else {
+                serverResponse.status = 400;
+            }
+        } catch (error) {
+            serverResponse.status = 500;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
     }
 
     public async addInvoice(req: Request, res: Response) {

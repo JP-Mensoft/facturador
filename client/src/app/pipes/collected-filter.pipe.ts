@@ -2,22 +2,27 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { InvoiceModel } from '../models/invoiceModel';
 
 @Pipe({
-  name: 'invoiceFilter'
+  name: 'collectedFilter'
 })
-export class InvoiceFilterPipe implements PipeTransform {
+export class CollectedFilterPipe implements PipeTransform {
 
   transform(value: InvoiceModel[], arg: string): InvoiceModel[] {
     const filteredInvoices: InvoiceModel[] = [];
+    let filter: boolean = false;
     if (arg === "") {
       return value;
     }
     if (value === undefined) {
       return [];
     }
+    if (arg === "all") {
+      return value;
+    } else if (arg === "collected") {
+      filter = true;
+    }
     value.forEach((invoice: InvoiceModel) => {
-      const invoiceDate: Date = new Date(invoice.date);
-      const invoiceDateString: string = invoiceDate.toLocaleDateString();
-      if (invoiceDateString.includes(arg)) {
+      const invoiceCollected: boolean = invoice.collected;
+      if (invoiceCollected === filter) {
         filteredInvoices.push(invoice);
       }
     });

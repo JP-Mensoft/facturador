@@ -3,7 +3,7 @@ import { InvoiceController } from "../../controllers/invoiceController";
 export const invoiceRoutes = [
     {
         method: 'get',
-        route: '/invoice/getone',
+        route: '/invoice/getone/:invoiceId',
         middlewares: 'checkToken',
         controller: InvoiceController,
         action: 'getOneInvoice'

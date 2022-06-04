@@ -8,7 +8,7 @@ export class InvoiceModel {
         public taxableIncome: number,
         public totalAmount: number,
         public concepts: ConceptModel[],
-        public customerId: number,
+        public customerId: any,
         public collectionDate?: Date,
         public invoiceId?: number
     ) { }

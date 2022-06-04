@@ -17,6 +17,14 @@ export class InvoicesService {
     this.apiPath = environment.path;
   }
 
+  public getOneInvoice(token: string, invoiceId: number): Observable<any> {
+    return this._http.get(this.apiPath + "invoice/getone" + invoiceId, { 'headers': { token } });
+  }
+
+  public getAllInvoices(token: string): Observable<any> {
+    return this._http.get(this.apiPath + "invoice/getall", { 'headers': { token } });
+  }
+
   public addInvoice(token: string, invoice: InvoiceModel): Observable<any> {
     return this._http.post(this.apiPath + "invoice/add", invoice, { 'headers': { token } });
   }

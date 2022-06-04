@@ -6,10 +6,13 @@ import { CustomerModel } from '../models/customerModel';
 })
 export class CustomerFilterPipe implements PipeTransform {
 
-  transform(value: CustomerModel[], arg: string): any[] {
+  transform(value: CustomerModel[], arg: string): CustomerModel[] {
     const filteredCustomers: CustomerModel[] = [];
     if (arg === "") {
       return value;
+    }
+    if (value === undefined) {
+      return [];
     }
     value.forEach((customer: CustomerModel) => {
       const customerName: string = customer.name.toLowerCase();

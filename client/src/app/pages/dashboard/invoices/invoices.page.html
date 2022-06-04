@@ -1,45 +1,42 @@
 <ion-content>
 
   <ion-grid>
-    <ion-row class='ion-justify-content-between ion-align-items-center'>
-      <ion-col size='12'>
-        <ion-searchbar animated showCancelButton="focus" placeholder="Buscar" [(ngModel)]="invoicesFilter"
-          cancelButtonText="Cancelar">
-        </ion-searchbar>
-      </ion-col>
+    <ion-row class='ion-justify-content-center ion-align-items-center'>
+      <ion-searchbar animated showCancelButton="focus" placeholder="Fecha" [(ngModel)]="invoicesFilter"
+        cancelButtonText="Cancelar">
+      </ion-searchbar>
+    </ion-row>
+    <ion-row class='ion-justify-content-center ion-align-items-center'>
+      <ion-segment [(ngModel)]="collectedFilter">
+        <ion-segment-button value="all">
+          <ion-label>Todas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="collected">
+          <ion-label>Cobradas</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="uncollected">
+          <ion-label>Pendientes</ion-label>
+        </ion-segment-button>
+      </ion-segment>
     </ion-row>
   </ion-grid>
 
   <ion-grid>
     <ion-row class='ion-justify-content-center ion-align-items-center'>
 
-      <ion-card (click)="goDetail();">
+      <ion-card
+        *ngFor="let invoice of invoices | invoiceFilter: invoicesFilter | collectedFilter: collectedFilter; index as i;"
+        (click)="goDetail(invoice.invoiceId);">
         <ion-card-header>
-          <ion-card-title>Factura</ion-card-title>
-          <ion-card-subtitle>Subtitulo Factura</ion-card-subtitle>
+          <ion-card-subtitle class="collectedInfo">
+            <ion-icon *ngIf="invoice.collected" class="collected" name="checkmark-circle"></ion-icon>
+            <ion-icon *ngIf="!invoice.collected" class="noCollected" name="close-circle"></ion-icon>
+          </ion-card-subtitle>
+          <ion-card-subtitle class="invoiceDate">{{invoice.date | date: "d/M/yyyy" }}</ion-card-subtitle>
+          <ion-card-title class="invoiceCustomer">{{invoice.customerId.name}}</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-          Contenido Factura
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card (click)="goDetail();">
-        <ion-card-header>
-          <ion-card-title>Factura</ion-card-title>
-          <ion-card-subtitle>Subtitulo Factura</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          Contenido Factura
-        </ion-card-content>
-      </ion-card>
-
-      <ion-card (click)="goDetail();">
-        <ion-card-header>
-          <ion-card-title>Factura</ion-card-title>
-          <ion-card-subtitle>Subtitulo Factura</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content>
-          Contenido Factura
+        <ion-card-content class="invoiceAmount">
+          {{invoice.totalAmount}} €
         </ion-card-content>
       </ion-card>
 
