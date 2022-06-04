@@ -23,11 +23,16 @@ export class EmitPage implements OnInit, OnDestroy {
 
   private switchEmitSub: Subscription;
 
-  public company: CompanyModel;
-  public user: UserSetModel;
-  public customer: CustomerModel;
-  public concept: ConceptModel;
+  // Invoice
+  public today: string;
   public invoice: InvoiceModel;
+  public concept: ConceptModel;
+  public concepts: ConceptModel[];
+  // User & Company
+  public user: UserSetModel;
+  public company: CompanyModel;
+  // Customers
+  public customer: CustomerModel;
   public customers: CustomerModel[];
 
   constructor(
@@ -44,7 +49,9 @@ export class EmitPage implements OnInit, OnDestroy {
     this.customer = new CustomerModel("", "", "", "", "", "", "", 0);
     this.concept = new ConceptModel("", 0, 0);
     this.invoice = new InvoiceModel(new Date(), 0, 0, "", false, new Date(), 0, 0, [], 0);
+    this.today = new Date().toDateString();
     this.customers = [];
+    this.concepts = [];
   }
 
   ngOnInit() {
@@ -52,6 +59,8 @@ export class EmitPage implements OnInit, OnDestroy {
     this.getUserData();
     this.getUserCompany();
     this.getUserCustomers();
+    this.getToday();
+    this.monitoringSwitchEmit();
   }
 
   ngOnDestroy() {
@@ -64,6 +73,7 @@ export class EmitPage implements OnInit, OnDestroy {
         this.getUserData();
         this.getUserCompany();
         this.getUserCustomers();
+        this.getToday();
       },
       error: () => { },
       complete: () => { }
@@ -71,6 +81,29 @@ export class EmitPage implements OnInit, OnDestroy {
   }
 
   // Invoice
+
+  public getToday(): void {
+    this.today = new Date().toLocaleDateString();
+  }
+
+  public addInvoice(): void {
+    console.log(this.concepts);
+  }
+
+  public resetInvoice(): void {
+    this.customer = new CustomerModel("", "", "", "", "", "", "", 0);
+    this.concepts = [];
+  }
+
+  public addConcept(): void {
+    this.concepts.push(new ConceptModel("", 0));
+  }
+
+  public deleteConcept(index: number): void {
+    if (this.concepts.length != 0) {
+      this.concepts.splice(index, 1);
+    }
+  }
 
   // User & Company
 
@@ -121,9 +154,5 @@ export class EmitPage implements OnInit, OnDestroy {
       this._router.navigate(['dashboard/customers/customer-detail', this.customer.customerId]);
     }
   }
-
-  // Utils
-
-
 
 }

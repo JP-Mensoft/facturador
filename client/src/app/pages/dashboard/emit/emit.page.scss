@@ -9,15 +9,17 @@ ion-button {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
-    margin-right: 10px;
-}
-
-ion-spinner,
-.verifyIcon {
-    margin-left: 10px;
 }
 
 .sectionTitle {
+    color: $color_blue;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.invoiceDate {
+    color: $color_grey;
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
@@ -37,5 +39,29 @@ ion-spinner,
 
 .dividerBar {
     color: $color_blue;
+    font-weight: 600;
+}
+
+.conceptInput {
+    font-family: "Oswald", sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.amountInput {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.btnCol {
+    display: flex;
+    align-items: flex-end;
+}
+
+.redBtn {
+    --color: rgb(100, 10, 10);
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
     font-weight: 600;
 }

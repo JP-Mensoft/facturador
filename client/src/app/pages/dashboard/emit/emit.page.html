@@ -1,7 +1,10 @@
 <ion-content>
 
+  <!-- User & Company -->
+
   <ion-item>
     <ion-label class="sectionTitle">{{company.name}}</ion-label>
+    <ion-label slot="end" class="invoiceDate">{{today}}</ion-label>
   </ion-item>
 
   <ion-card (click)="goUser();">
@@ -16,9 +19,11 @@
     </ion-card-content>
   </ion-card>
 
+  <!-- Customer -->
+
   <ion-item>
     <ion-label class="sectionTitle">Cliente</ion-label>
-    <ion-select [(ngModel)]="customer" interface="popover">
+    <ion-select [(ngModel)]="customer" interface="alert" okText="Seleccionar" cancelText="Cancelar">
       <ion-select-option *ngFor="let customer of customers; index as i;" [value]="customer">
         {{customer.name}}
       </ion-select-option>
@@ -37,8 +42,61 @@
     </ion-card-content>
   </ion-card>
 
+  <!-- Invoice & Concepts -->
+
   <ion-item>
     <ion-label class="sectionTitle">Conceptos</ion-label>
+    <ion-button slot="end" fill="clear" (click)="addConcept();">
+      <ion-icon slot="icon-only" name="add-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
+  <ion-card *ngIf="concepts.length != 0">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row *ngFor="let concept of concepts; index as i;">
+          <ion-col size="6">
+            <ion-item>
+              <ion-label class="dataInfo" position="floating">Concepto</ion-label>
+              <ion-input [(ngModel)]="concepts[i].concept" class="conceptInput"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="4">
+            <ion-item>
+              <ion-label class="dataInfo" position="floating">Importe</ion-label>
+              <ion-input [(ngModel)]="concepts[i].amount" class="amountInput" type="number"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2" class="btnCol">
+            <ion-button class="redBtn" fill="clear" (click)="deleteConcept(i);">
+              <ion-icon slot="icon-only" name="trash-bin-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- User & Company -->
+
+  <ion-item>
+    <ion-label class="sectionTitle">Datos Bancarios</ion-label>
+  </ion-item>
+
+  <ion-card (click)="goUser();">
+    <ion-card-header>
+      <ion-card-title class="dataTitle">
+        {{company.iban}}
+      </ion-card-title>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-item class="btnItem" lines="none">
+    <ion-button class="redBtn" slot="start" fill="clear" (click)="resetInvoice();">
+      Cancelar
+    </ion-button>
+    <ion-button slot="end" fill="clear" (click)="addInvoice();">
+      Guardar
+    </ion-button>
   </ion-item>
 
 </ion-content>
