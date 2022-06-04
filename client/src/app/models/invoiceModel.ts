@@ -13,5 +13,3 @@ export class InvoiceModel {
         public invoiceId?: number
     ) { }
 }
-
-
