@@ -119,14 +119,15 @@
 
 
   <ion-item class="btnItem" lines="none">
-    <ion-button class="redBtn" slot="start" fill="clear" (click)="resetInvoice();">
+    <ion-button class="redBtn" slot="start" fill="clear" (click)="resetInvoice();"
+      [disabled]="customer.customerId === 0 && concepts.length === 0">
       Cancelar
     </ion-button>
     <ion-spinner slot="end" color="primary" *ngIf="showSpinnerInvoice"></ion-spinner>
     <ion-icon slot="end" name="checkmark-outline" *ngIf="showCorrectInvoice"></ion-icon>
     <ion-icon slot="end" name="close-outline" *ngIf="showErrorInvoice"></ion-icon>
     <ion-button slot="end" fill="clear" (click)="addInvoice();">
-      Guardar
+      Compartir
     </ion-button>
   </ion-item>
 

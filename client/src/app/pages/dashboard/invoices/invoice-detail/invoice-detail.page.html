@@ -4,19 +4,49 @@
 
       <ion-card>
         <ion-card-header>
-          <ion-card-title>Factura</ion-card-title>
-          <ion-card-subtitle>Detalle 1</ion-card-subtitle>
-          <ion-card-subtitle>Detalle 2</ion-card-subtitle>
-          <ion-card-subtitle>Detalle 3</ion-card-subtitle>
+          <ion-card-subtitle class="collectedInfo">
+            <ion-icon *ngIf="invoice.collected" class="collected" name="checkmark-circle"></ion-icon>
+            <ion-icon *ngIf="!invoice.collected" class="noCollected" name="close-circle"></ion-icon>
+          </ion-card-subtitle>
+          <ion-card-subtitle class="invoiceDate">{{invoice.date | date: "d/M/yyyy"}}</ion-card-subtitle>
+          <ion-card-title class="invoiceCustomer">{{invoice.customerId.name}}</ion-card-title>
+          <ion-card-subtitle class="customerCif">{{invoice.customerId.cif}}</ion-card-subtitle>
         </ion-card-header>
-        <ion-card-content>
-          Contenido Factura
+        <ion-card-content class="customerData">
+          <p>{{invoice.customerId.email}}</p>
+          <p>{{invoice.customerId.contact}} <span class="dividerBar">/</span> {{invoice.customerId.phone}}</p>
+          <p>{{invoice.customerId.address}}</p>
         </ion-card-content>
-        <ion-card-content>
-          Comentarios Factura
+        <ion-card-content class="invoiceAmount">
+          <ion-list>
+            <ion-item *ngFor="let concept of invoice.concepts; index as i;">
+              <ion-label class="lblConcept">{{concept.concept}}: {{concept.amount}}€</ion-label>
+            </ion-item>
+          </ion-list>
+          <ion-item>
+            <ion-label class="lblTotal">
+              IVA: {{invoice.taxableIncome}}%
+              <span class="dividerBar">/</span>
+              Total: {{invoice.totalAmount}}€
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label class="lblRemarks">
+              {{invoice.remarks}}
+            </ion-label>
+          </ion-item>
         </ion-card-content>
       </ion-card>
 
     </ion-row>
+
+    <ion-row class='ion-justify-content-between ion-align-items-center'>
+
+      <ion-button fill="clear" (click)="deleteInvoice();" class="btnCancel">Eliminar</ion-button>
+      <ion-button fill="clear" (click)="collectInvoice();">Cobrar</ion-button>
+      <ion-button fill="clear" (click)="shareInvoice();">Compartir</ion-button>
+
+    </ion-row>
+
   </ion-grid>
 </ion-content>

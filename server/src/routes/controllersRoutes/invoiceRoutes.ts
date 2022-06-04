@@ -28,5 +28,12 @@ export const invoiceRoutes = [
         middlewares: 'checkToken',
         controller: InvoiceController,
         action: 'deleteInvoice'
+    },
+    {
+        method: 'get',
+        route: '/invoice/setcollected/:invoiceId',
+        middlewares: 'checkToken',
+        controller: InvoiceController,
+        action: 'setCollectedInvoice'
     }
 ]

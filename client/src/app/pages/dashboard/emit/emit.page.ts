@@ -91,11 +91,12 @@ export class EmitPage implements OnInit, OnDestroy {
     });
   }
 
+  // Invoice
+
   public goInvoices(): void {
+    this._dashboard.switchInvoices();
     this._router.navigate(["dashboard/invoices"]);
   }
-
-  // Invoice
 
   public getToday(): void {
     this.today = new Date().toLocaleDateString();

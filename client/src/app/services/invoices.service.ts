@@ -18,7 +18,7 @@ export class InvoicesService {
   }
 
   public getOneInvoice(token: string, invoiceId: number): Observable<any> {
-    return this._http.get(this.apiPath + "invoice/getone" + invoiceId, { 'headers': { token } });
+    return this._http.get(this.apiPath + "invoice/getone/" + invoiceId, { 'headers': { token } });
   }
 
   public getAllInvoices(token: string): Observable<any> {
@@ -31,6 +31,10 @@ export class InvoicesService {
 
   public deleteInvoice(token: string, invoiceId: number): Observable<any> {
     return this._http.delete(this.apiPath + "invoice/delete/" + invoiceId, { 'headers': { token } });
+  }
+
+  public setCollectedInvoice(token: string, invoiceId: number): Observable<any> {
+    return this._http.get(this.apiPath + "invoice/setcollected/" + invoiceId, { 'headers': { token } });
   }
 
 }

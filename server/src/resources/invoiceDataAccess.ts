@@ -30,7 +30,10 @@ export class InvoiceDataAccess {
     public async getAllInvoices(userId: number) {
         let dataResponse: ResponseModel = new ResponseModel();
         try {
-            const invoices = await this.entityManager.find(InvoiceEntity, { where: { userId } });
+            const invoices = await this.entityManager.find(InvoiceEntity, {
+                where: { userId },
+                order: { date: "DESC" }
+            });
             if (invoices != undefined) {
                 dataResponse.success = true;
                 dataResponse.result = invoices;
@@ -62,6 +65,20 @@ export class InvoiceDataAccess {
             if (deleteResult.affected != 0) {
                 dataResponse.success = true;
                 dataResponse.result = deleteResult;
+            }
+        } catch (error) {
+            dataResponse.result = error;
+        }
+        return dataResponse;
+    }
+
+    public async setCollectedInvoice(invoiceId: number, collectionDate: Date) {
+        let dataResponse: ResponseModel = new ResponseModel();
+        try {
+            const setResult = await this.entityManager.update(InvoiceEntity, invoiceId, { collected: true, collectionDate });
+            if (setResult.affected != 0) {
+                dataResponse.success = true;
+                dataResponse.result = setResult;
             }
         } catch (error) {
             dataResponse.result = error;

@@ -26,7 +26,7 @@ export class InvoicesPage implements OnInit, OnDestroy {
     private _storage: StorageService
   ) {
     this.invoicesFilter = "";
-    this.collectedFilter = "uncollected";
+    this.collectedFilter = "all";
   }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class InvoicesPage implements OnInit, OnDestroy {
     this.switchInvoicesSub = this._dashboard.subInvoices.subscribe({
       next: async () => {
         await this.getUserInvoices();
-        this.collectedFilter = "uncollected";
+        this.collectedFilter = "all";
       },
       error: () => { },
       complete: () => { }

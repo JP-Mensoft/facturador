@@ -114,4 +114,22 @@ export class InvoiceController {
         return res.status(serverResponse.status).json(serverResponse);
     }
 
+    public async setCollectedInvoice(req: Request, res: Response) {
+        let serverResponse: ResponseModel = new ResponseModel();
+        const invoiceId: number = Number(req.params.invoiceId);
+        try {
+            const setInvoiceResult: ResponseModel = await this.invoiceDA.setCollectedInvoice(invoiceId, new Date());
+            if (setInvoiceResult.success) {
+                serverResponse.success = true;
+                serverResponse.status = 200;
+            } else {
+                serverResponse.status = 400;
+            }
+        } catch (error) {
+            serverResponse.result = error;
+            serverResponse.status = 500;
+        }
+        return res.status(serverResponse.status).json(serverResponse);
+    }
+
 }

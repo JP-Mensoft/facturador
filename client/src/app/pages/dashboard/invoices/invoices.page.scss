@@ -4,12 +4,6 @@ $color_grey: rgb(100, 100, 100);
 $color_red_error: rgb(100, 10, 10);
 $color_green_success: rgb(10, 100, 10);
 
-.checkCol {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .invoiceDate {
     color: $color_blue;
     font-family: "Oswald", sans-serif;

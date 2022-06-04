@@ -32,7 +32,7 @@
             <ion-icon *ngIf="invoice.collected" class="collected" name="checkmark-circle"></ion-icon>
             <ion-icon *ngIf="!invoice.collected" class="noCollected" name="close-circle"></ion-icon>
           </ion-card-subtitle>
-          <ion-card-subtitle class="invoiceDate">{{invoice.date | date: "d/M/yyyy" }}</ion-card-subtitle>
+          <ion-card-subtitle class="invoiceDate">{{invoice.date | date: "d/M/yyyy"}}</ion-card-subtitle>
           <ion-card-title class="invoiceCustomer">{{invoice.customerId.name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content class="invoiceAmount">
