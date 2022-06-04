@@ -91,18 +91,48 @@ export class EmitPage implements OnInit, OnDestroy {
     });
   }
 
+  public goInvoices(): void {
+    this._router.navigate(["dashboard/invoices"]);
+  }
+
   // Invoice
 
   public getToday(): void {
     this.today = new Date().toLocaleDateString();
   }
 
-  public addInvoice(): void {
+  public async addInvoice() {
     this.showSpinnerInvoice = true;
     this.showCorrectInvoice = false;
     this.showErrorInvoice = false;
+    this.updateTotalAmount();
     if (this.checkInvoice()) {
-      console.log(this.invoice);
+      this.generateInvoice();
+      this._invoice.addInvoice(await this._storage.get("token"), this.invoice).subscribe({
+        next: (result: ResponseModel) => {
+          if (result.success) {
+            setTimeout(() => {
+              this.showSpinnerInvoice = false;
+              this.showCorrectInvoice = true;
+            }, 500);
+            setTimeout(() => {
+              this.showCorrectInvoice = false;
+              this.resetInvoice();
+              this.goInvoices();
+            }, 1000);
+          }
+        },
+        error: () => {
+          setTimeout(() => {
+            this.showSpinnerInvoice = false;
+            this.showErrorInvoice = true;
+          }, 500);
+          setTimeout(() => {
+            this.showErrorInvoice = false;
+          }, 1000);
+        },
+        complete: () => { }
+      });
     } else {
       setTimeout(() => {
         this.showSpinnerInvoice = false;
@@ -112,14 +142,6 @@ export class EmitPage implements OnInit, OnDestroy {
         this.showErrorInvoice = false;
       }, 1000);
     }
-  }
-
-  public resetInvoice(): void {
-    this.customer = new CustomerModel("", "", "", "", "", "", "", 0);
-    this.concepts = [];
-    this.remarks = "";
-    this.totalAmount = 0;
-    this.taxableIncome = 0;
   }
 
   public addConcept(): void {
@@ -147,6 +169,22 @@ export class EmitPage implements OnInit, OnDestroy {
     });
     let taxableAmounts: number = (this.taxableIncome / 100) * temporaryTotal;
     this.totalAmount = temporaryTotal + taxableAmounts;
+  }
+
+  public generateInvoice(): void {
+    this.invoice.concepts = this.concepts;
+    this.invoice.customerId = this.customer.customerId;
+    this.invoice.remarks = this.remarks;
+    this.invoice.taxableIncome = this.taxableIncome;
+    this.invoice.totalAmount = this.totalAmount;
+  }
+
+  public resetInvoice(): void {
+    this.customer = new CustomerModel("", "", "", "", "", "", "", 0);
+    this.concepts = [];
+    this.remarks = "";
+    this.totalAmount = 0;
+    this.taxableIncome = 0;
   }
 
   // User & Company
