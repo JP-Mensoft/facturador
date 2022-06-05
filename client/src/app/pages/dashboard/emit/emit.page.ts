@@ -93,9 +93,8 @@ export class EmitPage implements OnInit, OnDestroy {
 
   // Invoice
 
-  public goInvoices(): void {
-    this._dashboard.switchInvoices();
-    this._router.navigate(["dashboard/invoices"]);
+  public goInvoice(invoiceId: number): void {
+    this._router.navigate(["dashboard/invoices/invoice-detail", invoiceId]);
   }
 
   public getToday(): void {
@@ -119,7 +118,7 @@ export class EmitPage implements OnInit, OnDestroy {
             setTimeout(() => {
               this.showCorrectInvoice = false;
               this.resetInvoice();
-              this.goInvoices();
+              this.goInvoice(result.result.invoiceId);
             }, 1000);
           }
         },
@@ -157,10 +156,20 @@ export class EmitPage implements OnInit, OnDestroy {
   }
 
   public checkInvoice(): boolean {
-    return this.customer.customerId != 0
+    if (this.customer.customerId != 0
       && this.concepts.length != 0
       && this.company.name != ""
-      && this.totalAmount != 0
+      && this.totalAmount != 0) {
+      let checkConcepts: boolean = true;
+      this.concepts.forEach(concept => {
+        if (concept.concept === "" || concept.amount === 0 || concept.amount === null) {
+          checkConcepts = false;
+        }
+      });
+      return checkConcepts;
+    } else {
+      return false;
+    }
   }
 
   public updateTotalAmount(): void {
@@ -169,23 +178,25 @@ export class EmitPage implements OnInit, OnDestroy {
       temporaryTotal += concept.amount;
     });
     let taxableAmounts: number = (this.taxableIncome / 100) * temporaryTotal;
-    this.totalAmount = temporaryTotal + taxableAmounts;
+    this.totalAmount = Math.round(temporaryTotal + taxableAmounts);
   }
 
   public generateInvoice(): void {
-    this.invoice.concepts = this.concepts;
+    this.invoice = new InvoiceModel(new Date(), "", false, 0, 0, [], 0);
     this.invoice.customerId = this.customer.customerId;
-    this.invoice.remarks = this.remarks;
+    this.invoice.concepts = this.concepts;
     this.invoice.taxableIncome = this.taxableIncome;
     this.invoice.totalAmount = this.totalAmount;
+    this.invoice.remarks = this.remarks;
   }
 
   public resetInvoice(): void {
+    this.invoice = new InvoiceModel(new Date(), "", false, 0, 0, [], 0);
     this.customer = new CustomerModel("", "", "", "", "", "", "", 0);
     this.concepts = [];
-    this.remarks = "";
-    this.totalAmount = 0;
     this.taxableIncome = 0;
+    this.totalAmount = 0;
+    this.remarks = "";
   }
 
   // User & Company

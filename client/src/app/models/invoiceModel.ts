@@ -1,4 +1,5 @@
 import { ConceptModel } from "./conceptModel";
+import { CustomerModel } from "./customerModel";
 
 export class InvoiceModel {
     constructor(

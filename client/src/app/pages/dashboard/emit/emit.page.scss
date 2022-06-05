@@ -44,7 +44,7 @@ ion-button {
 
 .conceptInput {
     font-family: "Oswald", sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 400;
 }
 
@@ -54,23 +54,23 @@ ion-button {
     font-weight: 600;
 }
 
-.taxRow {
+.btnConcept {
+    display: flex;
+    align-items: flex-end;
+}
+
+.taxesRow {
     display: flex;
     justify-content: flex-end;
 }
 
-.lblTotal {
+.lblTotalAmount {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
 }
 
-.btnCol {
-    display: flex;
-    align-items: flex-end;
-}
-
-.redBtn {
+.btnCancel {
     --color: rgb(100, 10, 10);
     font-family: "Oswald", sans-serif;
     font-size: 15px;

@@ -59,15 +59,17 @@ export class InvoiceDetailPage implements OnInit {
   }
 
   public async collectInvoice() {
-    this._invoices.setCollectedInvoice(await this._storage.get("token"), this.invoiceId).subscribe({
-      next: (result: ResponseModel) => {
-        if (result.success) {
-          this.getOneInvoice();
-        }
-      },
-      error: () => { },
-      complete: () => { }
-    });
+    if (!this.invoice.collected) {
+      this._invoices.setCollectedInvoice(await this._storage.get("token"), this.invoiceId).subscribe({
+        next: (result: ResponseModel) => {
+          if (result.success) {
+            this.getOneInvoice();
+          }
+        },
+        error: () => { },
+        complete: () => { }
+      });
+    }
   }
 
   public async shareInvoice() {

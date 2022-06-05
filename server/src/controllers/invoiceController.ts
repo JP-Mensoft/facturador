@@ -82,7 +82,7 @@ export class InvoiceController {
                 }
                 if (saveSuccess) {
                     serverResponse.success = true;
-                    serverResponse.result = await this.invoiceDA.getOneInvoice(savedInvoice.invoiceId);
+                    serverResponse.result = await (await this.invoiceDA.getOneInvoice(savedInvoice.invoiceId)).result;
                     serverResponse.status = 200;
                 } else {
                     serverResponse.status = 400;

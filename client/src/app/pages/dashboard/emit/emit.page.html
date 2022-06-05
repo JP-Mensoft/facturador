@@ -46,7 +46,7 @@
 
   <ion-item>
     <ion-label class="sectionTitle">Conceptos</ion-label>
-    <ion-label class="lblTotal">Total: {{totalAmount}} €</ion-label>
+    <ion-label class="lblTotalAmount">Total: {{totalAmount}} €</ion-label>
     <ion-button slot="end" fill="clear" (click)="addConcept();">
       <ion-icon slot="icon-only" name="add-outline"></ion-icon>
     </ion-button>
@@ -68,7 +68,7 @@
                 (change)="updateTotalAmount();"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col size="2" class="btnCol">
+          <ion-col size="2" class="btnConcept">
             <ion-button class="redBtn" fill="clear" (click)="deleteConcept(i);">
               <ion-icon slot="icon-only" name="trash-bin-outline"></ion-icon>
             </ion-button>
@@ -79,7 +79,7 @@
   </ion-card>
 
   <ion-grid>
-    <ion-row class="taxRow">
+    <ion-row class="taxesRow">
       <ion-col size="4">
         <ion-item>
           <ion-label class="dataInfo" position="floating">% IVA</ion-label>
@@ -118,8 +118,8 @@
   </ion-card>
 
 
-  <ion-item class="btnItem" lines="none">
-    <ion-button class="redBtn" slot="start" fill="clear" (click)="resetInvoice();"
+  <ion-item lines="none">
+    <ion-button class="btnCancel" slot="start" fill="clear" (click)="resetInvoice();"
       [disabled]="customer.customerId === 0 && concepts.length === 0">
       Cancelar
     </ion-button>
@@ -127,7 +127,7 @@
     <ion-icon slot="end" name="checkmark-outline" *ngIf="showCorrectInvoice"></ion-icon>
     <ion-icon slot="end" name="close-outline" *ngIf="showErrorInvoice"></ion-icon>
     <ion-button slot="end" fill="clear" (click)="addInvoice();">
-      Compartir
+      Guardar
     </ion-button>
   </ion-item>
 

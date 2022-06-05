@@ -4,6 +4,32 @@ $color_grey: rgb(100, 100, 100);
 $color_red_error: rgb(100, 10, 10);
 $color_green_success: rgb(10, 100, 10);
 
+.lblSegment {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.collectedInfo {
+    font-size: 20px;
+    text-align: end;
+}
+
+.collectionDate {
+    font-size: 13px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    margin: 0;
+}
+
+.collected {
+    color: $color_green_success;
+}
+
+.noCollected {
+    color: $color_red_error;
+}
+
 .invoiceDate {
     color: $color_blue;
     font-family: "Oswald", sans-serif;
@@ -19,28 +45,19 @@ $color_green_success: rgb(10, 100, 10);
     text-align: center;
 }
 
-.invoiceAmount {
+.remarks {
+    color: $color_grey;
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
     text-align: center;
 }
 
-.collectedInfo {
-    font-size: 15px;
-    text-align: end;
-}
-
-.collected {
-    color: $color_green_success;
-}
-
-.noCollected {
-    color: $color_red_error;
-}
-
-.lblSegment {
+.totalAmount {
+    color: black;
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
+    text-align: end;
+    margin-top: 20px;
 }

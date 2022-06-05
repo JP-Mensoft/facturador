@@ -12,6 +12,26 @@ ion-button {
     margin-right: 10px;
 }
 
+.collectedInfo {
+    font-size: 20px;
+    text-align: end;
+}
+
+.collectionDate {
+    font-size: 13px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    margin: 0;
+}
+
+.collected {
+    color: $color_green_success;
+}
+
+.noCollected {
+    color: $color_red_error;
+}
+
 .invoiceDate {
     color: $color_blue;
     font-family: "Oswald", sans-serif;
@@ -20,14 +40,14 @@ ion-button {
     text-align: center;
 }
 
-.invoiceCustomer {
+.customerName {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
     text-align: center;
 }
 
-.invoiceAmount {
+.customerCif {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
@@ -42,53 +62,37 @@ ion-button {
     text-align: center;
 }
 
-.customerCif {
+.dividerBar {
+    color: $color_blue;
+    font-weight: 600;
+}
+
+.invoiceConcept {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
-    text-align: center;
 }
 
-.collectedInfo {
-    font-size: 15px;
-    text-align: end;
+.conceptName {
+    color: $color_blue;
 }
 
-.collected {
-    color: $color_green_success;
-}
-
-.noCollected {
-    color: $color_red_error;
-}
-
-.lblConcept {
-    font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    text-align: start;
-}
-
-.lblTotal {
+.invoiceTotalAmount {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
     text-align: end;
 }
 
-.lblRemarks {
+.invoiceRemarks {
     color: $color_grey;
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
     text-align: center;
+    margin-top: 20px;
 }
 
-.btnCancel {
+.btnDelete {
     color: $color_red_error;
-}
-
-.dividerBar {
-    color: $color_blue;
-    font-weight: 600;
 }
