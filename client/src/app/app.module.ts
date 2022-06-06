@@ -13,7 +13,9 @@ import { DashboardService } from './services/dashboard.service';
 import { UserService } from './services/user.service';
 import { CustomersService } from './services/customers.service';
 import { InvoicesService } from './services/invoices.service';
-import { CollectedFilterPipe } from './pipes/collected-filter.pipe';
+
+// PDF
+import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,7 +36,8 @@ import { CollectedFilterPipe } from './pipes/collected-filter.pipe';
     DashboardService,
     UserService,
     CustomersService,
-    InvoicesService
+    InvoicesService,
+    FileOpener
   ],
   bootstrap: [AppComponent],
 })
