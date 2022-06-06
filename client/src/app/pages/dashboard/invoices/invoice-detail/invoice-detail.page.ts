@@ -101,7 +101,7 @@ export class InvoiceDetailPage implements OnInit {
     if (this._platform.is('cordova')) {
       this.pdfObject.getBase64(async (data: any) => {
         try {
-          const path = "FacturadorPDF/" + pdfName;
+          const path = "facturas/" + pdfName;
           const directory = Directory.Documents;
           const writeResult = await Filesystem.writeFile({
             path,
@@ -122,8 +122,8 @@ export class InvoiceDetailPage implements OnInit {
         }
       });
     } else {
-      this.pdfObject.download(pdfName);
-      //this.pdfObject.open();
+      //this.pdfObject.download(pdfName);
+      this.pdfObject.open();
     }
   }
 
