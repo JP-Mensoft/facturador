@@ -14,9 +14,6 @@ import { UserService } from './services/user.service';
 import { CustomersService } from './services/customers.service';
 import { InvoicesService } from './services/invoices.service';
 
-// PDF
-import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
-
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -36,8 +33,7 @@ import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
     DashboardService,
     UserService,
     CustomersService,
-    InvoicesService,
-    FileOpener
+    InvoicesService
   ],
   bootstrap: [AppComponent],
 })

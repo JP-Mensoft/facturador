@@ -5,14 +5,15 @@ import { ResponseModel } from 'src/app/models/responseModel';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { StorageService } from 'src/app/services/storage.service';
-// PDF
+import { PdfInvoiceModel } from 'src/app/models/pdfInvoiceModel';
+import { Platform, ToastController } from '@ionic/angular';
+// PDFMake
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 (<any>pdfMake).vfs = pdfFonts.pdfMake.vfs;
-import { PdfInvoiceModel } from 'src/app/models/pdfInvoiceModel';
+// Capacitor
 import { Filesystem, Directory } from '@capacitor/filesystem';
-import { FileOpener } from '@awesome-cordova-plugins/file-opener/ngx';
-import { Platform } from '@ionic/angular';
+import { Share } from '@capacitor/share';
 
 @Component({
   selector: 'app-invoice-detail',
@@ -33,8 +34,8 @@ export class InvoiceDetailPage implements OnInit {
     private _storage: StorageService,
     private _invoices: InvoicesService,
     private _dashboard: DashboardService,
-    private _fileOpener: FileOpener,
-    private _platform: Platform
+    private _platform: Platform,
+    private _toast: ToastController
   ) {
     this.invoiceId = 0;
     this.invoice = new InvoiceModel(new Date(), "", false, 0, 0, [], 0);
@@ -91,28 +92,51 @@ export class InvoiceDetailPage implements OnInit {
     this._router.navigate(["dashboard/invoices"]);
   }
 
+  // Generate & Share Invoice
+
   public async shareInvoice() {
     const pdfDocumentStructure = this.pdfInvoiceModel.generateDocumentStructure();
+    const pdfName: string = this.generateInvoiceFileName();
     this.pdfObject = pdfMake.createPdf(pdfDocumentStructure);
     if (this._platform.is('cordova')) {
-      this.pdfObject.getBase64(async (pdfData: any) => {
+      this.pdfObject.getBase64(async (data: any) => {
         try {
-          const path = "pdfInvoices/" + this.invoice.customerId.name + this.invoice.invoiceId + String(new Date().getMilliseconds()) + ".pdf";
+          const path = "FacturadorPDF/" + pdfName;
+          const directory = Directory.Documents;
           const writeResult = await Filesystem.writeFile({
             path,
-            data: pdfData,
-            directory: Directory.Documents,
+            data,
+            directory,
             recursive: true
           });
-          this._fileOpener.open(writeResult.uri, 'application/pdf');
+          await Share.share({
+            title: "Factura",
+            url: writeResult.uri
+          });
         } catch (error) {
-          console.log(error);
+          const toast = await this._toast.create({
+            message: error,
+            duration: 2000
+          });
+          toast.present();
         }
       });
     } else {
-      //this.pdfObject.download('invoice.pdf');
-      this.pdfObject.open();
+      this.pdfObject.download(pdfName);
+      //this.pdfObject.open();
     }
+  }
+
+  public generateInvoiceFileName(): string {
+    const invoiceDate: Date = new Date(this.invoice.date);
+    const invoiceTitle: string = "F" + this.invoice.invoiceId;
+    const customerName: string = this.invoice.customerId.name;
+    const customerNameCompact: string = customerName.replace(" ", "");
+    const invoiceYear: string = String(invoiceDate.getFullYear());
+    const invoiceMonth: string = String(invoiceDate.getMonth());
+    const invoiceDay: string = String(invoiceDate.getDate());
+    const fileName = invoiceTitle + customerNameCompact + invoiceDay + invoiceMonth + invoiceYear + ".pdf";
+    return fileName;
   }
 
 }
