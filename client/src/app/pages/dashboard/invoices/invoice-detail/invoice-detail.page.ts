@@ -5,7 +5,10 @@ import { ResponseModel } from 'src/app/models/responseModel';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { InvoicesService } from 'src/app/services/invoices.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { UserService } from 'src/app/services/user.service';
 import { PdfInvoiceModel } from 'src/app/models/pdfInvoiceModel';
+import { UserSetModel } from 'src/app/models/userModel';
+import { CompanyModel } from 'src/app/models/companyModel';
 import { Platform, ToastController } from '@ionic/angular';
 // PDFMake
 import * as pdfMake from "pdfmake/build/pdfmake";
@@ -23,6 +26,8 @@ import { Share } from '@capacitor/share';
 export class InvoiceDetailPage implements OnInit {
 
   public invoice: InvoiceModel;
+  public user: UserSetModel;
+  public company: CompanyModel
   private invoiceId: number;
   private pdfObject: any;
   private pdfInvoiceModel: PdfInvoiceModel;
@@ -32,6 +37,7 @@ export class InvoiceDetailPage implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _storage: StorageService,
+    private _user: UserService,
     private _invoices: InvoicesService,
     private _dashboard: DashboardService,
     private _platform: Platform,
@@ -47,6 +53,8 @@ export class InvoiceDetailPage implements OnInit {
     this._section.setSectionName("Facturas");
     this.invoiceId = this._route.snapshot.params["invoiceId"];
     this.getOneInvoice();
+    this.getUser();
+    this.getCompany();
   }
 
   public async getOneInvoice() {
@@ -95,35 +103,38 @@ export class InvoiceDetailPage implements OnInit {
   // Generate & Share Invoice
 
   public async shareInvoice() {
-    const pdfDocumentStructure = this.pdfInvoiceModel.generateDocumentStructure();
-    const pdfName: string = this.generateInvoiceFileName();
-    this.pdfObject = pdfMake.createPdf(pdfDocumentStructure);
-    if (this._platform.is('cordova')) {
-      this.pdfObject.getBase64(async (data: any) => {
-        try {
-          const path = "facturas/" + pdfName;
-          const directory = Directory.Documents;
-          const writeResult = await Filesystem.writeFile({
-            path,
-            data,
-            directory,
-            recursive: true
-          });
-          await Share.share({
-            title: "Factura",
-            url: writeResult.uri
-          });
-        } catch (error) {
-          const toast = await this._toast.create({
-            message: error,
-            duration: 2000
-          });
-          toast.present();
-        }
-      });
-    } else {
-      //this.pdfObject.download(pdfName);
-      this.pdfObject.open();
+    if (this.invoice != undefined && this.company != undefined && this.user != undefined) {
+      this.pdfInvoiceModel = new PdfInvoiceModel(this.invoice, this.company, this.user);
+      const pdfDocumentStructure = this.pdfInvoiceModel.generateDocumentStructure();
+      const pdfName: string = this.generateInvoiceFileName();
+      this.pdfObject = pdfMake.createPdf(pdfDocumentStructure);
+      if (this._platform.is('cordova')) {
+        this.pdfObject.getBase64(async (data: any) => {
+          try {
+            const path = "facturas/" + pdfName;
+            const directory = Directory.Documents;
+            const writeResult = await Filesystem.writeFile({
+              path,
+              data,
+              directory,
+              recursive: true
+            });
+            await Share.share({
+              title: "Factura",
+              url: writeResult.uri
+            });
+          } catch (error) {
+            const toast = await this._toast.create({
+              message: error,
+              duration: 2000
+            });
+            toast.present();
+          }
+        });
+      } else {
+        //this.pdfObject.download(pdfName);
+        this.pdfObject.open();
+      }
     }
   }
 
@@ -137,6 +148,32 @@ export class InvoiceDetailPage implements OnInit {
     const invoiceDay: string = String(invoiceDate.getDate());
     const fileName = invoiceTitle + customerNameCompact + invoiceDay + invoiceMonth + invoiceYear + ".pdf";
     return fileName;
+  }
+
+  // Get Company & User
+
+  public async getUser() {
+    this._user.getUser(await this._storage.get("token")).subscribe({
+      next: (result: ResponseModel) => {
+        if (result.success) {
+          this.user = result.result;
+        }
+      },
+      error: () => { },
+      complete: () => { }
+    });
+  }
+
+  public async getCompany() {
+    this._user.getUserCompany(await this._storage.get("token")).subscribe({
+      next: (result: ResponseModel) => {
+        if (result.success) {
+          this.company = result.result;
+        }
+      },
+      error: () => { },
+      complete: () => { }
+    });
   }
 
 }
