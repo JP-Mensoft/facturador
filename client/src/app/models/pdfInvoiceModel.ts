@@ -51,8 +51,8 @@ export class PdfInvoiceModel {
                     text: '\nConceptos: ',
                     style: 'subheader'
                 },
-                this.invoice.concepts.toString(),
-                "IVA: " + this.invoice.taxableIncome,
+                this.generateConceptsString(),
+                "IVA: " + this.invoice.taxableIncome + "%",
                 "Total: " + this.invoice.totalAmount,
                 {
                     text: '\nPago: ',
@@ -73,4 +73,14 @@ export class PdfInvoiceModel {
         }
 
     }
+
+    public generateConceptsString(): string {
+        let conceptsString: string = "";
+        this.invoice.concepts.forEach(concept => {
+            const conceptSubstring: string = concept.concept + ": " + String(concept.amount) + "€" + "\n";
+            conceptsString += conceptSubstring;
+        });
+        return conceptsString;
+    }
+
 }
