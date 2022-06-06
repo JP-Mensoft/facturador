@@ -17,7 +17,8 @@ export class InvoiceFilterPipe implements PipeTransform {
     value.forEach((invoice: InvoiceModel) => {
       const invoiceDate: Date = new Date(invoice.date);
       const invoiceDateString: string = invoiceDate.toLocaleDateString();
-      if (invoiceDateString.includes(arg)) {
+      const customerName: string = invoice.customerId.name.toLowerCase();
+      if (invoiceDateString.includes(arg) || customerName.includes(arg.toLowerCase())) {
         filteredInvoices.push(invoice);
       }
     });
