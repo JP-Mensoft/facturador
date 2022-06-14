@@ -16,59 +16,82 @@ export class PdfInvoiceModel {
             pageOrientation: "portrait",
             pageMargins: [60, 40, 40, 40],
             content: [
-                { text: 'Factura ' + this.invoice.invoiceId, style: 'header' },
+                { text: 'Factura Nº ' + this.invoice.invoiceId + " - " + new Date(this.invoice.date).toLocaleDateString(), style: 'title' },
+                { text: '\n\nDatos Empresa & Cliente', style: 'header' },
                 {
-                    text: '\nEmpresa: ',
-                    style: 'subheader'
+                    style: 'table',
+                    table: {
+                        body: [
+                            ['Empresa', 'Contacto', 'Cliente'],
+                            [
+                                {
+                                    stack: [
+                                        {
+                                            ul: [
+                                                this.company.name,
+                                                "CIF: " + this.company.cif,
+                                                this.company.address
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    stack: [
+                                        {
+                                            ul: [
+                                                this.user.name,
+                                                "Email: " + this.user.email,
+                                                "Teléfono: " + this.user.phone
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    stack: [
+                                        {
+                                            ul: [
+                                                this.invoice.customerId.name,
+                                                "CIF: " + this.invoice.customerId.cif,
+                                                "Email: " + this.invoice.customerId.email,
+                                                "Teléfono: " + this.invoice.customerId.phone,
+                                                this.invoice.customerId.address
+                                            ]
+                                        }
+                                    ]
+                                },
+                            ]
+                        ]
+                    }
                 },
-                this.company.name,
-                this.company.cif,
-                this.company.address,
-                {
-                    text: '\nContacto: ',
-                    style: 'subheader'
-                },
-                this.user.email,
-                this.user.phone,
-                this.user.name,
-                {
-                    text: '\nCliente: ',
-                    style: 'subheader'
-                },
-                this.invoice.customerId.name,
-                this.invoice.customerId.cif,
-                this.invoice.customerId.address,
-                {
-                    text: '\nContacto Cliente: ',
-                    style: 'subheader'
-                },
-                this.invoice.customerId.name,
-                this.invoice.customerId.contact,
-                this.invoice.customerId.email,
-                this.invoice.customerId.phone,
-                this.invoice.customerId.address,
-                {
-                    text: '\nConceptos: ',
-                    style: 'subheader'
-                },
+                { text: '\n\nConceptos', style: 'header' },
                 this.generateConceptsString(),
-                "IVA: " + this.invoice.taxableIncome + "%",
-                "Total: " + this.invoice.totalAmount,
-                {
-                    text: '\nPago: ',
-                    style: 'subheader'
-                },
-                this.company.iban
+                { text: '\n\nImporte', style: 'header' },
+                'IVA: ' + this.invoice.taxableIncome + "%",
+                { text: 'TOTAL: ' + this.invoice.totalAmount + "€", style: 'subheader' },
+                { text: '\n\nCobro', style: 'header' },
+                { text: this.company.iban, style: 'subheader' }
             ],
             styles: {
+                title: {
+                    fontSize: 14,
+                    bold: true,
+                    color: "darkcyan"
+                },
                 header: {
-                    fontSize: 20,
-                    bold: true
+                    fontSize: 12,
+                    bold: true,
+                    color: "cadetblue"
                 },
                 subheader: {
-                    fontSize: 15,
-                    bold: true
+                    fontSize: 12,
+                    bold: true,
+                },
+                table: {
+                    margin: [0, 5, 0, 15]
                 }
+            },
+            defaultStyle: {
+                fontSize: 10
             }
         }
 
