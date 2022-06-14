@@ -10,6 +10,14 @@ $color_green_success: rgb(10, 100, 10);
     font-weight: 600;
 }
 
+.invoiceNumber {
+    color: black;
+    margin-right: 5px;
+    font-size: 13px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+}
+
 .collectedInfo {
     font-size: 20px;
     text-align: end;
@@ -17,10 +25,10 @@ $color_green_success: rgb(10, 100, 10);
 }
 
 .collectionDate {
-    font-size: 12px;
+    font-size: 11px;
     font-family: "Oswald", sans-serif;
     font-weight: 600;
-    margin: 0;
+    margin-right: 5px;
 }
 
 .collected {
@@ -46,11 +54,18 @@ $color_green_success: rgb(10, 100, 10);
     text-align: center;
 }
 
+.remarksRow {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-top: solid rgb(100, 100, 100, 0.3) 1px;
+    border-bottom: solid rgb(100, 100, 100, 0.3) 1px;
+}
+
 .remarks {
-    color: $color_grey;
+    color: black;
     font-family: "Oswald", sans-serif;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 13px;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -61,4 +76,8 @@ $color_green_success: rgb(10, 100, 10);
     font-weight: 600;
     text-align: end;
     margin-top: 20px;
+}
+
+.eSymbol {
+    color: rgb(210, 160, 25);
 }

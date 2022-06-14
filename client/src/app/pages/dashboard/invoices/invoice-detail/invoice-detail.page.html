@@ -2,48 +2,74 @@
   <ion-grid>
     <ion-row class='ion-justify-content-center ion-align-items-center'>
 
-      <ion-card>
-        <ion-card-header>
-          <ion-card-subtitle class="collectedInfo">
-            <ion-icon *ngIf="invoice.collected" class="collected" name="checkmark-circle"></ion-icon>
-            <ion-icon *ngIf="!invoice.collected" class="noCollected" name="close-circle"></ion-icon>
-            <p class="collectionDate" *ngIf="invoice.collected">
-              {{invoice.collectionDate | date: "d/M/yyyy"}}
-            </p>
-          </ion-card-subtitle>
-          <ion-card-subtitle class="invoiceDate">{{invoice.date | date: "d/M/yyyy"}}</ion-card-subtitle>
-          <ion-card-title class="customerName">{{invoice.customerId.name}}</ion-card-title>
-          <ion-card-subtitle class="customerCif">{{invoice.customerId.cif}}</ion-card-subtitle>
-        </ion-card-header>
-        <ion-card-content class="customerData">
-          <p>{{invoice.customerId.email}}</p>
-          <p>{{invoice.customerId.contact}} <span class="dividerBar">/</span> {{invoice.customerId.phone}}</p>
-          <p>{{invoice.customerId.address}}</p>
-        </ion-card-content>
-        <ion-card-content>
-          <ion-list>
-            <ion-item *ngFor="let concept of invoice.concepts; index as i;">
-              <ion-label class="invoiceConcept">
-                <span class="conceptName">{{concept.concept}}</span>: {{concept.amount}}€
+      <ion-col size='10'>
+        <ion-card>
+
+          <ion-card-header>
+            <ion-row>
+              <ion-col size='6'>
+                <ion-row class='ion-justify-content-start ion-align-items-center'>
+                  <span class="invoiceNumber">{{invoice.invoiceId}}</span>
+                </ion-row>
+              </ion-col>
+              <ion-col size='6'>
+                <ion-row class='ion-justify-content-end ion-align-items-center'>
+                  <span class="collectionDate" *ngIf="invoice.collected">
+                    {{invoice.collectionDate | date: "d/M/yyyy"}}
+                  </span>
+                  <ion-icon *ngIf="invoice.collected" class="collected" name="checkmark-circle"></ion-icon>
+                  <ion-icon *ngIf="!invoice.collected" class="noCollected" name="close-circle"></ion-icon>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+            <ion-card-subtitle class="invoiceDate">{{invoice.date | date: "d/M/yyyy"}}</ion-card-subtitle>
+            <ion-card-title class="customerName">{{invoice.customerId.name}}</ion-card-title>
+            <ion-card-subtitle class="customerCif">{{invoice.customerId.cif}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content class="customerData">
+            <p>{{invoice.customerId.email}}</p>
+            <p>{{invoice.customerId.contact}} <span class="dividerBar">/</span> {{invoice.customerId.phone}}</p>
+            <p>{{invoice.customerId.address}}</p>
+          </ion-card-content>
+
+          <ion-card-content class="remarksContainer">
+            <ion-row class='ion-justify-content-center ion-align-items-center remarksRow'>
+              <ion-col size='12' class="remarks ion-text-wrap">
+                {{invoice.remarks}}
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+
+          <ion-card-content>
+            <ion-list>
+              <ion-item *ngFor="let concept of invoice.concepts; index as i;">
+                <ion-label class="ion-text-wrap">
+                  <p class="conceptName">
+                    {{concept.concept}}
+                  </p>
+                  <p class="conceptAmount">
+                    {{concept.amount}} <span class="eSymbol">€</span>
+                  </p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+            <ion-item lines="none">
+              <ion-label class="invoiceTax">
+                IVA: {{invoice.taxableIncome}}%
+              </ion-label>
+              <ion-label class="invoiceTotalAmount">
+                Total: {{invoice.totalAmount}} <span class="eSymbol">€</span>
               </ion-label>
             </ion-item>
-          </ion-list>
-          <ion-item>
-            <ion-label class="invoiceTotalAmount">
-              IVA: {{invoice.taxableIncome}}%
-              <span class="dividerBar">/</span>
-              Total: {{invoice.totalAmount}}€
-            </ion-label>
-          </ion-item>
-          <p class="invoiceRemarks">
-            {{invoice.remarks}}
-          </p>
-        </ion-card-content>
-      </ion-card>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
 
     </ion-row>
 
-    <ion-row class='ion-justify-content-between ion-align-items-center'>
+    <ion-row class='ion-justify-content-between ion-align-items-center btnRow'>
 
       <ion-button fill="clear" (click)="deleteInvoice();" class="btnDelete">Eliminar</ion-button>
       <ion-button fill="clear" (click)="collectInvoice();" [disabled]="invoice.collected">

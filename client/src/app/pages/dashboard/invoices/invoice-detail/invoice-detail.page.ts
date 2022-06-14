@@ -9,7 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { PdfInvoiceModel } from 'src/app/models/pdfInvoiceModel';
 import { UserSetModel } from 'src/app/models/userModel';
 import { CompanyModel } from 'src/app/models/companyModel';
-import { Platform, ToastController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 // PDFMake
 import * as pdfMake from "pdfmake/build/pdfmake";
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -40,8 +40,7 @@ export class InvoiceDetailPage implements OnInit {
     private _user: UserService,
     private _invoices: InvoicesService,
     private _dashboard: DashboardService,
-    private _platform: Platform,
-    private _toast: ToastController
+    private _platform: Platform
   ) {
     this.invoiceId = 0;
     this.invoice = new InvoiceModel(new Date(), "", false, 0, 0, [], 0);
@@ -123,13 +122,7 @@ export class InvoiceDetailPage implements OnInit {
               title: "Factura",
               url: writeResult.uri
             });
-          } catch (error) {
-            const toast = await this._toast.create({
-              message: error,
-              duration: 2000
-            });
-            toast.present();
-          }
+          } catch (error) { }
         });
       } else {
         //this.pdfObject.download(pdfName);

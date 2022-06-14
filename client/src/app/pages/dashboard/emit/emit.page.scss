@@ -44,13 +44,13 @@ ion-button {
 
 .conceptInput {
     font-family: "Oswald", sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 400;
 }
 
 .amountInput {
     font-family: "Oswald", sans-serif;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: 600;
 }
 
@@ -72,6 +72,10 @@ ion-button {
     font-family: "Oswald", sans-serif;
     font-size: 15px;
     font-weight: 600;
+}
+
+.eSymbol {
+    color: rgb(210, 160, 25);
 }
 
 .btnCancel {
