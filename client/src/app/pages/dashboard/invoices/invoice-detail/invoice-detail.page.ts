@@ -101,6 +101,25 @@ export class InvoiceDetailPage implements OnInit {
     });
   }
 
+  public async confirmCollectInvoice() {
+    const alert = await this._alert.create({
+      header: "Cobrar",
+      message: '¿Quieres marcar la factura como cobrada?, no se podrá volver a cambiar.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => { }
+        }, {
+          text: 'Cobrar',
+          handler: async () => {
+            await this.collectInvoice();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   public async collectInvoice() {
     if (!this.invoice.collected) {
       this._invoices.setCollectedInvoice(await this._storage.get("token"), this.invoiceId).subscribe({

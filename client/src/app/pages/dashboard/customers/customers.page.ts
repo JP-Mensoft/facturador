@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CustomerModel } from 'src/app/models/customerModel';
 import { ResponseModel } from 'src/app/models/responseModel';
 import { CustomersService } from 'src/app/services/customers.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-customers',
@@ -23,7 +25,9 @@ export class CustomersPage implements OnInit, OnDestroy {
     private _dashboard: DashboardService,
     private _router: Router,
     private _customers: CustomersService,
-    private _storage: StorageService
+    private _storage: StorageService,
+    private _alert: AlertController,
+    private _toast: ToastController
   ) {
     this.customersFilter = "";
     this.customers = [];
@@ -61,6 +65,25 @@ export class CustomersPage implements OnInit, OnDestroy {
     });
   }
 
+  public async confirmDeleteCustomer(customerId: number) {
+    const alert = await this._alert.create({
+      header: "Eliminar",
+      message: '¿Quieres eliminar este cliente?, no se podrá recuperar.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => { }
+        }, {
+          text: 'Eliminar',
+          handler: async () => {
+            await this.deleteCustomer(customerId);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   public async deleteCustomer(customerId: number) {
     this._customers.deleteCustomer(await this._storage.get("token"), customerId).subscribe({
       next: (result: ResponseModel) => {
@@ -68,8 +91,14 @@ export class CustomersPage implements OnInit, OnDestroy {
           this.getUserCustomers();
         }
       },
-      error: () => {
-
+      error: async () => {
+        const toast = await this._toast.create({
+          message: 'No puedes eliminar un cliente con facturas asociadas.',
+          duration: 1500,
+          icon: 'alert-outline',
+          position: 'top'
+        });
+        toast.present();
       },
       complete: () => { }
     });
