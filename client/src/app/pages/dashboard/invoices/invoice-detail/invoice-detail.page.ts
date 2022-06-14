@@ -9,6 +9,7 @@ import { UserService } from 'src/app/services/user.service';
 import { PdfInvoiceModel } from 'src/app/models/pdfInvoiceModel';
 import { UserSetModel } from 'src/app/models/userModel';
 import { CompanyModel } from 'src/app/models/companyModel';
+import { AlertController } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 // PDFMake
 import * as pdfMake from "pdfmake/build/pdfmake";
@@ -40,7 +41,8 @@ export class InvoiceDetailPage implements OnInit {
     private _user: UserService,
     private _invoices: InvoicesService,
     private _dashboard: DashboardService,
-    private _platform: Platform
+    private _platform: Platform,
+    private _alert: AlertController
   ) {
     this.invoiceId = 0;
     this.invoice = new InvoiceModel(new Date(), "", false, 0, 0, [], 0);
@@ -66,6 +68,25 @@ export class InvoiceDetailPage implements OnInit {
       error: () => { },
       complete: () => { }
     });
+  }
+
+  public async confirmDeleteInvoice() {
+    const alert = await this._alert.create({
+      header: "Eliminar Factura",
+      message: '¿Quieres eliminar la factura?, no se podrá recuperar.',
+      buttons: [
+        {
+          text: 'Cancelar',
+          handler: () => { }
+        }, {
+          text: 'Eliminar',
+          handler: async () => {
+            await this.deleteInvoice();
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
   public async deleteInvoice() {

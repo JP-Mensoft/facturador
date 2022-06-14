@@ -71,7 +71,7 @@
 
     <ion-row class='ion-justify-content-between ion-align-items-center btnRow'>
 
-      <ion-button fill="clear" (click)="deleteInvoice();" class="btnDelete">Eliminar</ion-button>
+      <ion-button fill="clear" (click)="confirmDeleteInvoice();" class="btnDelete">Eliminar</ion-button>
       <ion-button fill="clear" (click)="collectInvoice();" [disabled]="invoice.collected">
         {{invoice.collected ? "Cobrada" : "Cobrar"}}
       </ion-button>
