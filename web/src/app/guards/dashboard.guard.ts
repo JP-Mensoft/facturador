@@ -27,7 +27,7 @@ export class DashboardGuard implements CanActivate, CanActivateChild {
           }
         },
         error: () => {
-          this._router.navigate(['auth/login']);
+          this._router.navigate(['auth']);
           resolve(false);
         },
         complete: () => { }
@@ -44,7 +44,7 @@ export class DashboardGuard implements CanActivate, CanActivateChild {
           }
         },
         error: () => {
-          this._router.navigate(['auth/login']);
+          this._router.navigate(['auth']);
           resolve(false);
         },
         complete: () => { }
