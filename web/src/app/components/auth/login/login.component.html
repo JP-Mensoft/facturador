@@ -1,0 +1,56 @@
+<div class="container-fluid">
+
+    <div class="row titleRow d-flex justify-content-center {{loginCorrecto ? 'correctAccess' : ''}}">
+        <div class="col-8 col-md-6 col-lg-3 d-flex justify-content-center {{!loginCorrecto ? 'titleContainer' : ''}}">
+            <div class="title d-flex align-items-center">
+                <p class="titleText">
+                    <i class="bi bi-water titleIcon"></i>
+                    Certimar
+                </p>
+            </div>
+            <div class="subtitle d-flex justify-content-between">
+                <p class="subtitleText">by</p>
+                <img class="img-fluid subtitleImg" src="./assets/img/logo_negro.png" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-10 col-md-8 col-lg-3">
+            <form [formGroup]="loginForm" (ngSubmit)="login()" method="post">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-envelope-fill icon"></i>
+                                <input class="form-control {{error ? 'wrongAccess' : ''}}" type="text"
+                                    formControlName="email" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi {{!passVer ? 'bi-lock-fill' : 'bi-unlock-fill'}} icon"
+                                    (click)="cambioVerPass();"></i>
+                                <input class="form-control {{error ? 'wrongAccess' : ''}}"
+                                    type="{{!passVer ? 'password' : 'text'}}" formControlName="password"
+                                    placeholder="Contraseña" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row formRow">
+                    <div class="col-12 d-flex justify-content-end">
+                        <button type="submit" class="btnAcceso">Acceder</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row d-flex justify-content-center lemaMensoft">
+        <div class="col-10 col-md-8 col-lg-3">
+            <p>Designed by Mensoft, assembled in Vallecas.</p>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,51 @@
+.navBarra {
+    background-color: rgb(10, 65, 120);
+    width: 200px;
+}
+
+.textoTitulo {
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    text-align: end;
+    margin-bottom: 0px;
+}
+
+.titleIcon {
+    color: rgb(0, 0, 0);
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.menuTituRow {
+    border-top: solid white 1.5pt;
+    background-color: rgb(200, 200, 200);
+    border-bottom: solid white 1.5pt;
+}
+
+.iconoNav {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+}
+
+.textoEnlace {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    border-bottom: solid white 1.5pt;
+    &:hover {
+        color: rgb(200, 200, 200);
+    }
+    &:hover .iconoNav {
+        color: rgb(200, 200, 200);
+    }
+}
+
+.conectado {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+}

@@ -1,0 +1,165 @@
+<div class="imgContainer">
+    <img class="imgFondo img-fluid" src="../../../../assets/img/casa.png" alt="fondo">
+</div>
+
+<div class="container-fluid">
+
+    <div class="row titleRow">
+        <div class="col-12 d-flex justify-content-between">
+            <h1 class="title">
+                <i class="bi bi-house-door-fill titleIcon"></i>
+                MIS SUBASTAS
+            </h1>
+            <button class="btnSearch" (click)="activarBuscar();"><i class="bi bi-search findIcon"></i></button>
+        </div>
+    </div>
+
+    <div *ngIf="buscarActivo" class="row searchRow">
+        <div class="col-12 d-flex justify-content-end searchCol">
+            <input type="text" [(ngModel)]="filtro" class="searchInput" placeholder="Fecha o Especie">
+        </div>
+    </div>
+
+    <div class="row misSubastasRow">
+        <div *ngFor="let s of subastas | filtroProductos: filtro; let i = index"
+            class="col-12 col-md-4 col-xl-3 d-flex justify-content-center">
+
+            <div class="card cardSubasta">
+
+                <img *ngIf="s.imagen?.public_id == 0" class="card-img-top" src="assets/img/Pez.png" alt="Subasta">
+                <img *ngIf="s.imagen?.public_id != 0" class="card-img-top" [src]="s.imagen?.secure_url" alt="Subasta">
+
+                <div class="card-body">
+                    <div class="row especieRow">
+                        <h6 class="cardText cardName">{{s.especie}}</h6>
+                        <h6 class="cardText cardDate">{{s.fecha | date:'dd/MM/yyyy - HH:mm:ss'}}</h6>
+                    </div>
+                    <div class="row subastaRow">
+                        <div class="col-6 colWeightPrice">
+                            <h6 class="cardText cardWeight">{{s.peso | number:'.2'}} kg</h6>
+                            <h6 class="cardText cardPrice">{{s.precio | number:'.0'}} €</h6>
+                        </div>
+                        <div class="col-6 colAuctionAdmin">
+                            <div class="row">
+                                <div class="col-12 btn-group dropup d-flex justify-content-center">
+                                    <button type="button" class="{{s.estado ? 'btnAbierto' : 'btnCerrado'}}"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{s.estado ? "ABIERTA" : 'CERRADA'}}
+                                    </button>
+                                    <ul class="container-fluid dropdown-menu menuConfirmacion">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <p class="textoConfirmar">¿Cerrar subasta?</p>
+                                                <p class="textoConfirmar">Las subastas cerradas no se pueden volver a
+                                                    abrir.</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12 containerConfirmar d-flex justify-content-center">
+                                                <button class="btnConfirmar" (click)="cambiarEstado(i);">CERRAR
+                                                    SUBASTA</button>
+                                            </div>
+                                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="row d-flex justify-content-center">
+                                <a *ngIf="s.estado" class="btnVer d-flex justify-content-center"
+                                    [routerLink]="['/m/subasta',s._id]">VER SUBASTA</a>
+                                <h6 *ngIf="!s.estado" class="textoCerrada">SUBASTA CERRADA</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row dataRow">
+                        <div class="col-12">
+                            <h6 class="cardText dataCardTextTitle">LATITUD / LONGITUD</h6>
+                            <h6 class="cardText dataCardTextData">{{s.latitud}} / {{s.longitud}}</h6>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="cardText dataCardTextTitle">RFID</h6>
+                            <h6 class="cardText dataCardTextData">{{s.rfid}}</h6>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="cardText dataCardTextTitle">LOTE</h6>
+                            <h6 class="cardText dataCardTextData">{{s.lote}}</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <small *ngIf="calcularTiempo('M', s.fecha) < 60">
+                                Última actualización hace {{calcularTiempo('M', s.fecha)}} {{calcularTiempo('M',s.fecha)
+                                ==
+                                1 ?
+                                ' minuto': 'minutos'}}.
+                            </small>
+                            <small *ngIf="calcularTiempo('M', s.fecha) >= 60 && calcularTiempo('H', s.fecha) < 24">
+                                Última actualización hace {{calcularTiempo('H', s.fecha)}} {{calcularTiempo('H',s.fecha)
+                                ==
+                                1 ?
+                                ' hora':'horas'}}.
+                            </small>
+                            <small *ngIf="calcularTiempo('H', s.fecha) >= 24">
+                                Última actualización hace {{calcularTiempo('D', s.fecha)}} {{calcularTiempo('D',s.fecha)
+                                ==
+                                1 ?
+                                ' día': 'días'}}.
+                            </small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center btn-group dropup">
+                            <button type="button" class="btnDelete" data-bs-toggle="dropdown" aria-expanded="false">
+                                ELIMINAR
+                            </button>
+                            <ul class="container-fluid dropdown-menu menuConfirmacion">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p class="textoConfirmar">¿Seguro/a?</p>
+                                        <p class="textoConfirmar">Las subastas eliminadas no se pueden restaurar.</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 containerConfirmar d-flex justify-content-center">
+                                        <button class="btnConfirmar" (click)="eliminarSubasta(s, i);">ELIMINAR
+                                            SUBASTA</button>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end">
+            <div class="btn-group dropup">
+                <button type="button" class="btnDeleteAll" data-bs-toggle="dropdown" aria-expanded="false">
+                    CERRAR TODAS LAS SUBASTAS
+                </button>
+                <ul class="container-fluid dropdown-menu menuConfirmacion">
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="textoConfirmar">¿Seguro/a?</p>
+                            <p class="textoConfirmar">Las subastas cerradas no se pueden volver a abrir.</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 containerConfirmar d-flex justify-content-center">
+                            <button class="btnConfirmar" (click)="cerrarTodas();">CERRAR SUBASTAS</button>
+                        </div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>

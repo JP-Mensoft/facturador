@@ -1,0 +1,221 @@
+.imgContainer {
+    z-index: -100;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+.imgFondo {
+    position: relative;
+    right: -10vh;
+    bottom: -200px;
+    opacity: 10%;
+}
+
+.titleRow {
+    margin-bottom: 25px;
+}
+
+.title {
+    font-family: "Oswald", sans-serif;
+    font-size: 25px;
+    font-weight: 800;
+    color: rgb(100, 100, 100);
+}
+
+.titleIcon {
+    color: rgb(15, 75, 135);
+    margin-right: 5px;
+}
+
+.cardEspecie {
+    width: 500px;
+    border: solid rgb(200, 200, 200) 2px;
+    box-shadow: -5px 5px 10px rgb(200, 200, 200);
+    background-color: rgb(240, 240, 240);
+    margin-bottom: 10px;
+}
+
+.cardProducto {
+    width: 500px;
+    border: solid rgb(200, 200, 200) 2px;
+    box-shadow: -5px 5px 10px rgb(200, 200, 200);
+    margin-bottom: 10px;
+}
+
+.cardDatos {
+    width: 500px;
+    border: solid rgb(200, 200, 200) 2px;
+    box-shadow: -5px 5px 10px rgb(200, 200, 200);
+    margin-bottom: 50px;
+}
+
+.textoEspecie {
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+}
+
+.textoPeso {
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: rgb(15, 75, 135);
+}
+
+.card-img-bottom {
+    height: 300px;
+}
+
+.card-footer {
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(100, 100, 100);
+    background-color: rgb(240, 240, 240);
+}
+
+.card-header {
+    height: 70px;
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    background-color: rgb(15, 75, 135);
+    color: white;
+}
+
+.inputPuja {
+    margin-right: 10px;
+    font-weight: 800;
+    border-radius: 5px;
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    border: solid rgb(0, 0, 0) 2pt;
+    outline: none;
+    &:focus {
+        transition: 0.2s;
+        box-shadow: 4px 4px 0px;
+        transform: translate(-4px, -4px);
+    }
+}
+
+.btnPuja {
+    font-weight: 800;
+    border-radius: 5px;
+    border: solid rgb(0, 0, 0) 2pt;
+    background-color: rgb(245, 225, 100);
+    transition: 0.1s;
+    &:hover {
+        box-shadow: 4px 4px 0px;
+        transform: translate(-4px, -4px);
+    }
+}
+
+.btnPujaDisabled {
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: black;
+    border-radius: 4px;
+    border: solid black 2pt;
+    background-color: rgb(200, 200, 200);
+    opacity: 70%;
+}
+
+.tituloDato {
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    margin-bottom: 1px;
+}
+
+.pDatos {
+    text-align: center;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(100, 100, 100);
+    margin-bottom: 5px;
+}
+
+.datosFecha {
+    margin-bottom: 15px;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(100, 100, 100);
+}
+
+.menuConfirmacion {
+    padding: 5px;
+    border: solid black 2px;
+    box-shadow: 4px 4px 0px rgb(0, 0, 0);
+    background-color: rgb(230, 230, 230);
+}
+
+.textoConfirmar {
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Oswald", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.textoPrecio {
+    color: rgb(15, 75, 135);
+    font-weight: 800;
+}
+
+.btnConfirmar {
+    width: 90%;
+    margin-top: 10px;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: solid rgb(0, 0, 0) 2pt;
+    background-color: rgb(190, 240, 170);
+    color: rgb(0, 0, 0);
+    &:hover {
+        transition: 0.1s;
+        box-shadow: 4px 4px 0px rgb(0, 0, 0);
+        transform: translate(-4px, -4px);
+    }
+}
+
+.ofertaCorrecta {
+    animation: pujaCorrecta 0.6s 0s 1;
+}
+
+.ofertaFallida {
+    animation: pujaFallida 0.6s 0s 1;
+}
+
+// Keyframes
+
+@keyframes pujaCorrecta {
+    0% {
+    }
+    50% {
+        background-color: rgb(160, 240, 160);
+    }
+    100% {
+    }
+}
+
+@keyframes pujaFallida {
+    0% {
+    }
+    50% {
+        background-color: rgb(240, 160, 160);
+    }
+    100% {
+    }
+}

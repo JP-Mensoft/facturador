@@ -1,0 +1,36 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-6 colPrecio">
+            <div class="row">
+                <span class="d-flex justify-content-center tituloPrecio">
+                    Precio Actual:
+                </span>
+            </div>
+            <div class="row">
+                <span class="d-flex justify-content-center precio">
+                    {{precio}} €
+                </span>
+            </div>
+        </div>
+        <div class="col-6 colPuja">
+            <div class="row">
+                <div class="col-6 d-flex justify-content-center colIco">
+                    <i
+                        class="bi {{id_usuario == id_ultimaPuja ? 'bi-hand-thumbs-up-fill' : 'bi-hand-thumbs-down-fill'}} d-flex justify-content-center"></i>
+                </div>
+                <div class="col-6 d-flex justify-content-center colPuja">
+                    0€
+                </div>
+            </div>
+            <div class="row rowInfo">
+                <div class="col-12">
+                    <span class="d-flex justify-content-center tituloPuja">
+                        {{id_usuario == id_ultimaPuja ? "Tu puja es la más alta." : "Tu puja no es la más alta."}}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

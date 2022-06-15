@@ -1,0 +1,115 @@
+<div class="imgContainer">
+    <img class="imgFondo img-fluid" src="../../../../assets/img/pezfondo.png" alt="fondo">
+</div>
+
+<div class="container-fluid">
+
+    <div class="row titleRow">
+        <div class="col-12 d-flex justify-content-start">
+            <h1 class="title">
+                <i class="bi bi-award-fill titleIcon"></i>
+                SUBASTA
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="card cardEspecie">
+                <div class="card-body d-flex justify-content-between">
+                    <span class="textoEspecie">
+                        {{evento.especie}}
+                    </span>
+                    <span class="textoPeso">
+                        {{evento.peso | number:'.2'}} kg
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="card cardProducto">
+                <div class="card-header d-flex justify-content-center">
+                    <input type="input"
+                        class="inputPuja {{pujaCorrecta ? 'ofertaCorrecta' : ''}} {{pujaFallida ? 'ofertaFallida' : ''}}"
+                        [(ngModel)]="precio_puja">
+                    <div class="d-flex justify-content-center btn-group dropup">
+                        <button type="button" class="{{precio >= precio_puja ? 'btnPujaDisabled' : 'btnPuja'}}"
+                            data-bs-toggle="dropdown" aria-expanded="false" [disabled]="precio >= precio_puja">
+                            PUJAR
+                        </button>
+                        <ul class="container-fluid dropdown-menu menuConfirmacion">
+                            <div class="row">
+                                <div class="col-12">
+                                    <p class="textoConfirmar">
+                                        ¿Ofrecer <span class="textoPrecio">{{precio_puja}}</span>€?
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 containerConfirmar d-flex justify-content-center">
+                                    <button type="button" class="btnConfirmar" (click)="pujar();">CONFIRMAR</button>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <app-estado (newItemEvent)="estadoSubasta($event)" [id_evento]="_id" [precio_inicial]="precio">
+                    </app-estado>
+                </div>
+                <img *ngIf="evento.imagen?.public_id == 0" class="card-img-bottom" src="assets/img/Pez.png"
+                    alt="Producto">
+                <img *ngIf="evento.imagen?.public_id != 0" class="card-img-bottom" [src]="evento.imagen?.secure_url"
+                    alt="Producto">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <div class="card cardDatos">
+                <div class="card-body">
+                    <div class="row">
+                        <span class="d-flex justify-content-center datosFecha">{{evento.fecha |
+                            date:'dd/MM/yyyy'}}</span>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="tituloDato">LATITUD / LONGITUD</p>
+                            <p class="datosLat pDatos">{{evento.latitud}} / {{evento.longitud}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="tituloDato">RFID</p>
+                            <p class="datosRfid pDatos">{{evento.rfid}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p class="tituloDato">LOTE</p>
+                            <p class="datosLote pDatos">{{evento.lote}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    <small *ngIf="calcularTiempo('M', evento.fecha) < 60">
+                        Última actualización hace {{calcularTiempo('M', evento.fecha)}}
+                        {{calcularTiempo('M',evento.fecha) == 1 ?
+                        ' minuto': 'minutos'}}.
+                    </small>
+                    <small *ngIf="calcularTiempo('M', evento.fecha) >= 60 && calcularTiempo('H', evento.fecha) < 24">
+                        Última actualización hace {{calcularTiempo('H', evento.fecha)}}
+                        {{calcularTiempo('H',evento.fecha) == 1 ?
+                        ' hora':'horas'}}.
+                    </small>
+                    <small *ngIf="calcularTiempo('H', evento.fecha) >= 24">
+                        Última actualización hace {{calcularTiempo('D', evento.fecha)}}
+                        {{calcularTiempo('D',evento.fecha) == 1 ?
+                        ' día': 'días'}}.
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

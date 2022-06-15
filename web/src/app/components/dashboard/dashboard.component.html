@@ -1,0 +1,14 @@
+<div [class]="evento">
+    <app-navbar [clase]="clase" (newItemEvent)="sidebar($event)"></app-navbar>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <app-sidebar [clase]="clase" (newItemEvent)="sidebar($event)"></app-sidebar>
+        </div>
+        <div id="layoutSidenav_content">
+            <div class="container-fluid px-4 mt-5">
+                <router-outlet (activate)="onActivate($event)"></router-outlet>
+            </div>
+            <app-footer></app-footer>
+        </div>
+    </div>
+</div>
