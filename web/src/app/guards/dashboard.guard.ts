@@ -19,7 +19,7 @@ export class DashboardGuard implements CanActivate, CanActivateChild {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       this._auth.checkToken(this._storage.get("token")).subscribe({
         next: (result: ResponseModel) => {
           if (result.success) {
@@ -36,7 +36,7 @@ export class DashboardGuard implements CanActivate, CanActivateChild {
   }
 
   canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return new Promise((resolve) => {
+    return new Promise(async (resolve) => {
       this._auth.checkToken(this._storage.get("token")).subscribe({
         next: (result: ResponseModel) => {
           if (result.success) {
