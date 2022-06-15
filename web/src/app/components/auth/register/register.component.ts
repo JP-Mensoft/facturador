@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ResponseModel } from 'src/app/models/responseModel';
+import { UserSetModel } from 'src/app/models/userModel';
+import { AuthService } from 'src/app/services/auth.service';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-register',
@@ -7,9 +13,88 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  public registerForm: FormGroup;
+  public passVer: boolean = false;
+  public error: boolean = false;
+  public loginCorrecto: boolean = false;
 
-  ngOnInit(): void {
+  constructor(
+    private _formB: FormBuilder,
+    private _storage: StorageService,
+    private _auth: AuthService,
+    private _router: Router
+  ) { }
+
+  ngOnInit() {
+    this.crearFormulario();
+  }
+
+  crearFormulario() {
+    this.registerForm = this._formB.group({
+      email: ['', [Validators.required, Validators.email]],
+      name: ['', [Validators.required,]],
+      phone: ['', [Validators.required,]],
+      newPassword: ['', [Validators.required, Validators.minLength(6)]],
+      reNewPassword: ['', [Validators.required, Validators.minLength(6)]]
+    });
+  }
+
+  cambioVerPass() {
+    this.passVer = !this.passVer;
+  }
+
+  public async addUser() {
+    this.error = false;
+    this.loginCorrecto = false;
+    const user = new UserSetModel(
+      this.registerForm.get("email").value,
+      this.registerForm.get("name").value,
+      this.registerForm.get("phone").value,
+      this.registerForm.get("newPassword").value,
+      this.registerForm.get("reNewPassword").value
+    );
+    if (user.newPassword != "" && user.newPassword === user.reNewPassword) {
+      this.addUserSub(user);
+    } else {
+      this.error = true;
+      setTimeout(() => {
+        this.error = false;
+      }, 500);
+    }
+  }
+
+  public async addUserSub(user: UserSetModel) {
+    this._auth.addUser(user).subscribe({
+      next: async (result: ResponseModel) => {
+        if (result.success) {
+          this.loginCorrecto = true;
+          setTimeout(() => {
+            this._storage.set("token", result.result)
+            this._router.navigate(["dashboard"]);
+          }, 500);
+          setTimeout(() => {
+            this.loginCorrecto = false;
+            this.clearForm();
+          }, 1000);
+        }
+      },
+      error: () => {
+        this.error = true;
+        setTimeout(() => {
+          this.error = false;
+        }, 500);
+      },
+      complete: () => { }
+    });
+  }
+
+  public goLogin(): void {
+    this._router.navigate(['auth/login']);
+    this.clearForm();
+  }
+
+  public clearForm(): void {
+    this.registerForm.reset();
   }
 
 }
