@@ -4,6 +4,8 @@ import { DashboardGuard } from './guards/dashboard.guard';
 
 /**
  * loadChildren (Lazy Loading), debe importar y cargar siempre el module, no el routing.module.
+ * De lo contrario, puede romperse al cargar rutas hijas dentro de padre y dejar cargar por su cuenta rutas hijas.
+ * Es decir cargar componente login desde /login en vez de en auth/login, y es terrible para los guards.
  * Los comodines ('', '**'), van al final del array de rutas, cuando busca la ruta recorre el array de arriba a abajo.
  * El guard solo permite o no activar la ruta especificada, hace referencia a la ruta y no al componente o módulo.
  * Los módulos deben cargar todo lo necesario para sus componentes.
