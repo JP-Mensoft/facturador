@@ -4,18 +4,23 @@ import { DashboardGuard } from './guards/dashboard.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    pathMatch: 'full',
-    redirectTo: 'auth'
-  },
-  {
     path: 'auth',
-    loadChildren: () => import('./pages/auth/auth-routing.module').then(m => m.AuthPageRoutingModule)
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthPageModule)
   },
   {
     path: 'dashboard',
     canActivate: [DashboardGuard],
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardPageModule)
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'auth'
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'auth'
   }
 ];
 

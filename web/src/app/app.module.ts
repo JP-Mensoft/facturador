@@ -18,11 +18,6 @@ import { CollectedFilterPipe } from './pipes/collected-filter.pipe';
 import { CustomerFilterPipe } from './pipes/customer-filter.pipe';
 import { InvoiceFilterPipe } from './pipes/invoice-filter.pipe';
 
-// Modules
-import { DashboardModule } from './components/dashboard/dashboard.module';
-import { AuthModule } from './components/auth/auth.module';
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,9 +28,7 @@ import { AuthModule } from './components/auth/auth.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    DashboardModule,
-    AuthModule
+    HttpClientModule
   ],
   providers: [
     AuthService,

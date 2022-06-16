@@ -57,6 +57,10 @@
     animation: logout 0.3s 0s 1 ease-in forwards;
 }
 
+.dropdown-item {
+    cursor: pointer;
+}
+
 // Keyframes
 
 @keyframes logout {

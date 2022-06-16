@@ -15,6 +15,12 @@ import { InvoicesComponent } from './invoices/invoices.component';
 import { InvoicesDetailComponent } from './invoices/invoices-detail/invoices-detail.component';
 import { UserComponent } from './user/user.component';
 
+/**
+ * canActivateChild no sería necesario, todas las rutas hijas cargan dentro de la ruta padre (padre/hija).
+ * Al no permitir desde el app-routing cargar el dashboard-routing, ya no cargarian sus hijas.
+ * Los guards pueden servir también para controlar dónde está el usuario (ruta) y cargar o guardar lo que queramos.
+ */
+
 const routes: Routes = [
   {
     path: '',
@@ -55,6 +61,11 @@ const routes: Routes = [
       },
       {
         path: '',
+        pathMatch: "full",
+        redirectTo: 'emit'
+      },
+      {
+        path: '**',
         pathMatch: "full",
         redirectTo: 'emit'
       }

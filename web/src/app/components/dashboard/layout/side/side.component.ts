@@ -46,8 +46,8 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: 'dashboard/emit', title: 'Emitir Factura', icon: 'iconoNav bi-send-fill', class: 'sb-nav-link-icon', group: 'Secciones' },
-  { path: 'dashboard/invoices', title: 'Facturas', icon: 'iconoNav bi bi-folder-fill', class: 'sb-nav-link-icon', group: 'Secciones' },
-  { path: 'dashboard/customers', title: 'Clientes', icon: 'iconoNav bi bi-people-fill', class: 'sb-nav-link-icon', group: 'Secciones' }
+  { path: 'emit', title: 'Emitir Factura', icon: 'iconoNav bi-send-fill', class: 'sb-nav-link-icon', group: 'Secciones' },
+  { path: 'invoices', title: 'Facturas', icon: 'iconoNav bi bi-folder-fill', class: 'sb-nav-link-icon', group: 'Secciones' },
+  { path: 'customers', title: 'Clientes', icon: 'iconoNav bi bi-people-fill', class: 'sb-nav-link-icon', group: 'Secciones' }
 ];
 

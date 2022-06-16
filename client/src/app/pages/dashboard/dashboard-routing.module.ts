@@ -7,7 +7,6 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardPage,
-    canActivateChild: [DashboardGuard],
     children: [
       {
         path: 'emit',
@@ -27,6 +26,11 @@ const routes: Routes = [
       },
       {
         path: '',
+        pathMatch: 'full',
+        redirectTo: 'emit'
+      },
+      {
+        path: '**',
         pathMatch: 'full',
         redirectTo: 'emit'
       }
