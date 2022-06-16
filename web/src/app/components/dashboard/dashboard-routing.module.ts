@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+// Guards
+import { DashboardGuard } from 'src/app/guards/dashboard.guard';
+
 // Components
 import { CustomersComponent } from './customers/customers.component';
 import { CustomersAddComponent } from './customers/customers-add/customers-add.component';
@@ -16,6 +19,7 @@ const routes: Routes = [
   {
     path: '',
     component: DashboardComponent,
+    canActivateChild: [DashboardGuard],
     children: [
       {
         path: 'customers',

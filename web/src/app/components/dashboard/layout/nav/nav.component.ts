@@ -40,4 +40,8 @@ export class NavComponent implements OnInit {
     }, 600);
   }
 
+  public goUser(): void {
+    this._router.navigate(["dashboard/user"]);
+  }
+
 }
