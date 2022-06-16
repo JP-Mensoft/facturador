@@ -18,6 +18,7 @@ export class SideComponent implements OnInit {
 
   ngOnInit(): void {
     let titulos = [];
+    this.menuItems = ROUTES;
     for (let i = 0; i < this.menuItems.length; i++) {
       const item = this.menuItems[i];
       titulos.push(item.group);
