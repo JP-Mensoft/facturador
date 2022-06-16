@@ -19,12 +19,4 @@ export class DashboardComponent implements OnInit {
     this.class = !this.class;
   }
 
-  onActivate(event: any) {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'smooth'
-    });
-  }
-
 }
