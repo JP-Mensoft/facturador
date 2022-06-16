@@ -1,0 +1,21 @@
+<nav class="sb-sidenav accordion navBarra" id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+        <div class="nav">
+            <div *ngFor="let title of titleItems">
+                <div class="sb-sidenav-menu-heading menuTituRow">
+                    <p class="textoTitulo">
+                        {{title}}
+                        <i class="bi bi-wind titleIcon"></i>
+                    </p>
+                </div>
+                <div *ngFor="let item of menuItems">
+                    <a *ngIf="item.group == title" class="nav-link textoEnlace" (click)="sidebar(!class)"
+                        [routerLink]="item.path">
+                        <div [class]="item.class"><i [class]="item.icon"></i></div>
+                        {{item.title}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

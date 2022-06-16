@@ -65,12 +65,13 @@ export class RegisterComponent implements OnInit {
 
   public async addUserSub(user: UserSetModel) {
     this._auth.addUser(user).subscribe({
-      next: async (result: ResponseModel) => {
-        if (result.success) {
+      next: async (response: ResponseModel) => {
+        if (response.success) {
           this.loginCorrecto = true;
           setTimeout(() => {
-            this._storage.set("token", result.result)
-            this._router.navigate(["dashboard"]);
+            this._storage.set("token", response.result.token);
+            this._storage.set("email", response.result.email);
+            this._router.navigate(["dashboard/user"]);
           }, 500);
           setTimeout(() => {
             this.loginCorrecto = false;

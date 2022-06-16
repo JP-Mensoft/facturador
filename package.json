@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "rserver": "cd server && npm start",
-    "rclient": "cd client && npm start",
-    "rweb": "cd web && npm start",
+    "sserver": "cd server && npm start",
+    "sclient": "cd client && npm start",
+    "sweb": "cd web && npm start",
     "iserver": "cd server && npm install",
     "iclient": "cd client && npm install",
     "iweb": "cd web && npm install"

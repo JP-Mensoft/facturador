@@ -1,1 +1,23 @@
-<router-outlet></router-outlet>
+<div [class]="event">
+
+    <app-nav [class]="class" (newItemEvent)="sidebar($event)"></app-nav>
+
+    <div id="layoutSidenav">
+
+        <div id="layoutSidenav_nav">
+            <app-side [class]="class" (newItemEvent)="sidebar($event)"></app-side>
+        </div>
+
+        <div id="layoutSidenav_content">
+
+            <div class="container-fluid px-4 mt-5">
+                <router-outlet (activate)="onActivate($event)"></router-outlet>
+            </div>
+
+            <app-footer></app-footer>
+
+        </div>
+
+    </div>
+
+</div>

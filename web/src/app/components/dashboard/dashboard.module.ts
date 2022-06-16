@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+
+// Components
 import { DashboardComponent } from './dashboard.component';
 import { CustomersComponent } from './customers/customers.component';
 import { EmitComponent } from './emit/emit.component';
 import { InvoicesComponent } from './invoices/invoices.component';
 import { UserComponent } from './user/user.component';
-import { NavComponent } from './nav/nav.component';
-import { SideComponent } from './side/side.component';
+import { NavComponent } from './layout/nav/nav.component';
+import { SideComponent } from './layout/side/side.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,8 @@ import { SideComponent } from './side/side.component';
     InvoicesComponent,
     UserComponent,
     NavComponent,
-    SideComponent
+    SideComponent,
+    FooterComponent
   ],
   imports: [
     CommonModule,
