@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
     <div class="row titleRow d-flex justify-content-center {{loginCorrecto ? 'correctAccess' : ''}}">
-        <div class="col-8 col-md-6 col-lg-3 d-flex justify-content-center {{!loginCorrecto ? 'titleContainer' : ''}}">
+        <div class="col-8 col-md-6 col-lg-4 d-flex justify-content-center {{!loginCorrecto ? 'titleContainer' : ''}}">
             <div class="title d-flex align-items-center">
                 <p class="titleText">
                     Facturador
@@ -16,7 +16,7 @@
     </div>
 
     <div class="row d-flex justify-content-center">
-        <div class="col-10 col-md-8 col-lg-3">
+        <div class="col-8 col-md-6 col-lg-4">
             <form [formGroup]="loginForm">
                 <div class="row">
                     <div class="col-12">
@@ -39,9 +39,9 @@
                     </div>
                 </div>
                 <div class="row formRow">
-                    <div class="col-12 d-flex justify-content-between">
-                        <button (click)="goRegister();" class="btnRegister">Registro</button>
+                    <div class="col-12 d-flex justify-content-between flex-row-reverse">
                         <button (click)="attemptAccess();" class="btnAcceso">Acceder</button>
+                        <button (click)="goRegister();" class="btnRegister">Registro</button>
                     </div>
                 </div>
             </form>
@@ -49,7 +49,7 @@
     </div>
 
     <div class="row d-flex justify-content-center motto">
-        <div class="col-10 col-md-8 col-lg-3">
+        <div class="col-8 col-md-6 col-lg-4">
             <p>Designed and assembled by JL Pastor.</p>
         </div>
     </div>

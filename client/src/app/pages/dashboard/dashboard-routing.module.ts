@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardGuard } from 'src/app/guards/dashboard.guard';
 import { DashboardPage } from './dashboard.page';
 
 const routes: Routes = [
   {
     path: '',
     component: DashboardPage,
+    canActivateChild: [DashboardGuard],
     children: [
       {
         path: 'emit',

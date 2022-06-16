@@ -16,7 +16,7 @@ export class RegisterComponent implements OnInit {
   public registerForm: FormGroup;
   public passVer: boolean = false;
   public error: boolean = false;
-  public loginCorrecto: boolean = false;
+  public registroCorrecto: boolean = false;
 
   constructor(
     private _formB: FormBuilder,
@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 
   public async addUser() {
     this.error = false;
-    this.loginCorrecto = false;
+    this.registroCorrecto = false;
     const user = new UserSetModel(
       this.registerForm.get("email").value,
       this.registerForm.get("name").value,
@@ -67,14 +67,14 @@ export class RegisterComponent implements OnInit {
     this._auth.addUser(user).subscribe({
       next: async (response: ResponseModel) => {
         if (response.success) {
-          this.loginCorrecto = true;
+          this.registroCorrecto = true;
           setTimeout(() => {
             this._storage.set("token", response.result.token);
             this._storage.set("email", response.result.email);
             this._router.navigate(["dashboard/user"]);
           }, 500);
           setTimeout(() => {
-            this.loginCorrecto = false;
+            this.registroCorrecto = false;
             this.clearForm();
           }, 1000);
         }
@@ -90,7 +90,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public goLogin(): void {
-    this._router.navigate(['auth/login']);
+    this._router.navigate(['login']);
     this.clearForm();
   }
 

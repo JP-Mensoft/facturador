@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
   }
 
   public goRegister(): void {
-    this._router.navigate(['auth/register']);
+    this._router.navigate(['register']);
     this.clearForm();
   }
 

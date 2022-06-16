@@ -41,7 +41,7 @@ export class NavComponent implements OnInit {
   }
 
   public goUser(): void {
-    this._router.navigate(["dashboard/user"]);
+    this._router.navigate(["user"]);
   }
 
 }

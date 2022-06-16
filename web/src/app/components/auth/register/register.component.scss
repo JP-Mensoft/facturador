@@ -113,7 +113,7 @@ input {
 }
 
 .correctAccess {
-    animation: accesoCorrecto 0.4s 0s 1 normal ease-in-out forwards;
+    animation: registroCorrecto 0.4s 0s 1 normal ease-in-out forwards;
 }
 
 @keyframes wrongAccessColor {
@@ -144,7 +144,7 @@ input {
     }
 }
 
-@keyframes accesoCorrecto {
+@keyframes registroCorrecto {
     0% {
     }
     30% {
