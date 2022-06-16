@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 @Component({
   selector: 'app-side',
   templateUrl: './side.component.html',
-  styleUrls: ['./side.component.scss']
+  styleUrls: ['../../dashboard.component.scss', './side.component.scss']
 })
 export class SideComponent implements OnInit {
 
@@ -46,8 +46,8 @@ declare interface RouteInfo {
 }
 
 export const ROUTES: RouteInfo[] = [
-  { path: '/dashboard/customers', title: 'Clientes', icon: 'iconoNav bi bi-people-fill', class: 'sb-nav-link-icon', group: 'Navegación' },
-  { path: '/dashboard/emit', title: 'Emitir Factura', icon: 'iconoNav bi-send-fill', class: 'sb-nav-link-icon', group: 'Navegación' },
-  { path: '/dashboard/invoices', title: 'Facturas', icon: 'iconoNav bi bi-folder-fill', class: 'sb-nav-link-icon', group: 'Navegación' },
+  { path: '/dashboard/emit', title: 'Emitir Factura', icon: 'iconoNav bi-send-fill', class: 'sb-nav-link-icon', group: 'Secciones' },
+  { path: '/dashboard/invoices', title: 'Facturas', icon: 'iconoNav bi bi-folder-fill', class: 'sb-nav-link-icon', group: 'Secciones' },
+  { path: '/dashboard/customers', title: 'Clientes', icon: 'iconoNav bi bi-people-fill', class: 'sb-nav-link-icon', group: 'Secciones' }
 ];
 
