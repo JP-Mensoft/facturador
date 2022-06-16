@@ -11,6 +11,11 @@ import { UserComponent } from './user/user.component';
 import { NavComponent } from './layout/nav/nav.component';
 import { SideComponent } from './layout/side/side.component';
 import { FooterComponent } from './layout/footer/footer.component';
+import { CustomersDetailComponent } from './customers/customers-detail/customers-detail.component';
+import { CustomersAddComponent } from './customers/customers-add/customers-add.component';
+import { CustomersSetComponent } from './customers/customers-set/customers-set.component';
+import { InvoicesDetailComponent } from './invoices/invoices-detail/invoices-detail.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,11 +26,17 @@ import { FooterComponent } from './layout/footer/footer.component';
     UserComponent,
     NavComponent,
     SideComponent,
-    FooterComponent
+    FooterComponent,
+    CustomersDetailComponent,
+    CustomersAddComponent,
+    CustomersSetComponent,
+    InvoicesDetailComponent
   ],
   imports: [
     CommonModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class DashboardModule { }
