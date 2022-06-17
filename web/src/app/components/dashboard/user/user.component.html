@@ -7,11 +7,118 @@
         </div>
     </div>
 
-    <div class="row optionsRow">
 
-    </div>
+    <div class="row d-flex justify-content-center">
 
-    <div class="row contentRow">
+        <div class="col-10 col-md-6 col-lg-4">
+            <div class="row formTitle">
+                Datos Usuario
+            </div>
+            <form [formGroup]="userForm">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-envelope-fill icon"></i>
+                                <input
+                                    class="form-control {{errorUser ? 'wrong' : ''}} {{correctUser ? 'correct' : ''}}"
+                                    type="text" formControlName="email" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-person icon"></i>
+                                <input
+                                    class="form-control {{errorUser ? 'wrong' : ''}}  {{correctUser ? 'correct' : ''}}"
+                                    type="text" formControlName="name" placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-phone icon"></i>
+                                <input
+                                    class="form-control {{errorUser ? 'wrong' : ''}}  {{correctUser ? 'correct' : ''}}"
+                                    type="text" formControlName="phone" placeholder="Teléfono" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi {{!passVer ? 'bi-lock-fill' : 'bi-unlock-fill'}} icon"
+                                    (click)="cambioVerPass();"></i>
+                                <input
+                                    class="form-control {{errorUser ? 'wrong' : ''}}  {{correctUser ? 'correct' : ''}}"
+                                    type="{{!passVer ? 'password' : 'text'}}" formControlName="newPassword"
+                                    placeholder="Nueva Contraseña" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi {{!passVer ? 'bi-lock' : 'bi-unlock'}} icon"
+                                    (click)="cambioVerPass();"></i>
+                                <input
+                                    class="form-control {{errorUser ? 'wrong' : ''}}  {{correctUser ? 'correct' : ''}}"
+                                    type="{{!passVer ? 'password' : 'text'}}" formControlName="reNewPassword"
+                                    placeholder="Repetor Nueva Contraseña" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row formRow">
+                    <div class="col-12 d-flex justify-content-between flex-row-reverse">
+                        <button (click)="saveUser();" class="btnAcceso">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-10 col-md-6 col-lg-4">
+            <div class="row formTitle">
+                Datos Empresa
+            </div>
+            <form [formGroup]="companyForm">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-bag icon"></i>
+                                <input
+                                    class="form-control {{errorCompany ? 'wrong' : ''}} {{correctCompany ? 'correct' : ''}}"
+                                    type="text" formControlName="name" placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-pin-map icon"></i>
+                                <input
+                                    class="form-control {{errorCompany ? 'wrong' : ''}} {{correctCompany ? 'correct' : ''}}"
+                                    type="text" formControlName="address" placeholder="Dirección" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-info-circle icon"></i>
+                                <input
+                                    class="form-control {{errorCompany ? 'wrong' : ''}} {{correctCompany ? 'correct' : ''}}"
+                                    type="text" formControlName="cif" placeholder="CIF" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-credit-card icon"></i>
+                                <input
+                                    class="form-control {{errorCompany ? 'wrong' : ''}} {{correctCompany ? 'correct' : ''}}"
+                                    type="text" formControlName="iban" placeholder="IBAN" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row formRow">
+                    <div class="col-12 d-flex justify-content-between flex-row-reverse">
+                        <button (click)="saveCompany();" class="btnAcceso">Guardar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
 
     </div>
 

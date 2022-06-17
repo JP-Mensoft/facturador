@@ -1,3 +1,10 @@
+// Variables
+$color_azul: rgb(20, 100, 160);
+$color_gris: rgb(100, 100, 100);
+$color_rojo_error: rgba(190, 65, 65, 0.4);
+$color_verde_correcto: rgba(100, 170, 65, 0.4);
+//
+
 .titleRow {
     margin-bottom: 20px;
 }
@@ -12,4 +19,78 @@
     font-size: 25px;
     font-weight: 600;
     color: rgb(100, 100, 100);
+}
+
+.formTitle {
+    margin-bottom: 20px;
+    font-family: "Oswald", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.formRow {
+    margin-bottom: 10px;
+}
+
+input {
+    font-family: "Oswald", sans-serif;
+    border: solid black 2px;
+    border-radius: 4px;
+    outline: none;
+    font-size: 15px;
+    transition: 0.2s;
+    &:focus {
+        border: solid $color_azul 2px;
+        box-shadow: -4px 4px 0px;
+        transform: translate(4px, -4px);
+    }
+}
+
+.wrong {
+    animation: wrong 0.6s 1;
+}
+
+.correct {
+    animation: correct 0.6s 1;
+}
+
+.icon {
+    font-size: 18px;
+    margin-right: 10px;
+    color: black;
+}
+
+.btnAcceso {
+    font-family: "Oswald", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    border: solid black 2pt;
+    background-color: $color_azul;
+    color: white;
+    &:hover {
+        transition: 0.1s;
+        box-shadow: 4px 4px 0px black;
+        transform: translate(-4px, -4px);
+    }
+}
+
+@keyframes wrong {
+    0% {
+    }
+    50% {
+        background-color: $color_rojo_error;
+    }
+    100% {
+    }
+}
+
+@keyframes correct {
+    0% {
+    }
+    50% {
+        background-color: $color_verde_correcto;
+    }
+    100% {
+    }
 }

@@ -52,7 +52,6 @@ export class UserPage implements OnInit {
   public buildForms(): void {
     this.companyForm = this._formBuilder.group({
       name: ['', []],
-      logoURL: ['', []],
       address: ['', []],
       cif: ['', []],
       iban: ['', []]
