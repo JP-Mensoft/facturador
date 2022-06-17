@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //path: 'http://192.168.1.156:4444/',
-  path: 'http://192.168.1.131:4444/'
+  path: 'http://192.168.1.156:4444/',
+  //path: 'http://192.168.1.131:4444/'
 };
 
 /*
