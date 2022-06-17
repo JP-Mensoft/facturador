@@ -143,7 +143,11 @@ export class EmitComponent implements OnInit {
     this.invoice = new InvoiceModel(new Date(), "", false, 0, 0, [], 0);
     this.invoice.customerId = this.customer.customerId;
     this.invoice.concepts = this.concepts;
-    this.invoice.taxableIncome = this.taxableIncome;
+    if (this.taxableIncome === 0 || this.taxableIncome === null || this.taxableIncome === undefined) {
+      this.invoice.taxableIncome = 0;
+    } else {
+      this.invoice.taxableIncome = this.taxableIncome;
+    }
     this.invoice.totalAmount = this.totalAmount;
     this.invoice.remarks = this.remarks;
   }

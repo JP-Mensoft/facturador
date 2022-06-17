@@ -1,5 +1,12 @@
+// Variables
+$color_azul: rgb(20, 100, 160);
+$color_gris: rgb(100, 100, 100);
+$color_rojo_error: rgba(190, 65, 65, 0.7);
+$color_verde_correcto: rgba(100, 170, 65, 0.4);
+//
+
 .titleRow {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 
 .titleIcon {
@@ -12,4 +19,152 @@
     font-size: 25px;
     font-weight: 600;
     color: rgb(100, 100, 100);
+}
+
+.contentRow {
+    margin-bottom: 30px;
+}
+
+p {
+    margin: 0px;
+}
+
+.ccCol {
+    margin-bottom: 20px;
+}
+
+.companyCard {
+    cursor: pointer;
+}
+
+.collectionInfo {
+    text-align: end;
+    font-family: "Oswald", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: $color_gris;
+}
+
+.collectedIcon {
+    margin-left: 5px;
+    color: rgb(130, 180, 130);
+}
+
+.uncollectedIcon {
+    margin-left: 5px;
+    color: rgb(185, 85, 85);
+}
+
+.companyName {
+    font-family: "Oswald", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: start;
+}
+
+.card-text {
+    font-family: "Oswald", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.textName {
+    font-weight: 800;
+}
+
+.textDate {
+    margin-bottom: 10px;
+}
+
+.textRemarks {
+    margin-bottom: 10px;
+}
+
+.textAmount {
+    font-size: 16px;
+    font-weight: 800;
+    text-align: end;
+}
+
+.customerData {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.customerContact {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.customerRemarks {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btnOptions {
+    font-family: "Oswald", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 4px;
+    border: solid black 2pt;
+    color: black;
+}
+
+.collectInvoiceBtn {
+    background-color: rgb(200, 200, 200);
+    &:hover {
+        transition: 0.1s;
+        box-shadow: 0px 4px 0px black;
+        transform: translate(0px, -4px);
+    }
+}
+
+.shareInvoiceBtn {
+    background-color: rgb(130, 180, 130);
+    &:hover {
+        transition: 0.1s;
+        box-shadow: 4px 4px 0px black;
+        transform: translate(-4px, -4px);
+    }
+}
+
+.deleteInvoiceBtn {
+    background-color: rgb(200, 120, 120);
+    &:hover {
+        transition: 0.1s;
+        box-shadow: -4px 4px 0px black;
+        transform: translate(4px, -4px);
+    }
+}
+
+.menuConfirmacion {
+    padding: 5px;
+    border: solid black 2px;
+    box-shadow: 4px 4px 0px rgb(0, 0, 0);
+    background-color: rgb(230, 230, 230);
+}
+
+.textoConfirmar {
+    text-align: center;
+    margin-top: 10px;
+    font-family: "Oswald", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btnConfirmar {
+    width: 90%;
+    margin-top: 10px;
+    font-family: "Oswald", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    border: solid rgb(0, 0, 0) 2pt;
+    background-color: rgba(245, 225, 100, 0.5);
+    color: rgb(0, 0, 0);
+    &:hover {
+        transition: 0.1s;
+        box-shadow: 4px 4px 0px rgb(0, 0, 0);
+        transform: translate(-4px, -4px);
+    }
 }

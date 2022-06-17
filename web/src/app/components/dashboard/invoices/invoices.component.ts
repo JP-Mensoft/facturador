@@ -43,7 +43,7 @@ export class InvoicesComponent implements OnInit {
   }
 
   public goDetail(invoiceId: number): void {
-    this._router.navigate(['dashboard/invoice-detail', invoiceId]);
+    this._router.navigate(['dashboard/invoices-detail', invoiceId]);
   }
 
   public setCollectedFilter(filter: string): void {
