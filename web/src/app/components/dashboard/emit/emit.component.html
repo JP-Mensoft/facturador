@@ -7,11 +7,162 @@
         </div>
     </div>
 
-    <div class="row optionsRow">
-
-    </div>
-
     <div class="row contentRow">
+
+        <div class="row d-flex justify-content-between">
+            <div class="col-12 col-md-8 col-lg-6 ccCol">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="companyName">{{company.name}}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="companyToday">{{today}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body companyCard" (click)="goUser();">
+                        <p class="card-text">{{company.cif}}</p>
+                        <p class="card-text">{{user.email}}</p>
+                        <p class="card-text">{{user.phone}}</p>
+                        <p class="card-text">{{company.address}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-6 ccCol">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="companyName">
+                                    Cliente
+                                    <i class="bi bi-caret-right-fill"></i>
+                                </p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <select [(ngModel)]="customer" class="searchSelector">
+                                    <option *ngFor="let customer of customers; index as i" [ngValue]="customer">
+                                        {{customer.name}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body companyCard" (click)="goCustomerDetail();">
+                        <p class="card-text">{{customer.cif}}</p>
+                        <p class="card-text">{{customer.email}}</p>
+                        <p class="card-text">{{customer.phone}}</p>
+                        <p class="card-text">{{customer.address}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-4">
+                                <p class="companyName">
+                                    Conceptos
+                                </p>
+                            </div>
+                            <div class="col-4 d-flex justify-content-center">
+                                <span class="totalAmount">{{totalAmount}} €</span>
+                            </div>
+                            <div class="col-4 d-flex justify-content-end">
+                                <button class="addConceptBtn" (click)="addConcept();">
+                                    <i class="bi bi-plus-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row conceptRow" *ngFor="let concept of concepts; index as i">
+                            <div class="row inputRow">
+                                <div class="col-2 d-flex justify-content-center align-items-center">
+                                    <span class="conceptNumber">{{i + 1}}</span>
+                                </div>
+                                <div class="col-10 d-flex align-items-center">
+                                    <input class="conceptInput" [(ngModel)]="concepts[i].concept"
+                                        placeholder="Concepto" />
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 d-flex justify-content-end align-items-center">
+                                    <input [(ngModel)]="concepts[i].amount" placeholder="Importe"
+                                        (change)="updateTotalAmount();" type="number" />
+                                    <span class="amountLogo">€</span>
+                                    <button class="deleteConceptBtn" (click)="deleteConcept(i);">
+                                        <i class="bi bi-trash-fill"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-end align-items-center">
+                                <input [(ngModel)]="taxableIncome" placeholder="IVA" (change)="updateTotalAmount();"
+                                    type="number" />
+                                <span class="amountLogo">% IVA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row userRow">
+            <div class="col-12 col-md-8 col-lg-6 ccCol">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="companyName">
+                                    Datos Bancarios
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body companyCard" (click)="goUser();">
+                        <p class="card-text">{{company.iban}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-6 ccCol">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-12">
+                                <p class="companyName">
+                                    Comentarios
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <textarea class="remarksInput" rows="3" [(ngModel)]="remarks"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row userRow d-flex justify-content-between">
+            <div class="col-2 d-flex justify-content-start">
+                <button class="cancelInvoiceBtn" (click)="resetInvoice();"
+                    [disabled]="customer.customerId === 0 && concepts.length === 0">
+                    Cancelar
+                </button>
+            </div>
+            <div class="col-2 d-flex justify-content-end">
+                <button class="addInvoiceBtn {{error ? 'wrong' : ''}}" (click)="addInvoice();">
+                    Guardar
+                </button>
+            </div>
+        </div>
 
     </div>
 

@@ -32,6 +32,8 @@ export class EmitComponent implements OnInit {
   // Customers
   public customer: CustomerModel;
   public customers: CustomerModel[];
+  // Checks
+  public error: boolean;
 
   constructor(
     private _storage: StorageService,
@@ -51,6 +53,7 @@ export class EmitComponent implements OnInit {
     this.remarks = "";
     this.totalAmount = 0;
     this.taxableIncome = 0;
+    this.error = false;
   }
 
   ngOnInit(): void {
@@ -63,7 +66,7 @@ export class EmitComponent implements OnInit {
   // Invoice
 
   public goInvoice(invoiceId: number): void {
-    this._router.navigate(["dashboard/invoices/invoice-detail", invoiceId]);
+    this._router.navigate(["dashboard/invoices-detail", invoiceId]);
   }
 
   public getToday(): void {
@@ -71,33 +74,31 @@ export class EmitComponent implements OnInit {
   }
 
   public async addInvoice() {
+    this.error = false;
     this.updateTotalAmount();
     if (this.checkInvoice()) {
       this.generateInvoice();
       this._invoice.addInvoice(this._storage.get("token"), this.invoice).subscribe({
         next: (result: ResponseModel) => {
           if (result.success) {
-            setTimeout(() => {
-            }, 500);
-            setTimeout(() => {
-              this.resetInvoice();
-              this.goInvoice(result.result.invoiceId);
-            }, 1000);
+            this.resetInvoice();
+            this.goInvoice(result.result.invoiceId);
           }
         },
         error: () => {
-          setTimeout(() => {
-          }, 500);
-          setTimeout(() => {
-          }, 1000);
+          this.error = true;
         },
-        complete: () => { }
+        complete: () => {
+          setTimeout(() => {
+            this.error = false;
+          }, 900);
+        }
       });
     } else {
+      this.error = true;
       setTimeout(() => {
-      }, 500);
-      setTimeout(() => {
-      }, 1000);
+        this.error = false;
+      }, 900);
     }
   }
 
@@ -202,7 +203,7 @@ export class EmitComponent implements OnInit {
 
   public goCustomerDetail(): void {
     if (this.customer.customerId != 0) {
-      this._router.navigate(['dashboard/customers/customer-detail', this.customer.customerId]);
+      this._router.navigate(['dashboard/customers-detail', this.customer.customerId]);
     }
   }
 

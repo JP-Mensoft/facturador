@@ -32,7 +32,7 @@ const routes: Routes = [
         component: CustomersComponent
       },
       {
-        path: 'customers-detail',
+        path: 'customers-detail/:customerId',
         component: CustomersDetailComponent
       },
       {
@@ -40,7 +40,7 @@ const routes: Routes = [
         component: CustomersAddComponent
       },
       {
-        path: 'customers-set',
+        path: 'customers-set/:customerId',
         component: CustomersSetComponent
       },
       {
@@ -48,7 +48,7 @@ const routes: Routes = [
         component: InvoicesComponent,
       },
       {
-        path: 'invoices-detail',
+        path: 'invoices-detail/:invoiceId',
         component: InvoicesDetailComponent,
       },
       {
