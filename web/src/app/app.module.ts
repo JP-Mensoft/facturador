@@ -13,17 +13,9 @@ import { InvoicesService } from './services/invoices.service';
 import { StorageService } from './services/storage.service';
 import { UserService } from './services/user.service';
 
-// Pipes
-import { CollectedFilterPipe } from './pipes/collected-filter.pipe';
-import { CustomerFilterPipe } from './pipes/customer-filter.pipe';
-import { InvoiceFilterPipe } from './pipes/invoice-filter.pipe';
-
 @NgModule({
   declarations: [
-    AppComponent,
-    CollectedFilterPipe,
-    CustomerFilterPipe,
-    InvoiceFilterPipe
+    AppComponent
   ],
   imports: [
     BrowserModule,

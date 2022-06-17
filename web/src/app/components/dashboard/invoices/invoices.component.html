@@ -8,10 +8,57 @@
     </div>
 
     <div class="row optionsRow">
-
+        <div class="col-12">
+            <div class="row d-flex justify-content-end">
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    <i class="bi bi-search"></i>
+                    <input class="searchInput" [(ngModel)]="invoicesFilter" placeholder="Fecha Emisión / Cliente"
+                        type="texto" />
+                </div>
+            </div>
+            <div class="row d-flex justify-content-end btnFilterRow">
+                <div class="col-6 d-flex justify-content-end">
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btnFilter btnFilterUncollected"
+                            (click)="setCollectedFilter('uncollected');">Pendientes</button>
+                        <button type="button" class="btnFilter btnFilterAll"
+                            (click)="setCollectedFilter('all');">Todas</button>
+                        <button type="button" class="btnFilter btnFilterCollected"
+                            (click)="setCollectedFilter('collected');">Cobradas</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="row contentRow">
+    <div class="row contentRow d-flex justify-content-start">
+
+        <div class="col-12 col-md-6 col-lg-4 ccCol"
+            *ngFor="let invoice of invoices | invoiceFilter: invoicesFilter | collectedFilter: collectedFilter; index as i">
+            <div class="card companyCard" (click)="goDetail(invoice.invoiceId);">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="companyName">{{invoice.invoiceId}}</p>
+                        </div>
+                        <div class="col-6">
+                            <p *ngIf="invoice.collected" class="collectionInfo">
+                                {{invoice.collectionDate | date: "d/M/yyyy"}}
+                                <i class="bi bi-circle-fill collectedIcon"></i>
+                            </p>
+                            <p *ngIf="!invoice.collected" class="collectionInfo"><i
+                                    class="bi bi-circle-fill uncollectedIcon"></i></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text textName">{{invoice.customerId.name}}</p>
+                    <p class="card-text textDate">{{invoice.date | date: "d/M/yyyy"}}</p>
+                    <p class="card-text textRemarks">{{invoice.remarks}}</p>
+                    <p class="card-text textAmount">{{invoice.totalAmount}} €</p>
+                </div>
+            </div>
+        </div>
 
     </div>
 

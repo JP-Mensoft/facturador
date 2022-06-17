@@ -31,7 +31,7 @@ export class InvoicesComponent implements OnInit {
   }
 
   public async getUserInvoices() {
-    this._invoices.getAllInvoices(await this._storage.get("token")).subscribe({
+    this._invoices.getAllInvoices(this._storage.get("token")).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
           this.invoices = result.result;
@@ -43,7 +43,11 @@ export class InvoicesComponent implements OnInit {
   }
 
   public goDetail(invoiceId: number): void {
-    this._router.navigate(['dashboard/invoices/invoice-detail', invoiceId]);
+    this._router.navigate(['dashboard/invoice-detail', invoiceId]);
+  }
+
+  public setCollectedFilter(filter: string): void {
+    this.collectedFilter = filter;
   }
 
 }

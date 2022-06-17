@@ -17,6 +17,11 @@ import { CustomersSetComponent } from './customers/customers-set/customers-set.c
 import { InvoicesDetailComponent } from './invoices/invoices-detail/invoices-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+// Pipes
+import { InvoiceFilterPipe } from 'src/app/pipes/invoice-filter.pipe';
+import { CustomerFilterPipe } from 'src/app/pipes/customer-filter.pipe';
+import { CollectedFilterPipe } from 'src/app/pipes/collected-filter.pipe';
+
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -30,7 +35,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CustomersDetailComponent,
     CustomersAddComponent,
     CustomersSetComponent,
-    InvoicesDetailComponent
+    InvoicesDetailComponent,
+    InvoiceFilterPipe,
+    CustomerFilterPipe,
+    CollectedFilterPipe
   ],
   imports: [
     CommonModule,
