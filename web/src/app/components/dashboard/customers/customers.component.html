@@ -8,11 +8,66 @@
     </div>
 
     <div class="row optionsRow">
-
+        <div class="col-12">
+            <div class="row d-flex justify-content-end">
+                <div class="col-6 d-flex justify-content-end align-items-center">
+                    <i class="bi bi-search"></i>
+                    <input class="searchInput" [(ngModel)]="customersFilter" placeholder="Cliente" type="texto" />
+                    <button class="addBtn" (click)="goAdd();">
+                        <i class="bi bi-plus-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="row contentRow">
-
+    <div class="row contentRow d-flex justify-content-start">
+        <div class="col-12 col-md-6 col-lg-4 ccCol"
+            *ngFor="let customer of customers | customerFilter: customersFilter; index as i">
+            <div class="card companyCard">
+                <div class="card-header" (click)="goDetail(customer.customerId);">
+                    <div class="row">
+                        <div class="col-6">
+                            <p class="companyName">{{customer.name}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{customer.email}}</p>
+                    <p class="card-text">{{customer.phone}}</p>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-between">
+                            <div class="d-flex justify-content-center btn-group dropup">
+                                <button class="deleteInvoiceBtn btnOptions" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="bi bi-trash-fill"></i>
+                                </button>
+                                <ul class="container-fluid dropdown-menu menuConfirmacion">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p class="textoConfirmar">
+                                                ¿Seguro/a?
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 containerConfirmar d-flex justify-content-center">
+                                            <button type="button" class="btnConfirmar"
+                                                (click)="confirmDeleteCustomer(customer.customerId);">Eliminar</button>
+                                        </div>
+                                    </div>
+                                </ul>
+                            </div>
+                            <button class="addBtn btnOptions" (click)="goSetCustomer(customer.customerId);">
+                                <i class="bi bi-hammer"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

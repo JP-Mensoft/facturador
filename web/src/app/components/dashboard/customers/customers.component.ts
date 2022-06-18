@@ -52,22 +52,22 @@ export class CustomersComponent implements OnInit {
         }
       },
       error: async () => {
-
+        alert("No puedes eliminar un cliente con facturas asociadas.");
       },
       complete: () => { }
     });
   }
 
   public goSetCustomer(customerId: number): void {
-    this._router.navigate(['dashboard/customers/customer-set', customerId]);
+    this._router.navigate(['dashboard/customers-set', customerId]);
   }
 
   public goDetail(customerId: number): void {
-    this._router.navigate(['dashboard/customers/customer-detail', customerId]);
+    this._router.navigate(['dashboard/customers-detail', customerId]);
   }
 
   public goAdd(): void {
-    this._router.navigate(['dashboard/customers/customer-add']);
+    this._router.navigate(['dashboard/customers-add']);
   }
 
 }
