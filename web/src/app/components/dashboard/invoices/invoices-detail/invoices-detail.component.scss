@@ -64,26 +64,47 @@ p {
 
 .card-text {
     font-family: "Oswald", sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.textName {
-    font-weight: 800;
 }
 
 .textDate {
-    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
 }
 
-.textRemarks {
+.textName {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.textCif {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.textContact {
+    text-align: end;
+}
+
+.textConcept {
+    text-align: end;
     margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.textConceptAmount {
+    font-size: 16px;
+    font-weight: 700;
 }
 
 .textAmount {
     font-size: 16px;
-    font-weight: 800;
+    font-weight: 700;
     text-align: end;
+}
+
+.textRemarks {
+    text-align: center;
 }
 
 .customerData {
@@ -93,12 +114,32 @@ p {
 
 .customerContact {
     margin-top: 10px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
-.customerRemarks {
+.invoiceConcepts {
+    border-top: solid rgb(200, 200, 200) 1px;
+    padding-top: 10px;
     margin-top: 10px;
-    margin-bottom: 10px;
+}
+
+.invoiceAmount {
+    background-color: rgb(240, 240, 240);
+    border-top: solid rgb(200, 200, 200) 1px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 5px;
+    margin-top: 10px;
+}
+
+.invoiceRemarks {
+    border-top: solid rgb(200, 200, 200) 1px;
+    padding-top: 16px;
+}
+
+.btnRow {
+    padding-bottom: 10px;
+    padding-top: 10px;
 }
 
 .btnOptions {

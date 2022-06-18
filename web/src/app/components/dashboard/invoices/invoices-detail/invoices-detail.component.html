@@ -9,6 +9,7 @@
 
     <div class="row contentRow">
         <div class="card">
+
             <div class="card-header">
                 <div class="row">
                     <div class="col-6">
@@ -24,30 +25,39 @@
                     </div>
                 </div>
             </div>
+
             <div class="card-body">
-                <div class="customerData">
-                    <p class="card-text textName">{{invoice.customerId.name}}</p>
-                    <p class="card-text textDate">{{invoice.date | date: "d/M/yyyy"}}</p>
-                    <p class="card-text textName">{{invoice.customerId.cif}}</p>
+                <div class="row">
+                    <div class="col-6 d-flex justify-content-start">
+                        <div class="customerData">
+                            <p class="card-text textDate">{{invoice.date | date: "d/M/yyyy"}}</p>
+                            <p class="card-text textName">{{invoice.customerId.name}}</p>
+                            <p class="card-text textCif">{{invoice.customerId.cif}}</p>
+                        </div>
+                    </div>
+                    <div class="col-6 d-flex justify-content-end">
+                        <div class="customerContact">
+                            <p class="card-text textContact">{{invoice.customerId.email}}</p>
+                            <p class="card-text textContact">{{invoice.customerId.contact}} /
+                                {{invoice.customerId.phone}}
+                            </p>
+                            <p class="card-text textContact">{{invoice.customerId.address}}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="customerContact">
-                    <p class="card-text textName">{{invoice.customerId.email}}</p>
-                    <p class="card-text textName">{{invoice.customerId.contact}} / {{invoice.customerId.phone}}</p>
-                    <p class="card-text textName">{{invoice.customerId.address}}</p>
-                </div>
-                <div class="customerRemarks">
-                    <p class="card-text textRemarks">{{invoice.remarks}}</p>
-                </div>
-                <div *ngFor="let concept of invoice.concepts; index as i" class="customerConcepts">
-                    <p class="card-text textRemarks">
-                        {{concept.concept}}
+                <div class="invoiceConcepts">
+                    <p *ngFor="let concept of invoice.concepts; index as i" class="card-text textConcept">
+                        {{concept.concept}} - <span class="textConceptAmount">{{concept.amount}}€</span>
                     </p>
-                    <p class="card-text textRemarks">
-                        {{concept.amount}}
-                    </p>
                 </div>
-                <p class="card-text textAmount">{{invoice.taxableIncome}}% / {{invoice.totalAmount}}€</p>
+                <div class="invoiceAmount">
+                    <p class="card-text textAmount">{{invoice.taxableIncome}}% / {{invoice.totalAmount}}€</p>
+                </div>
+                <div class="invoiceRemarks">
+                    <p class="card-text textRemarks text-break">{{invoice.remarks}}</p>
+                </div>
             </div>
+
             <div class="card-footer">
                 <div class="row btnRow">
                     <div class="col-12 d-flex justify-content-between">
@@ -100,6 +110,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
