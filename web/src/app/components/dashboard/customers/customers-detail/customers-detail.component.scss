@@ -1,3 +1,10 @@
+// Variables
+$color_azul: rgb(20, 100, 160);
+$color_gris: rgb(100, 100, 100);
+$color_rojo_error: rgba(190, 65, 65, 0.7);
+$color_verde_correcto: rgba(100, 170, 65, 0.4);
+//
+
 .titleRow {
     margin-bottom: 20px;
 }
@@ -12,4 +19,35 @@
     font-size: 25px;
     font-weight: 600;
     color: rgb(100, 100, 100);
+}
+
+p {
+    margin: 0px;
+}
+
+.ccCol {
+    margin-bottom: 20px;
+}
+
+.companyName {
+    font-family: "Oswald", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: start;
+}
+
+.card-text {
+    font-family: "Oswald", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.customerCif {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.customerRemarks {
+    text-align: center;
 }

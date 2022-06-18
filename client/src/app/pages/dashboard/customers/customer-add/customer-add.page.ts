@@ -39,9 +39,9 @@ export class CustomerAddPage implements OnInit {
   public buildForms(): void {
     this.customerForm = this._formBuilder.group({
       name: ["", [Validators.required]],
-      email: ["", [Validators.required, Validators.email]],
-      contact: ["", [Validators.required]],
-      phone: ["", [Validators.required]],
+      email: ["", [Validators.email]],
+      contact: [""],
+      phone: [""],
       address: ["", [Validators.required]],
       cif: ["", [Validators.required]],
       remarks: [""]

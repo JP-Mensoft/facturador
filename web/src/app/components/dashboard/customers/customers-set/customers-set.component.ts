@@ -16,6 +16,7 @@ export class CustomersSetComponent implements OnInit {
   private customerId: number;
   public customer: CustomerModel;
   public customerForm: FormGroup;
+  public errorUser: boolean;
 
   constructor(
     private _route: ActivatedRoute,
@@ -26,6 +27,7 @@ export class CustomersSetComponent implements OnInit {
   ) {
     this.customerId = 0;
     this.customer = new CustomerModel("", "", "", "", "", "", "");
+    this.errorUser = false;
     this.buildForms();
   }
 
@@ -60,6 +62,7 @@ export class CustomersSetComponent implements OnInit {
   }
 
   public async setCustomer() {
+    this.errorUser = false;
     this.customer.name = this.customerForm.get("name").value;
     this.customer.email = this.customerForm.get("email").value;
     this.customer.contact = this.customerForm.get("contact").value;
@@ -70,20 +73,17 @@ export class CustomersSetComponent implements OnInit {
     this._customers.setCustomer(this._storage.get("token"), this.customer).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
-          setTimeout(() => {
-          }, 500);
-          setTimeout(() => {
-            this.goCustomers();
-          }, 1000);
+          this.goCustomers();
         }
       },
       error: () => {
-        setTimeout(() => {
-        }, 500);
-        setTimeout(() => {
-        }, 1000);
+        this.errorUser = true;
       },
-      complete: () => { }
+      complete: () => {
+        setTimeout(() => {
+          this.errorUser = false;
+        }, 700);
+      }
     });
   }
 

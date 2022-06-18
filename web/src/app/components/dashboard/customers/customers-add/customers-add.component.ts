@@ -14,13 +14,16 @@ import { StorageService } from 'src/app/services/storage.service';
 export class CustomersAddComponent implements OnInit {
 
   public customerForm: FormGroup;
+  public errorUser: boolean;
 
   constructor(
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _customers: CustomersService,
     private _storage: StorageService
-  ) { }
+  ) {
+    this.errorUser = false;
+  }
 
   ngOnInit() {
     this.buildForms();
@@ -29,9 +32,9 @@ export class CustomersAddComponent implements OnInit {
   public buildForms(): void {
     this.customerForm = this._formBuilder.group({
       name: ["", [Validators.required]],
-      email: ["", [Validators.required, Validators.email]],
-      contact: ["", [Validators.required]],
-      phone: ["", [Validators.required]],
+      email: ["", [Validators.email]],
+      contact: [""],
+      phone: [""],
       address: ["", [Validators.required]],
       cif: ["", [Validators.required]],
       remarks: [""]
@@ -39,6 +42,7 @@ export class CustomersAddComponent implements OnInit {
   }
 
   public async saveCustomer() {
+    this.errorUser = false;
     const name = this.customerForm.get("name").value;
     const email = this.customerForm.get("email").value;
     const contact = this.customerForm.get("contact").value;
@@ -50,20 +54,17 @@ export class CustomersAddComponent implements OnInit {
     this._customers.addCustomer(this._storage.get("token"), customer).subscribe({
       next: (result: ResponseModel) => {
         if (result.success) {
-          setTimeout(() => {
-          }, 500);
-          setTimeout(() => {
-            this.goCustomers();
-          }, 1000);
+          this.goCustomers();
         }
       },
       error: () => {
-        setTimeout(() => {
-        }, 500);
-        setTimeout(() => {
-        }, 1000);
+        this.errorUser = true;
       },
-      complete: () => { }
+      complete: () => {
+        setTimeout(() => {
+          this.errorUser = false;
+        }, 700);
+      }
     });
   }
 

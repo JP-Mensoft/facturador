@@ -7,12 +7,25 @@
         </div>
     </div>
 
-    <div class="row optionsRow">
-
-    </div>
-
     <div class="row contentRow">
-
+        <div class="card companyCard">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-6">
+                        <p class="companyName">{{customer.name}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <p class="card-text customerCif">{{customer.cif}}</p>
+                <p class="card-text">{{customer.email}}</p>
+                <p class="card-text">{{customer.phone}} / {{customer.contact}}</p>
+                <p class="card-text">{{customer.address}}</p>
+            </div>
+            <div class="card-footer">
+                <p class="card-text text-break customerRemarks">{{customer.remarks}}</p>
+            </div>
+        </div>
     </div>
 
 </div>

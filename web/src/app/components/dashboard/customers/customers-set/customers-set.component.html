@@ -7,12 +7,66 @@
         </div>
     </div>
 
-    <div class="row optionsRow">
-
-    </div>
-
-    <div class="row contentRow">
-
+    <div class="row d-flex justify-content-center">
+        <div class="col-10 col-md-6">
+            <form [formGroup]="customerForm">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-person icon"></i>
+                                <input class="form-control {{errorUser ? 'wrong' : ''}}" type="text"
+                                    formControlName="name" placeholder="Nombre" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-envelope-fill icon"></i>
+                                <input class="form-control {{errorUser ? 'wrong' : ''}}" type="text"
+                                    formControlName="email" placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-person icon"></i>
+                                <input class="form-control {{errorUser ? 'wrong' : ''}}" type="text"
+                                    formControlName="contact" placeholder="Contacto" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-phone icon"></i>
+                                <input class="form-control {{errorUser ? 'wrong' : ''}}" type="text"
+                                    formControlName="phone" placeholder="Teléfono" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-pin-map icon"></i>
+                                <input class="form-control {{errorUser ? 'wrong' : ''}}" type="text"
+                                    formControlName="address" placeholder="Dirección" />
+                            </div>
+                        </div>
+                        <div class="row formRow form-group">
+                            <div class="col-12 d-flex justify-content-start align-items-center">
+                                <i class="bi bi-info-circle icon"></i>
+                                <input class="form-control {{errorUser ? 'wrong' : ''}}" type="text"
+                                    formControlName="cif" placeholder="CIF" />
+                            </div>
+                        </div>
+                        <textarea class="remarksInput" rows="3" formControlName="remarks"
+                            placeholder="Comentarios"></textarea>
+                    </div>
+                </div>
+                <div class="row formRow btnRow">
+                    <div class="col-12 d-flex justify-content-between flex-row-reverse">
+                        <button (click)="setCustomer();" class="btnAcceso {{!customerForm.valid ? 'disabled' : ''}}"
+                            [disabled]="!customerForm.valid">Guardar</button>
+                        <button (click)="goCustomers();" class="btnCancelar">Cancelar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>
