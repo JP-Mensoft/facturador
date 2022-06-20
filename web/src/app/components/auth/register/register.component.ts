@@ -68,9 +68,9 @@ export class RegisterComponent implements OnInit {
       next: async (response: ResponseModel) => {
         if (response.success) {
           this.registroCorrecto = true;
+          this._storage.set("token", response.result.token);
+          this._storage.set("email", response.result.email);
           setTimeout(() => {
-            this._storage.set("token", response.result.token);
-            this._storage.set("email", response.result.email);
             this._router.navigate(["dashboard/user"]);
           }, 500);
           setTimeout(() => {
